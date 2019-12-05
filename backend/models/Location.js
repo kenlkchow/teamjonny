@@ -10,7 +10,7 @@ const locationSchema = new mongoose.Schema({
   openLate: { type: Boolean },
   privacy: { type: Number, min: 1, max: 3, required: true },
   notes: { type: String },
-  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: false }
 
 }, {
   timestamps: true

@@ -7,6 +7,17 @@ function create(req, res, next) {
     .catch(next)
 }
 
+function remove(req, res) {
+  Location
+    .findById(req.params.id)
+    .then(location => {
+      if (!location) return res.status(404).json({ message: 'Not Found' })
+      return location.remove()
+    })
+    .then(() => res.status(200).json({ message: 'Location deleteted' })) 
+    .catch(err => console.log(err))
+}
+
 function update(req, res) {
   Location 
     .findById(req.params.id)
@@ -21,5 +32,6 @@ function update(req, res) {
 
 module.exports = {
   update,
-  create
+  create,
+  remove
 }
