@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const { dbURI, port } = require('./config/environment')
+const errorHandler = require('./lib/errorHandler')
 const router = require('./router')
 
 mongoose.connect(dbURI,
@@ -19,7 +20,7 @@ app.use((req, resp, next) => {
 
 app.use('/api', router)
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 app.use('/*', (req, res) => res.status(404).json({ message: 'Not Found' }))
 
