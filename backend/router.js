@@ -2,13 +2,7 @@ const router = require('express').Router()
 const locations = require('./controllers/locations')
 
 const users = require('./controllers/users')
-<<<<<<< HEAD
 const secureRoute = require('./lib/secureRoute')
-=======
-
-
-const secureRoute = require('./lib/returnUnauthorised')
->>>>>>> development
 
 
 router.route('/locations')
