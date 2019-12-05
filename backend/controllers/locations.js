@@ -1,5 +1,6 @@
 const Location = require('../models/Location')
 
+
 function index(req, res) {
   Location
     .find()
@@ -37,7 +38,6 @@ function update(req, res) {
     .findById(req.params.id)
     .then(location => {
       if (!location) return res.status(404).json({ message: '404 not found' })
-      if (!req.currentUser._id.equals(location.user)) return res.status(401).json({ message: 'Unauthorized' })
       return location.set(req.body)
     })
     .then(location => location.save())
