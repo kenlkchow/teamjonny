@@ -1,9 +1,6 @@
 const router = require('express').Router()
-<<<<<<< HEAD
 const locations = require('./controllers/locations')
-=======
 const users = require('./controllers/users')
->>>>>>> development
 
 router.route('/locations')
   .get(locations.index)
@@ -12,8 +9,6 @@ router.route('/locations')
 router.route('/locations/:id')
   .put(locations.update)
   .delete(locations.remove)
-
-
 
 router.route('/register')
   .post(users.register)
