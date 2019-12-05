@@ -36,14 +36,14 @@ userSchema
   })
 
 userSchema
-  .pre('save',  function hashPassword(next) { // this happens before the mode is saved
-    if (this.isModified('password')) { // if the password has been created or changed
-      this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8)) // reassign as a hash of itself
+  .pre('save',  function hashPassword(next) { 
+    if (this.isModified('password')) {
+      this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8)) 
     }
-    next() // now move on to saving
+    next() 
   })
 
-userSchema.methods.validatePassword = function validatePassword(password) {// our own methods attached to our user model to validate if a password is correct at login.
-  return bcrypt.compareSync(password, this.password) // bcyrpt hashes the password our user is trying to login with the same it hashed the one stored in the DB when they registered, it then compares them for us to see if they match, and returns true or false depending on the outcome
+userSchema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt.compareSync(password, this.password) 
 }
-module.exports = mongoose.model('User', userSchema) //exporting our models, with all its new methods and functiionality to be used in the user controller. see /controllers/user.js
+module.exports = mongoose.model('User', userSchema) 

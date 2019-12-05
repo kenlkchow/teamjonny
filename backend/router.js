@@ -1,20 +1,28 @@
 const router = require('express').Router()
 const locations = require('./controllers/locations')
+const users = require('./controllers/users')
+const secureRoute = require('./lib/returnUnauthorised')
 
 router.route('/locations')
-  .get(locations.index)
+  .get(secureRoute, locations.index)
 
 router.route('/locations/public')
-  .get(locations.indexPublic)
+  .get(secureRoute, locations.indexPublic)
 
 router.route('/locations/circle')
-  .get(locations.indexCircle)
+  .get(secureRoute, locations.indexCircle)
 
 router.route('/locations/private')
-  .get(locations.indexPrivate)
+  .get(secureRoute, locations.indexPrivate)
 
 router.route('/locations/:id')
-  .get(locations.show)
+  .get(secureRoute, locations.show)
+
+router.route('/register')
+  .post(users.register)
+
+router.route('/login')
+  .post(users.login)
 
 module.exports = router
 
