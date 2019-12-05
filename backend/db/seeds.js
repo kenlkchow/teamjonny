@@ -13,7 +13,11 @@ mongoose.connect(
         return User.create([{
           username: 'test',
           password: 'test',
-          passwordConfirmation: 'test'
+          passwordConfirmation: 'test',
+          circle: {
+            approved: [],
+            requested: []
+          }
         }])
       })
       .then(users => {
