@@ -16,8 +16,20 @@ function indexPublic(req, res) {
 }
 
 function indexCircle(req, res) {
+  // console.log(req.currentUser.circle.approved)
+  // const circleFriends = req.currentUser.circle.approved
+  // circleFriends.forEach((circleFriend) => {
+  //   find(location.user.equals(circleFriend.id))
+  //     .then(locations => res.status(200).json(locations))
+  // })
+
   Location
     .find({ privacy: { $eq: 2 } })
+    .then(locations => {
+      locations.filter(location => {
+        return req.currentUser.circle.approved.includes(location.user)
+      })
+    })
     .then(locations => res.status(200).json(locations))
     .catch(err => console.log(err))
 }
