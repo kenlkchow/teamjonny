@@ -23,8 +23,6 @@ app.use((req, resp, next) => {
 
 app.use('/api', router)
 
-app.use(errorHandler)
-
 app.use('/*', (req, res) => res.status(404).json({ message: 'Not Found' }))
 
 // Listen on our port!
