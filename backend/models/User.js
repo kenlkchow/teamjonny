@@ -9,7 +9,7 @@ const circleSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({ 
   username: { type: String, required: true, unique: true }, 
   password: { type: String, required: true  },
-  circle: [ circleSchema ]
+  circle: circleSchema
 }, {
   timestamps: true, 
   toJSON: { 
