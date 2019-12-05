@@ -6,7 +6,8 @@ const secureRoute = require('./lib/secureRoute')
 
 
 router.route('/locations')
-  .get(secureRoute, locations.index)
+  .get(locations.index)
+  .post(secureRoute, locations.create)
 
 router.route('/locations/public')
   .get(secureRoute, locations.indexPublic)
@@ -19,7 +20,6 @@ router.route('/locations/private')
 
 router.route('/locations/:id')
   .get(secureRoute, locations.show)
-  .post(secureRoute, locations.create)
   .put(locations.update)
   .delete(locations.remove)
 

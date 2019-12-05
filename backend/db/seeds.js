@@ -18,7 +18,17 @@ mongoose.connect(
             approved: [],
             requested: []
           }
-        }])
+        },
+        {
+          username: 'ken',
+          password: 'ken',
+          passwordConfirmation: 'ken',
+          circle: {
+            approved: [],
+            requested: []
+          }
+        }
+        ])
       })
       .then(users => {
         console.log(`${users.length} users created`)

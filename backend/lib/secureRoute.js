@@ -16,7 +16,6 @@ function secureRoute(req, res, next) {
   } 
 
   jwt.verify(token, secret, (err, payload) => {
-    console.log(payload, payload.sub)
     User
       .findById(payload.sub)
       .then(user => {

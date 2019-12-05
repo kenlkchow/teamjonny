@@ -23,8 +23,12 @@ function indexCircle(req, res) {
 }
 
 function indexPrivate(req, res) {
+  console.log(req.currentUser._id)
   Location
     .find({ privacy: { $eq: 3 } })
+    .then(locations => locations.filter(location => {
+      return req.currentUser._id.equals(location.user)
+    }))
     .then(locations => res.status(200).json(locations))
     .catch(err => console.log(err))
 }
