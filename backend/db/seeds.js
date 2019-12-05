@@ -20,15 +20,23 @@ mongoose.connect(
           }
         },
         {
-          username: 'ken',
-          password: 'ken',
-          passwordConfirmation: 'ken',
+          username: 'jessepinkman',
+          password: 'church',
+          passwordConfirmation: 'church',
           circle: {
             approved: [],
             requested: []
           }
-        }
-        ])
+        },
+        {
+          username: 'linmanuel',
+          password: 'cinnamonroll',
+          passwordConfirmation: 'cinnamonroll',
+          circle: {
+            approved: [],
+            requested: []
+          }
+        }])
       })
       .then(users => {
         console.log(`${users.length} users created`)
