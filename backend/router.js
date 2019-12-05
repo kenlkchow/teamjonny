@@ -1,14 +1,7 @@
 const router = require('express').Router()
 const locations = require('./controllers/locations')
-
 const users = require('./controllers/users')
-<<<<<<< HEAD
 const secureRoute = require('./lib/secureRoute')
-=======
-
-
-const secureRoute = require('./lib/returnUnauthorised')
->>>>>>> development
 
 
 router.route('/locations')
@@ -37,6 +30,8 @@ router.route('/login')
 
 router.route('/circle')
   .post(secureRoute, users.addToCircle)
+  .put(secureRoute, users.approveToCircle)
+  .delete(secureRoute, users.removeFromCircle)
 
 module.exports = router
 

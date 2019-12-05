@@ -18,6 +18,24 @@ mongoose.connect(
             approved: [],
             requested: []
           }
+        },
+        {
+          username: 'jessepinkman',
+          password: 'church',
+          passwordConfirmation: 'church',
+          circle: {
+            approved: [],
+            requested: []
+          }
+        },
+        {
+          username: 'linmanuel',
+          password: 'cinnamonroll',
+          passwordConfirmation: 'cinnamonroll',
+          circle: {
+            approved: [],
+            requested: []
+          }
         }])
       })
       .then(users => {
