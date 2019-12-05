@@ -7,7 +7,7 @@ router.route('/locations')
 router.route('/register')
   .post(users.register)
 
-router.route('login')
+router.route('/login')
   .post(users.login)
 
 module.exports = router
