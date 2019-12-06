@@ -47,6 +47,7 @@ function remove(req, res) {
     .findById(req.params.id)
     .then(location => {
       if (!location) return res.status(404).json({ message: 'Not Found' })
+      if (!req.currentUser._id.equals(location.user)) return res.status(401).json({ message: 'Unauthorized' })
       return location.remove()
     })
     .then(() => res.status(200).json({ message: 'Location deleteted' }))
@@ -58,6 +59,7 @@ function update(req, res) {
     .findById(req.params.id)
     .then(location => {
       if (!location) return res.status(404).json({ message: '404 not found' })
+      if (!req.currentUser._id.equals(location.user)) return res.status(401).json({ message: 'Unauthorized' })
       return location.set(req.body)
     })
     .then(location => location.save())

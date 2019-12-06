@@ -2,8 +2,12 @@
 
 const Location = require('../../models/Location')
 const User = require('../../models/User')
+const jwt = require('jsonwebtoken')
+const { secret } = require('../../config/environment')
 
 describe('GET /locations', () => {
+
+  let token = null
 
   beforeEach(done => {
     User.create({
@@ -11,6 +15,9 @@ describe('GET /locations', () => {
       password: 'ken',
       passwordConfirmation: 'ken'
     })
+      .then(user => {
+        token = jwt.sign({ sub: user._id }, secret, { expiresIn: '12h' })
+      })
       .then(user => {
         Location.create([
           {
@@ -36,8 +43,8 @@ describe('GET /locations', () => {
             user
           }
         ])
-          .then(() => done())
       })
+      .then(() => done())
   })
 
   afterEach(done => {
@@ -47,7 +54,9 @@ describe('GET /locations', () => {
   })
 
   it('should return a 200 response', done => {
-    api.get('/api/locations')
+    api
+      .get('/api/locations')
+      .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         expect(res.status).to.eq(200)
         done()
