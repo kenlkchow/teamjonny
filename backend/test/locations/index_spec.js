@@ -22,7 +22,7 @@ describe('GET /locations', () => {
         Location.create([
           {
             name: 'back alley',
-            address: 'E20 1HR',
+            postcode: 'E20 1HR',
             category: 'wild',
             website: 'test',
             priciness: 3,
@@ -33,7 +33,7 @@ describe('GET /locations', () => {
           },
           {
             name: 'test alley',
-            address: 'E20 1HR',
+            postcode: 'E20 1HR',
             category: 'wild',
             website: 'test',
             priciness: 3,

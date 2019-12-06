@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
-const { secret } = require('../config/environment')
+const { secret } = require('../config/environment') 
 
 function register(req, res, next) {
   req.body.circle = {
@@ -61,9 +61,7 @@ function approveToCircle(req, res) {
           return requestee.save()
         })
 
-        .then(requestee => {
-          console.log('REQUESTER', requester)
-          console.log('REQUESTEE', requestee)
+        .then(() => {
           return res.status(202).json({ message: `Request from ${requester.username} approved!` })
         })
     })
@@ -93,19 +91,30 @@ function removeFromCircle(req, res) {
           return deleter.save()
         })
 
-        .then(deleter => {
-          console.log('DELETER', deleter)
-          console.log('DELETEE', deletee)
+        .then(() => {
           return res.status(202).json({ message: `${deletee.username} removed from circle!` })
         })
     })
 }
 
+function indexCircle(req, res) {
+  User
+    .findById(req.currentUser._id)
+    .populate('circle.approved')
+    .populate('circle.requested')
+    .then(user => {
+      if (!user) return res.status(404).json({ message: '404 not found' })
+      return user.circle
+    })
+    .then(circle => res.status(200).json(circle))
+    .catch(err => console.log(err))
+}
 
 module.exports = {
   register,
   login,
   addToCircle,
   approveToCircle,
-  removeFromCircle
+  removeFromCircle,
+  indexCircle
 }
