@@ -4,6 +4,7 @@ const Location = require('../models/Location')
 function index(req, res) {
   Location
     .find()
+    .populate('user')
     .then(locations => res.status(200).json(locations))
     .catch(err => console.log(err))
 }
@@ -11,10 +12,11 @@ function index(req, res) {
 function indexAvailable(req, res) {
   Location
     .find()
+    .populate('user')
     .then(locations => {
       return locations.filter(location => {
-        return (req.currentUser._id.equals(location.user) || 
-        (req.currentUser.circle.approved.includes(location.user) && location.privacy === 2) || 
+        return (req.currentUser._id.equals(location.user._id) || 
+        (req.currentUser.circle.approved.includes(location.user._id) && location.privacy === 2) || 
         location.privacy === 1)
       })
     })
@@ -25,6 +27,7 @@ function indexAvailable(req, res) {
 function show(req, res) {
   Location
     .findById(req.params.id)
+    .populate('user')
     .then(location => {
       if (!location) {
         return res.status(404).json({ message: '404 not found' })

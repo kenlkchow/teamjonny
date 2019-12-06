@@ -3,14 +3,12 @@ const User = require('../../models/User')
 
 const testUserCorrect = {
   username: 'Natasha',
-  email: 'natasha@romanov.com',
   password: 'password',
   passwordConfirmation: 'password'
 }
 
 const testUserIncorrect = {
   username: 'Natasha',
-  email: 'natasha@romanov.com',
   password: 'password',
   passwordConfirmation: 'notthepassword'
 }

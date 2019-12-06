@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt') 
 
 const circleSchema = new mongoose.Schema({
-  approved: { type: [mongoose.Schema.ObjectId], ref: 'User' },
-  requested: { type: [mongoose.Schema.ObjectId], ref: 'User' }
+  approved: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+  requested: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
 })
 
 const userSchema = new mongoose.Schema({ 
@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
   timestamps: true, 
   toJSON: { 
     transform(doc, json) {
-      return { username: json.username }
+      return { 
+        username: json.username,
+        id: json._id
+      }
     }
   }
 })
