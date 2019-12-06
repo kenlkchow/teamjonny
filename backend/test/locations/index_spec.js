@@ -8,7 +8,7 @@ const { secret } = require('../../config/environment')
 describe('GET /locations', () => {
 
   let token = null
-
+  
   beforeEach(done => {
     User.create({
       username: 'Ken',
