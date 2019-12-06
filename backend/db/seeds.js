@@ -61,7 +61,7 @@ mongoose.connect(
         return Location.create([
           {
             name: 'test',
-            address: 'test',
+            postcode: 'test',
             category: 'test',
             website: 'test',
             priciness: 3,
@@ -72,7 +72,7 @@ mongoose.connect(
           },
           {
             name: 'test2',
-            address: 'test2',
+            postcode: 'test2',
             category: 'test2',
             website: 'test2',
             priciness: 2,
@@ -83,7 +83,7 @@ mongoose.connect(
           },
           {
             name: 'test3',
-            address: 'test3',
+            postcode: 'test3',
             category: 'test3',
             website: 'test3',
             priciness: 1,
@@ -94,7 +94,7 @@ mongoose.connect(
           },
           {
             name: 'Pear Tree Cafe',
-            address: 'SE8 5ET',
+            postcode: 'SE8 5ET',
             category: 'Bistro/Brunch',
             website: 'https://thepeartreekitchen.co.uk',
             priciness: 2,
@@ -105,7 +105,7 @@ mongoose.connect(
           },
           {
             name: 'Lantana',
-            address: 'EC1Y 1HQ',
+            postcode: 'EC1Y 1HQ',
             category: 'Bistro/Brunch',
             website: 'https://www.lantanacafe.co.uk',
             priciness: 2,
@@ -116,7 +116,7 @@ mongoose.connect(
           },
           {
             name: 'Granger & Co',
-            address: 'SW1X 0BP',
+            postcode: 'SW1X 0BP',
             category: 'Bistro/Brunch',
             website: 'https://grangerandco.com',
             priciness: 2,
@@ -127,7 +127,7 @@ mongoose.connect(
           }, 
           {
             name: 'Founder\'s Arms',
-            address: 'SE1 9JH',
+            postcode: 'SE1 9JH',
             category: 'Pub',
             website: 'https://foundersarms.co.uk',
             priciness: 2,
@@ -138,7 +138,7 @@ mongoose.connect(
           },
           {
             name: 'Market Place',
-            address: 'W1 8AH',
+            postcode: 'W1 8AH',
             category: 'Pub',
             website: 'https://www.marketplace-london.com',
             priciness: 2,
@@ -149,7 +149,7 @@ mongoose.connect(
           },
           {
             name: 'Mulberry Bush',
-            address: 'SE1 9PP',
+            postcode: 'SE1 9PP',
             category: 'Pub',
             website: 'https://mulberrybushpub.co.uk',
             priciness: 2,
@@ -160,7 +160,7 @@ mongoose.connect(
           },
           {
             name: 'Ole & Steen',
-            address: 'SW1Y 4RN',
+            postcode: 'SW1Y 4RN',
             category: 'Coffee Shop',
             website: 'https://oleandsteen.co.uk',
             priciness: 2,
@@ -171,7 +171,7 @@ mongoose.connect(
           }, 
           {
             name: 'Forge & Co',
-            address: 'E1 6HU',
+            postcode: 'E1 6HU',
             category: 'Coffee Shop',
             website: 'https://www.forgeandco.co.uk',
             priciness: 2,
@@ -182,7 +182,7 @@ mongoose.connect(
           },
           {
             name: 'Kaffeine',
-            address: 'W1W 7QJ',
+            postcode: 'W1W 7QJ',
             category: 'Coffee Shop',
             website: 'https://kaffeine.co.uk',
             priciness: 2,
@@ -193,7 +193,7 @@ mongoose.connect(
           },
           {
             name: 'Kipferl',
-            address: 'N1 8ED',
+            postcode: 'N1 8ED',
             category: 'Restaurant',
             website: 'https://kipferl.co.uk',
             priciness: 2,
@@ -204,7 +204,7 @@ mongoose.connect(
           },
           {
             name: 'Boro Bistro',
-            address: 'SE1 9QQ',
+            postcode: 'SE1 9QQ',
             category: 'Restaurant',
             website: 'https://borobistro.co.uk',
             priciness: 2,
@@ -215,7 +215,7 @@ mongoose.connect(
           },
           {
             name: 'Temakinho',
-            address: 'W1D 4TF',
+            postcode: 'W1D 4TF',
             category: 'Restaurant',
             website: 'https://www.temakinho.com',
             priciness: 3,
@@ -226,7 +226,7 @@ mongoose.connect(
           },
           {
             name: 'Postcard Teas',
-            address: 'W1S 1AG',
+            postcode: 'W1S 1AG',
             category: 'Shop',
             website: 'https://www.postcardteas.com',
             priciness: 3,
@@ -237,7 +237,7 @@ mongoose.connect(
           },
           {
             name: 'Inspitalfields',
-            address: 'E1 6EA',
+            postcode: 'E1 6EA',
             category: 'Shop',
             website: 'https://www.inspitalfields.co.uk',
             priciness: 2,
@@ -248,7 +248,7 @@ mongoose.connect(
           },
           {
             name: 'Scribbler',
-            address: 'WC1V 7DS',
+            postcode: 'WC1V 7DS',
             category: 'Shop',
             website: 'https://www.scribbler.com',
             priciness: 1,
