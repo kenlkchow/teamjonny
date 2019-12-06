@@ -55,7 +55,7 @@ describe('GET /locations', () => {
   })
 
   it('should return an array', done => {
-    api.get('/api/animals')
+    api.get('/api/locations')
       .end((err, res) => {
         expect(res.body).to.be.an('array')
         done()
