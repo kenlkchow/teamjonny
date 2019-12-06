@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 const useModalRegister = () => {
   const [isRegisterShowing, setIsRegisterShowing] = useState(false)
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === 'Escape'){
+        setIsRegisterShowing(false)
+      }
+    }
+    window.addEventListener('keydown', listener)
+  }, [])
 
   function toggleRegister() {
     setIsRegisterShowing(!isRegisterShowing)
@@ -23,17 +32,44 @@ const RegisterModal = ({ isRegisterShowing, hideRegister }) => isRegisterShowing
           <div className="title">Register</div>
           <form className="form">
             <div className="field">
-              <label htmlFor="" className="label">
-                Email
+              <label htmlFor="" className="label has-text-white">
+                Username
               </label>
               <div className="control">
                 <input
                   type="text"
-                  name="email"
+                  name="username"
                   className="input"
                 />
               </div>
             </div>
+            <div className="field">
+              <label htmlFor="" className="label has-text-white">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="password"
+                  className="input"
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label htmlFor="" className="label has-text-white">
+                Confirm Password
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="passwordConfirmation"
+                  className="input"
+                />
+              </div>
+            </div>
+            <button className="button is-info">
+              Complete registration
+            </button>
           </form>
         </div>
       </section>

@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 const useModalLogin = () => {
   const [isLoginShowing, setIsLoginShowing] = useState(false)
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === 'Escape'){
+        setIsLoginShowing(false)
+      }
+    }
+    window.addEventListener('keydown', listener)
+  }, [])
 
   function toggleLogin() {
     setIsLoginShowing(!isLoginShowing)
@@ -23,17 +32,32 @@ const LoginModal = ({ isLoginShowing, hideLogin }) => isLoginShowing ?
           <div className="title">Login</div>
           <form className="form">
             <div className="field">
-              <label htmlFor="" className="label">
-                Email
+              <label htmlFor="" className="label has-text-white">
+                Username
               </label>
               <div className="control">
                 <input
                   type="text"
-                  name="email"
+                  name="username"
                   className="input"
                 />
               </div>
             </div>
+            <div className="field">
+              <label htmlFor="" className="label has-text-white">
+                Password
+              </label>
+              <div className="control">
+                <input
+                  type="text"
+                  name="password"
+                  className="input"
+                />
+              </div>
+            </div>
+            <button className="button is-info">
+              Login
+            </button>
           </form>
         </div>
       </section>
