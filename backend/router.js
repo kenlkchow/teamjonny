@@ -26,6 +26,7 @@ router.route('/circle')
   .post(secureRoute, users.addToCircle)
   .put(secureRoute, users.approveToCircle)
   .delete(secureRoute, users.removeFromCircle)
+  .get(secureRoute, users.indexCircle)
 
 module.exports = router
 
