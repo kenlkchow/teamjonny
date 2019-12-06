@@ -8,31 +8,16 @@ function index(req, res) {
     .catch(err => console.log(err))
 }
 
-function indexPublic(req, res) {
+function indexAvailable(req, res) {
   Location
-    .find({ privacy: { $eq: 1 } })
-    .then(locations => res.status(200).json(locations))
-    .catch(err => console.log(err))
-}
-
-function indexCircle(req, res) {
-  Location
-    .find({ privacy: { $eq: 2 } })
+    .find()
     .then(locations => {
       return locations.filter(location => {
-        return req.currentUser.circle.approved.includes(location.user)
+        return (req.currentUser._id.equals(location.user) || 
+        (req.currentUser.circle.approved.includes(location.user) && location.privacy === 2) || 
+        location.privacy === 1)
       })
     })
-    .then(locations => res.status(200).json(locations))
-    .catch(err => console.log(err))
-}
-
-function indexPrivate(req, res) {
-  Location
-    .find({ privacy: { $eq: 3 } })
-    .then(locations => locations.filter(location => {
-      return req.currentUser._id.equals(location.user)
-    }))
     .then(locations => res.status(200).json(locations))
     .catch(err => console.log(err))
 }
@@ -81,9 +66,7 @@ function update(req, res) {
 
 module.exports = {
   index,
-  indexPublic,
-  indexCircle,
-  indexPrivate,
+  indexAvailable,
   show,
   remove,
   update,

@@ -8,14 +8,8 @@ router.route('/locations')
   .get(locations.index)
   .post(secureRoute, locations.create)
 
-router.route('/locations/public')
-  .get(secureRoute, locations.indexPublic)
-
-router.route('/locations/circle')
-  .get(secureRoute, locations.indexCircle)
-
-router.route('/locations/private')
-  .get(secureRoute, locations.indexPrivate)
+router.route('/locations/available')
+  .get(secureRoute, locations.indexAvailable)  
 
 router.route('/locations/:id')
   .get(secureRoute, locations.show)
