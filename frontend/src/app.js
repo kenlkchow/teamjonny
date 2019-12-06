@@ -6,11 +6,13 @@ import 'bulma'
 import './style.scss'
 
 import Home from './components/Home'
+import Circle from './components/Circle'
 
 const App = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path='/' component={Home} />
+      <Route exact path='/circle' component={Circle} />
     </Switch>
   </BrowserRouter>
 )
