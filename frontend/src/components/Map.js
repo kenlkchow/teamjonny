@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactMap from 'react-map-gl'
+import ReactMap, { Marker, Popup, GeolocateControl } from 'react-map-gl'
 import axios from 'axios'
 
 class Map extends React.Component {
@@ -13,7 +13,27 @@ class Map extends React.Component {
         longitude: -0.07280,
         zoom: 16
       },
-      locations: {}
+      locations: [{
+        category: '',
+        createdAt: '',
+        latitude: 0,
+        longitude: 0,
+        name: '',
+        notes: '',
+        openLate: false,
+        postcode: '',
+        priciness: 0,
+        privacy: 0,
+        updatedAt: '',
+        user: {
+          username: '', 
+          id: ''
+        },
+        website: '',
+        __v: 0,
+        _id: ''
+      }],
+      userPosition: ''
     }
   }
 
@@ -22,39 +42,52 @@ class Map extends React.Component {
       headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU2NDY0MjcsImV4cCI6MTU3NTczMjgyN30.y-CL4Z_6XuECIRWX7HjuYaiEjw8jzs9n6DDI4Y5wm9c' }
     })
       .then(resp => {
-        const locations2 = []
-        const locations1 = resp.data
-        const promise = new Promise(function (resolve, reject) {
-          locations1.forEach(location => {
-            return (
-              axios.get(`https://api.postcodes.io/postcodes/${location.postcode}`)
-                .then(resp => {
-                  console.log(resp.data.result.latitude, resp.data.result.longitude)
-                  location.latitude = resp.data.result.latitude
-                  location.longitude = resp.data.result.longitude
-                  locations2.push(location)
-                  resolve(locations2)
-                })
-                // .catch(err => reject(err))
-            )
-          })
+        const availableData = resp.data
+        const pulledPostcodes = availableData.map(postcode => {
+          return postcode.postcode
         })
-        return promise
+
+        axios.post('https://api.postcodes.io/postcodes', {
+          'postcodes': pulledPostcodes
+        })
+          .then(resp => {
+            availableData.forEach((postcode, i) => {
+              if (resp.data.result[i].result === null) {
+                resp.data.result[i].result = {}
+                resp.data.result[i].result.latitude = 'remove me'
+                resp.data.result[i].result.longitude = 'remove me'
+              }
+              postcode.latitude = resp.data.result[i].result.latitude
+              postcode.longitude = resp.data.result[i].result.longitude
+            })
+            const addedLongLat = availableData
+            const filteredLongLat = addedLongLat.filter(element => {
+              return element.latitude !== 'remove me'
+            })
+            this.setState({ locations: filteredLongLat })
+          })
       })
-      .then(resp => this.setState({ locations: resp }))
-    
   }
 
   render() {
-    console.log(this.state.locations)
-    return <div className="section">
+    return <section className="section">
       <ReactMap
         mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
         { ...this.state.viewport }
         onViewportChange={viewport => this.setState({ viewport })}
+        // mapStyle="mapbox://styles/mapbox/outdoors-v11"
       >
+        {/* <GeolocateControl
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+        /> */}
+        {this.state.locations.map((location, i) => {
+          return <Marker key={i} latitude={location.latitude} longitude={location.longitude} onClick>
+            <div className="marker"></div>
+          </Marker>
+        })}
       </ReactMap>
-    </div>
+    </section>
   }
 }
 
