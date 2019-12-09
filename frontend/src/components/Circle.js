@@ -26,7 +26,7 @@ const Circle = () => {
     return
   }
 
-  if (!circle.approved) return <h1>Loading...</h1>
+  if (!circle) return <h1>Loading...</h1>
 
   return <section className="section">
     <div className="container">
@@ -74,7 +74,7 @@ const Circle = () => {
       <section className="section">
         <div className="container">
           <h2 className="subtitle">New requests</h2>
-          {circle.requested.map((user, i) => {
+          {circle.requested && circle.requested.map((user, i) => {
             return <div key={i}>
               <div className="level is-mobile">
                 <div className="level-left">
@@ -93,17 +93,17 @@ const Circle = () => {
             </div>
           })}
 
+          {!circle.requested && <div className="is-size-7 has-text-grey">No requests</div>}
+
 
         </div>
       </section>
 
 
-
-
       <section className="section">
         <div className="container">
           <h2 className="subtitle">Current members</h2>
-          {circle.approved.map((user, i) => {
+          {circle.approved && circle.approved.map((user, i) => {
             return <div key={i}>
               <div className="level is-mobile">
                 <div className="level-left">
@@ -121,6 +121,7 @@ const Circle = () => {
               </div>
             </div>
           })}
+          {!circle.approved && <div className="is-size-7 has-text-grey">No members added</div>}
         </div>
       </section>
 
