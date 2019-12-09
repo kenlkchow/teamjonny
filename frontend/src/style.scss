@@ -25,6 +25,8 @@
 
   .control {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 
     .input, select, .select {
       width: 100%;
@@ -50,8 +52,7 @@
 }
 
 small.help.is-danger {
-  margin-top: -15px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 
 .marker {
@@ -61,4 +62,9 @@ small.help.is-danger {
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+small{
+  margin-top: 10px;
+  margin-left: 5px;
 }

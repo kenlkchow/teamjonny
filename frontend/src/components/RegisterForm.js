@@ -54,8 +54,8 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               className="input"
               onChange={handleChange}
             />
+            {errors.username && <small className="help is-danger">Please pick a different username.</small>}
           </div>
-          {errors.username && <small className="help is-danger">Please pick a different username.</small>}
         </div>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
@@ -68,8 +68,8 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               className="input"
               onChange={handleChange}
             />
+            {errors.password && <small className="help is-danger">{errors.password}</small>}
           </div>
-          {errors.password && <small className="help is-danger">{errors.password}</small>}
         </div>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
@@ -82,8 +82,8 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               className="input"
               onChange={handleChange}
             />
+            {errors.passwordConfirmation && <small className="help is-danger">Password and Password Confirmation do not match. Dummy!</small>}
           </div>
-          {errors.passwordConfirmation && <small className="help is-danger">Password and Password Confirmation do not match. Dummy!</small>}
         </div>
         <button className="button is-info">
           Complete registration

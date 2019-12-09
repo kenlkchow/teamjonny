@@ -47,7 +47,7 @@ const NewLocation = (props) => {
   }
 
   return <section className="section">
-    {console.log(data)}
+    {/* {console.log(data)} */}
     {console.log(errors)}
     <div className="container">
       <div className="title">Add new location</div>
