@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker, Popup, GeolocateControl } from 'react-map-gl'
 import axios from 'axios'
 
@@ -33,13 +33,13 @@ class Map extends React.Component {
         __v: 0,
         _id: ''
       }],
-      userPosition: ''
+      showPopup: true
     }
   }
 
   componentDidMount() {
     axios.get('/api/locations/available', {
-      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU2NDY0MjcsImV4cCI6MTU3NTczMjgyN30.y-CL4Z_6XuECIRWX7HjuYaiEjw8jzs9n6DDI4Y5wm9c' }
+      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU4ODU0MjUsImV4cCI6MTU3NTk3MTgyNX0.5T7VEMCotsI0H7Rw6yl_Pr9T9BwxMrt6OOAmwLyxxcU' }
     })
       .then(resp => {
         const availableData = resp.data
@@ -70,23 +70,29 @@ class Map extends React.Component {
   }
 
   render() {
-    return <section className="section">
-      <ReactMap
-        mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
-        { ...this.state.viewport }
-        onViewportChange={viewport => this.setState({ viewport })}
-        // mapStyle="mapbox://styles/mapbox/outdoors-v11"
-      >
-        {/* <GeolocateControl
-          positionOptions={{ enableHighAccuracy: true }}
-          trackUserLocation={true}
-        /> */}
-        {this.state.locations.map((location, i) => {
-          return <Marker key={i} latitude={location.latitude} longitude={location.longitude} onClick>
-            <div className="marker"></div>
-          </Marker>
-        })}
-      </ReactMap>
+    if (!this.state.locations || !this.state.viewport) {
+      return <p className="Title">Loading...</p>
+    }
+    return <section className="section hero is-fullheight has-background-link">
+      <div className="container has-text-centered">
+        <ReactMap
+          mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
+          { ...this.state.viewport }
+          onViewportChange={viewport => this.setState({ viewport })}
+          // mapStyle="mapbox://styles/mapbox/outdoors-v11"
+        >
+          {this.state.locations.map((location, i) => {
+            return <Marker 
+              key={i} 
+              latitude={location.latitude} 
+              longitude={location.longitude} 
+              offsetTop={-30} 
+              offsetLeft={-20}>
+              <div className="marker"></div>
+            </Marker>
+          })}
+        </ReactMap>
+      </div>
     </section>
   }
 }
