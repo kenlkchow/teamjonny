@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
-<<<<<<< HEAD
 import { LocationModal } from './LocationModal'
-=======
 import Auth from '../lib/authMethods'
->>>>>>> development
 
 
 const Map = () => {
