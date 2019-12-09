@@ -30,12 +30,12 @@ function addToCircle(req, res) {
   User
     .findOne({ username: req.body.username })
     .then(user => {
-      if (!user) return res.status(404).json({ message: '404 not found' })
-      if (user.circle.requested.includes(req.currentUser._id)) return res.status(400).json({ message: 'already requested' })
+      if (!user) return res.status(404).json({ message: 'No such user found' })
+      if (user.circle.requested.includes(req.currentUser._id)) return res.status(400).json({ message: 'Request already pending' })
       user.circle.requested.push(req.currentUser._id)
       return user.save()
     })
-    .then(user => res.status(202).json({ message: `Request sent to ${user.username}!` }))
+    .then(user => res.status(202).json({ message: `Request sent to ${user.username}` }))
 }
 
 function approveToCircle(req, res) {
@@ -43,7 +43,7 @@ function approveToCircle(req, res) {
     .findOne({ username: req.body.username })
     .then(requester => {
       if (!requester) return res.status(404).json({ message: '404 not found' })
-      if (!req.currentUser.circle.requested.includes(requester._id)) return res.status(402).json({ message: 'no request was sent' })
+      if (!req.currentUser.circle.requested.includes(requester._id)) return res.status(402).json({ message: 'No request was sent' })
       
       requester.circle.approved.push(req.currentUser._id)
       return requester.save()
@@ -62,12 +62,13 @@ function approveToCircle(req, res) {
         })
 
         .then(() => {
-          return res.status(202).json({ message: `Request from ${requester.username} approved!` })
+          return res.status(202).json({ message: `Request from ${requester.username} approved` })
         })
     })
 }
 
 function removeFromCircle(req, res) {
+  console.log(req.body)
   User
     .findOne({ username: req.body.username })
     .then(deletee => {
@@ -92,7 +93,7 @@ function removeFromCircle(req, res) {
         })
 
         .then(() => {
-          return res.status(202).json({ message: `${deletee.username} removed from circle!` })
+          return res.status(202).json({ message: `${deletee.username} removed from circle` })
         })
     })
 }
