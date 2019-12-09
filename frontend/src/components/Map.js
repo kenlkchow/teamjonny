@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
-<<<<<<< HEAD
 import { LocationModal } from './LocationModal'
-=======
 import Auth from '../lib/authMethods'
->>>>>>> development
 
 
 const Map = () => {
@@ -33,7 +30,27 @@ const Map = () => {
     user: {
       username: '', 
       id: ''
-    }
+    },
+    website: ''
+  }])
+
+  const [filteredLocations, setFilteredLocations] = useState([{
+    category: '',
+    createdAt: '',
+    latitude: 0,
+    longitude: 0,
+    name: '',
+    notes: '',
+    openLate: false,
+    postcode: '',
+    priciness: 0,
+    privacy: 0,
+    updatedAt: '',
+    user: {
+      username: '', 
+      id: ''
+    },
+    website: ''
   }])
 
   const [modal, setModal] = useState(false)
@@ -46,6 +63,14 @@ const Map = () => {
   function handleClick(e) {
     setLocationId(e.target.id)
     toggleModal()
+  }
+
+  function handleCategory(e) {
+    // if (e.target.value === 'All') {
+    //   return locations
+    // } else {
+    //   const categoryFiltered = locations
+    // }
   }
 
   useEffect(() => {
@@ -84,23 +109,40 @@ const Map = () => {
 
   return <section className="section hero is-fullheight has-background-link">
     <div className="container has-text-centered">
-      <ReactMap
-        mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
-        { ...viewport }
-        onViewportChange={_onViewportChange}
-        // mapStyle="mapbox://styles/mapbox/outdoors-v11"
-      >
-        {locations.map((location, i) => {
-          return <Marker 
-            key={i} 
-            latitude={location.latitude} 
-            longitude={location.longitude} 
-            offsetTop={-30} 
-            offsetLeft={-20}>
-            <div className="marker" id={location._id} onClick={handleClick}></div>
-          </Marker>
-        })}
-      </ReactMap>
+      <div className="columns">
+        <div className="column">
+          <ReactMap
+            mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
+            { ...viewport }
+            onViewportChange={_onViewportChange}
+            // mapStyle="mapbox://styles/mapbox/outdoors-v11"
+          >
+            {locations.map((location, i) => {
+              return <Marker 
+                key={i} 
+                latitude={location.latitude} 
+                longitude={location.longitude} 
+                offsetTop={-30} 
+                offsetLeft={-20}>
+                <div className="marker" id={location._id} onClick={handleClick}></div>
+              </Marker>
+            })}
+          </ReactMap>
+        </div>
+        <div className="column">
+          <div className="select">
+            <select name="category" onChange={handleCategory}>
+              <option value="Select" hidden defaultValue>Select</option>
+              <option value="Bistro/Brunch">Bistro/Brunch</option>
+              <option value="Coffee Shop">Coffee Shop</option>
+              <option value="Restaurant">Restaurant</option>
+              <option value="Shop">Shop</option>
+              <option value="Other">Other</option>
+              <option value="All">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
 
     {modal ? <LocationModal 

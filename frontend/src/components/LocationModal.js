@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Auth from '../lib/authMethods'
+import moment from 'moment'
 
 const LocationModal = ({ locationId, toggleModal }) => {
 
   const [priciness, setPriciness] = useState('')
-  const [singleLocation, setSingleLocation] = useState({})
+  const [singleLocation, setSingleLocation] = useState({ user: { username: '' }
+  })
 
   useEffect(() => {
     axios.get(`/api/locations/${locationId}`, {
-      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU4ODU0MjUsImV4cCI6MTU3NTk3MTgyNX0.5T7VEMCotsI0H7Rw6yl_Pr9T9BwxMrt6OOAmwLyxxcU' }
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
       .then(resp => {
         if (resp.data.priciness === 1) {
@@ -35,9 +38,11 @@ const LocationModal = ({ locationId, toggleModal }) => {
         <p>{singleLocation.notes}</p>
         {singleLocation.openLate ? <p>Open late</p> : null}
         <p>{priciness}</p>
+        <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>
       </section>
       <footer className="modal-card-foot">
         <Link className="button is-success">Edit</Link>
+        <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
       </footer>
     </div>
     <button className="modal-close is-large" aria-label="close" onClick={toggleModal}></button>
