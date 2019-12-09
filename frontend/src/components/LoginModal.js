@@ -23,11 +23,11 @@ const useModalLogin = () => {
   }
 }
 
-const LoginModal = ({ isLoginShowing, hideLogin }) => isLoginShowing ?
+const LoginModal = ({ isLoginShowing, hideLogin, props }) => isLoginShowing ?
   <div className="modal is-active">
     <div className="modal-background"></div>
     <div className="modal-content">
-      < LoginForm />
+      < LoginForm props={props} />
     </div>
     <button className="modal-close is-large" aria-label="close" onClick={hideLogin}></button>
   </div>

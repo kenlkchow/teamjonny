@@ -1,33 +1,34 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { setToken } from '../lib/auth'
 
 const initialData = {
   username: '',
   password: ''
 }
 
-const initialErrors = {
-  username: '',
-  password: ''
-}
 
-const LoginForm = () => {
+
+const LoginForm = ({ props }) => {
 
   const [data, setData] = useState(initialData)
-  const [errors, setErrors] = useState(initialErrors)
+  const [errors, setErrors] = useState()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/api/login', data)
-      .then((response) => console.log(response.data))
-      .catch(err => {
-        setErrors( { ...errors, ...err.response.data.errors } )
+      .then(resp => {
+        console.log(resp.data.token)
+        localStorage.setItem('token', resp.data.token)
+        props.history.push('/map')
       })
+      .catch(() => setErrors('Username or password incorrect')
+      )
   }
 
   const handleChange = (e) => {
     const newData = { ...data, [e.target.name]: e.target.value }
-    const newErrors = { ...errors, [e.target.name]: '' }
+    const newErrors = ''
     setData(newData)
     setErrors(newErrors)
     console.log(data)
@@ -35,7 +36,7 @@ const LoginForm = () => {
 
   return <section className="section">
     <div className="container">
-      <div className="title">Login</div>
+      <div className="title">Login </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
@@ -48,6 +49,7 @@ const LoginForm = () => {
               className="input"
               onChange={handleChange}
             />
+            {errors && <small className="help is-danger">{errors}</small>}
           </div>
         </div>
         <div className="field">
@@ -61,6 +63,7 @@ const LoginForm = () => {
               className="input"
               onChange={handleChange}
             />
+            {errors && <small className="help is-danger">{errors}</small>}
           </div>
         </div>
         <button className="button is-info">
