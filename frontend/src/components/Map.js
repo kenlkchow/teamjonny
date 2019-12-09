@@ -34,25 +34,6 @@ const Map = () => {
     website: ''
   }])
 
-  const [filteredLocations, setFilteredLocations] = useState([{
-    category: '',
-    createdAt: '',
-    latitude: 0,
-    longitude: 0,
-    name: '',
-    notes: '',
-    openLate: false,
-    postcode: '',
-    priciness: 0,
-    privacy: 0,
-    updatedAt: '',
-    user: {
-      username: '', 
-      id: ''
-    },
-    website: ''
-  }])
-
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
 
@@ -66,11 +47,7 @@ const Map = () => {
   }
 
   function handleCategory(e) {
-    // if (e.target.value === 'All') {
-    //   return locations
-    // } else {
-    //   const categoryFiltered = locations
-    // }
+    
   }
 
   useEffect(() => {
