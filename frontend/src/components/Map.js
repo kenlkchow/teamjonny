@@ -34,6 +34,8 @@ const Map = () => {
     website: ''
   }])
 
+  const [filter, setFilter] = useState('All')
+
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
 
@@ -47,7 +49,7 @@ const Map = () => {
   }
 
   function handleCategory(e) {
-    
+    setFilter(e.target.value)
   }
 
   useEffect(() => {
@@ -94,7 +96,9 @@ const Map = () => {
             onViewportChange={_onViewportChange}
             // mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
-            {locations.map((location, i) => {
+            {locations.filter(location => {
+              return location.category === filter
+            }).map((location, i) => {
               return <Marker 
                 key={i} 
                 latitude={location.latitude} 
