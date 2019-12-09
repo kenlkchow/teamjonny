@@ -13,8 +13,8 @@ router.route('/locations/available')
 
 router.route('/locations/:id')
   .get(secureRoute, locations.show)
-  .put(locations.update)
-  .delete(locations.remove)
+  .put(secureRoute, locations.update)
+  .delete(secureRoute, locations.remove)
 
 router.route('/register')
   .post(users.register)
