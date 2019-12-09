@@ -1,11 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
-const LoginForm = () => (
+const initialData = {
+  username: '',
+  password: ''
+}
 
-  <section className="section">
+const initialErrors = {
+  username: '',
+  password: ''
+}
+
+const LoginForm = () => {
+
+  const [data, setData] = useState(initialData)
+  const [errors, setErrors] = useState(initialErrors)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('/api/login', data)
+      .then((response) => console.log(response.data))
+      .catch(err => {
+        setErrors( { ...errors, ...err.response.data.errors } )
+      })
+  }
+
+  const handleChange = (e) => {
+    const newData = { ...data, [e.target.name]: e.target.value }
+    const newErrors = { ...errors, [e.target.name]: '' }
+    setData(newData)
+    setErrors(newErrors)
+    console.log(data)
+  }
+
+  return <section className="section">
     <div className="container">
       <div className="title">Login</div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
             Username
@@ -15,6 +46,7 @@ const LoginForm = () => (
               type="text"
               name="username"
               className="input"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -27,6 +59,7 @@ const LoginForm = () => (
               type="text"
               name="password"
               className="input"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -36,6 +69,6 @@ const LoginForm = () => (
       </form>
     </div>
   </section>
-)
+}
 
 export default LoginForm 

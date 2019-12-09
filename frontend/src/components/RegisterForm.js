@@ -1,11 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
-const RegisterForm = () => (
+const initialData = {
+  username: '',
+  password: '',
+  passwordConfirmation: ''
+}
 
-  <section className="section">
+const initialErrors = {
+  username: '',
+  password: '',
+  passwordConfirmation: ''
+}
+
+const RegisterForm = () => {
+  const [data, setData] = useState(initialData)
+  const [errors, setErrors] = useState(initialErrors)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('/api/register', data)
+      .then(() => console.log('Well done'))
+      .catch(err => {
+        setErrors( { ...errors, ...err.response.data.errors } )
+      })
+  }
+
+  const handleChange = (e) => {
+    const newData = { ...data, [e.target.name]: e.target.value }
+    const newErrors = { ...errors, [e.target.name]: '' }
+    setData(newData)
+    setErrors(newErrors)
+    console.log(data)
+  }
+
+  return <section className="section">
     <div className="container">
       <div className="title">Register</div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
             Username
@@ -15,6 +47,7 @@ const RegisterForm = () => (
               type="text"
               name="username"
               className="input"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -27,6 +60,7 @@ const RegisterForm = () => (
               type="text"
               name="password"
               className="input"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -39,6 +73,7 @@ const RegisterForm = () => (
               type="text"
               name="passwordConfirmation"
               className="input"
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -48,6 +83,6 @@ const RegisterForm = () => (
       </form>
     </div>
   </section>
-)
+}
 
 export default RegisterForm 
