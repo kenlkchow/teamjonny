@@ -13,14 +13,19 @@ const initialErrors = {
   passwordConfirmation: ''
 }
 
-const RegisterForm = () => {
+const RegisterForm = ({ hideRegister, hideLogin }) => {
   const [data, setData] = useState(initialData)
   const [errors, setErrors] = useState(initialErrors)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/api/register', data)
       .then(() => console.log('Well done'))
+      .then(() => { 
+        hideRegister() 
+        hideLogin()
+      } )
       .catch(err => {
         setErrors( { ...errors, ...err.response.data.errors } )
       })

@@ -23,11 +23,14 @@ const useModalRegister = () => {
   }
 }
 
-const RegisterModal = ({ isRegisterShowing, hideRegister }) => isRegisterShowing ?
+const RegisterModal = ({ isRegisterShowing, hideRegister, hideLogin }) => isRegisterShowing ?
   <div className="modal is-active">
     <div className="modal-background"></div>
     <div className="modal-content">
-      <RegisterForm />
+      <RegisterForm 
+        hideRegister={hideRegister}
+        hideLogin={hideLogin}
+      />
     </div>
     <button className="modal-close is-large" aria-label="close" onClick={hideRegister}></button>
   </div>

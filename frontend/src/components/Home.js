@@ -3,7 +3,7 @@ import React from 'react'
 import { useModalRegister, RegisterModal } from './RegisterModal'
 import { useModalLogin, LoginModal } from './LoginModal'
 
-const Home = () => {
+const Home = (props) => {
   const { toggleRegister, isRegisterShowing } = useModalRegister()
   const { toggleLogin, isLoginShowing } = useModalLogin()
   return (
@@ -21,10 +21,12 @@ const Home = () => {
       <RegisterModal
         isRegisterShowing={isRegisterShowing}
         hideRegister={toggleRegister}
+        hideLogin={toggleLogin}
       />
       <LoginModal
         isLoginShowing={isLoginShowing}
         hideLogin={toggleLogin}
+        props={props}
       />
     </section>
   )
