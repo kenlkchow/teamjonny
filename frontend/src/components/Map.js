@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker, Popup, GeolocateControl } from 'react-map-gl'
 import axios from 'axios'
+import Auth from '../lib/authMethods'
 
 class Map extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ class Map extends React.Component {
 
   componentDidMount() {
     axios.get('/api/locations/available', {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
       .then(resp => {
         const availableData = resp.data

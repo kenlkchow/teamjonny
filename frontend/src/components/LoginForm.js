@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { setToken } from '../lib/auth'
+import Auth from '../lib/authMethods'
 
 const initialData = {
   username: '',
@@ -19,10 +19,11 @@ const LoginForm = ({ props }) => {
     axios.post('/api/login', data)
       .then(resp => {
         console.log(resp.data.token)
-        localStorage.setItem('token', resp.data.token)
+        Auth.setToken(resp.data.token)
+        // localStorage.setItem('token', resp.data.token)
         props.history.push('/map')
       })
-      .catch(() => setErrors('Username or password incorrect')
+      .catch((errors) => setErrors(errors)
       )
   }
 

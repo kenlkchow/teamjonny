@@ -22,12 +22,12 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
     e.preventDefault()
     axios.post('/api/register', data)
       .then(() => console.log('Well done'))
-      .then(() => { 
-        hideRegister() 
+      .then(() => {
+        hideRegister()
         hideLogin()
-      } )
+      })
       .catch(err => {
-        setErrors( { ...errors, ...err.response.data.errors } )
+        setErrors({ ...errors, ...err.response.data.errors })
       })
   }
 
@@ -55,6 +55,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               onChange={handleChange}
             />
           </div>
+          {errors.username && <small className="help is-danger">Please pick a different username.</small>}
         </div>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
@@ -68,6 +69,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               onChange={handleChange}
             />
           </div>
+          {errors.password && <small className="help is-danger">{errors.password}</small>}
         </div>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
@@ -81,6 +83,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
               onChange={handleChange}
             />
           </div>
+          {errors.passwordConfirmation && <small className="help is-danger">Password and Password Confirmation do not match. Dummy!</small>}
         </div>
         <button className="button is-info">
           Complete registration
