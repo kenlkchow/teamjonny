@@ -57,7 +57,7 @@ const Navbar = (props) => {
             <Link className="navbar-item" to="#">List of locations</Link>
           </div>}
           {Auth.isAuthorized() && <div className="navbar-item">
-            <Link className="navbar-item" to="#">Add new location</Link>
+            <Link className="navbar-item" to="/new">Add new location</Link>
           </div>}
         </div>
         <div className="navbar-end">
