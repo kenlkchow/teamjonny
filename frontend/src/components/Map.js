@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
+<<<<<<< HEAD
 import { LocationModal } from './LocationModal'
+=======
+import Auth from '../lib/authMethods'
+>>>>>>> development
 
 
 const Map = () => {
@@ -46,7 +50,7 @@ const Map = () => {
 
   useEffect(() => {
     axios.get('/api/locations/available', {
-      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU4ODU0MjUsImV4cCI6MTU3NTk3MTgyNX0.5T7VEMCotsI0H7Rw6yl_Pr9T9BwxMrt6OOAmwLyxxcU' }
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
       .then(resp => {
         const availableData = resp.data

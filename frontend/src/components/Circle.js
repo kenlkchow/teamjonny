@@ -1,34 +1,100 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+const Auth = {
+  getToken() {
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVlMmRkZDZjZmIwYWYwY2QzMTQ4ZWQiLCJpYXQiOjE1NzU4OTI2MTMsImV4cCI6MTU3NTk3OTAxM30.xtDz0-16dMvdAcnX3PqFE_MRPrG019LzjxTrb4HxcyE'
+  }
+}
+
+const initialState = {
+  sendRequest: '',
+  sendApprove: '',
+  sendDelete: ''
+}
+
 const Circle = () => {
 
   const [circle, setCircle] = useState({})
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState(initialState)
+  const [username, setUsername] = useState({ username: '' })
+  const [message, setMessage] = useState(initialState)
 
-  useEffect(() => {
+  function fetchCircleData() {
     axios.get('/api/circle', {
-      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNjI5MDEwODA4N2RmMTY3Y2MxMDAiLCJpYXQiOjE1NzU2NDE4NzAsImV4cCI6MTU3NTcyODI3MH0.47LPwbEX6aQlPkkUZ0ilUmuXpcudDYy_f66SHgE-5Do' }
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(resp => {
-        console.log(resp.data)
+        console.log('API data', resp.data)
         setCircle(resp.data)
       })
       .catch(err => setErrors({ ...errors, ...err.response.data }))
+  }
+
+  useEffect(() => {
+    fetchCircleData()
   }, [])
 
   function handleRequest (e) {
     e.preventDefault()
-    return
+    axios.post('/api/circle', username, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(resp => {
+        setMessage({ ...initialState, sendRequest: resp.data.message })
+        setUsername({ username: '' })
+        setErrors({ ...errors, sendRequest: '' })
+      })
+      .catch(err => {
+        setMessage({ ...initialState })
+        setErrors({ ...errors, sendRequest: err.response.data.message })
+      })
   }
 
   function handleChange (e) {
-    return
+    setUsername({ username: e.target.value })
+    setErrors({ ...errors, sendRequest: '' })
   }
 
-  if (!circle.approved) return <h1>Loading...</h1>
+  function handleApprove(e) {
+    e.preventDefault
+    axios.put('/api/circle', { username: e.target.id }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(resp => {
+        setMessage({ ...initialState, sendApprove: resp.data.message })
+        setUsername({ username: '' })
+        setErrors({ ...errors, sendApprove: '' })
+        fetchCircleData()
+      })
+      .catch(err => {
+        setErrors({ ...errors, sendApprove: err.response.data.message })
+        setMessage({ ...initialState })
+      })
+  }
+
+  function handleDelete(e) {
+    e.preventDefault
+    axios.delete('/api/circle', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` },
+      data: { username: e.target.id }
+    })
+      .then(resp => {
+        setMessage({ ...initialState, sendDelete: resp.data.message })
+        setUsername({ username: '' })
+        setErrors({ ...errors, sendDelete: '' })
+        fetchCircleData()
+      })
+      .catch(err => {
+        setErrors({ ...errors, sendDelete: err.response.data.message })
+        setMessage({ ...initialState })
+      })
+  }
+
+  if (!circle) return <h1>Loading...</h1>
 
   return <section className="section">
+    {console.log('username', username)}
     <div className="container">
 
       <h1 className="title">Your Circle</h1>
@@ -50,6 +116,7 @@ const Circle = () => {
                       name="username"
                       className="input"
                       placeholder="Type username"
+                      value={username.username}
                     />
                   </div>
                 </div>
@@ -59,8 +126,11 @@ const Circle = () => {
                 <button className="button is-link" id="send-request">
                   Send request
                 </button>
-                {errors.message && <small className="help is-danger">
-                  {errors.message}
+                {errors.sendRequest && <small className="help is-danger">
+                  {errors.sendRequest}
+                </small>}
+                {message.sendRequest && <small className="help is-success">
+                  {message.sendRequest}
                 </small>}
               </div>
             
@@ -71,12 +141,27 @@ const Circle = () => {
         </div>
       </section>
 
+      <div className="has-text-centered">
+        {errors.sendApprove && <small className="help is-danger">
+          {errors.sendApprove}
+        </small>}
+        {message.sendApprove && <small className="help is-success">
+          {message.sendApprove}
+        </small>}
+        {errors.sendDelete && <small className="help is-danger">
+          {errors.sendDelete}
+        </small>}
+        {message.sendDelete && <small className="help is-success">
+          {message.sendDelete}
+        </small>}
+      </div>
+
       <section className="section">
         <div className="container">
           <h2 className="subtitle">New requests</h2>
-          {circle.requested.map((user, i) => {
+          {circle.requested && circle.requested.map((user, i) => {
             return <div key={i}>
-              <div className="level is-mobile">
+              <div className="level is-mobile circle-level">
                 <div className="level-left">
                   <div className="level-item">
                     {user.username}
@@ -84,7 +169,7 @@ const Circle = () => {
                 </div>
                 <div className="level-right">
                   <div className="level-item">
-                    <button className="button is-link is-small circle-button">
+                    <button className="button is-link is-small circle-button" id={user.username} onClick={handleApprove}>
                       Approve request
                     </button>
                   </div>
@@ -92,20 +177,19 @@ const Circle = () => {
               </div>
             </div>
           })}
+          {(!circle.requested || circle.requested.length === 0) && <div className="is-size-7 has-text-grey">No requests</div>}
 
 
         </div>
       </section>
 
 
-
-
       <section className="section">
         <div className="container">
           <h2 className="subtitle">Current members</h2>
-          {circle.approved.map((user, i) => {
+          {circle.approved && circle.approved.map((user, i) => {
             return <div key={i}>
-              <div className="level is-mobile">
+              <div className="level is-mobile circle-level">
                 <div className="level-left">
                   <div className="level-item">
                     {user.username}
@@ -113,7 +197,7 @@ const Circle = () => {
                 </div>
                 <div className="level-right">
                   <div className="level-item">
-                    <button className="button is-link is-small circle-button">
+                    <button className="button is-link is-small circle-button" id={user.username} onClick={handleDelete}>
                       Remove from circle
                     </button>
                   </div>
@@ -121,6 +205,7 @@ const Circle = () => {
               </div>
             </div>
           })}
+          {(!circle.approved || circle.approved.length === 0) && <div className="is-size-7 has-text-grey">No members added</div>}
         </div>
       </section>
 
