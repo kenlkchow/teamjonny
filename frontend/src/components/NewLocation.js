@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import Auth from '../lib/authMethods'
 import LocationForm from './LocationForm'
-
-const Auth = {
-  getToken() {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVlMmRkZDZjZmIwYWYwY2QzMTQ4ZWQiLCJpYXQiOjE1NzU4OTI2MTMsImV4cCI6MTU3NTk3OTAxM30.xtDz0-16dMvdAcnX3PqFE_MRPrG019LzjxTrb4HxcyE'
-  }
-}
 
 const initialData = {
   name: '',
@@ -47,7 +42,7 @@ const NewLocation = (props) => {
   }
 
   return <section className="section">
-    {console.log(data)}
+    {/* {console.log(data)} */}
     {console.log(errors)}
     <div className="container">
       <div className="title">Add new location</div>

@@ -1,21 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
-// import Auth from '../lib/auth'
-
-const Auth = {
-  getToken() {
-    return localStorage.getItem('token')
-  },
-
-  logout() {
-    localStorage.removeItem('token')
-  },
-
-  isAuthorized() {
-    return this.getToken()
-  }
-}
+import Auth from '../lib/authMethods'
 
 const Navbar = (props) => {
 
