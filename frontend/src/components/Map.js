@@ -39,7 +39,7 @@ class Map extends React.Component {
 
   componentDidMount() {
     axios.get('/api/locations/available', {
-      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVhNzRkODgzOGQ4N2MxZmU0ZDcwMmMiLCJpYXQiOjE1NzU4ODU0MjUsImV4cCI6MTU3NTk3MTgyNX0.5T7VEMCotsI0H7Rw6yl_Pr9T9BwxMrt6OOAmwLyxxcU' }
+      headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVlMWVmNGJiMmQwZjU3MWNhYzI5OTkiLCJpYXQiOjE1NzU4ODY1ODUsImV4cCI6MTU3NTk3Mjk4NX0.LwW2ROyRJNHOKFPi_uKxgkqc-dmK9_LMrY8DpiKCvKg' }
     })
       .then(resp => {
         const availableData = resp.data
