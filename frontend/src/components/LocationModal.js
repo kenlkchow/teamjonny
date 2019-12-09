@@ -35,7 +35,6 @@ const LocationModal = ({ locationId, toggleModal }) => {
       </header>
       <section className="modal-card-body">
         <p>{singleLocation.category}</p>
-        <p>{singleLocation.notes}</p>
         {singleLocation.openLate ? <p>Open late</p> : null}
         <p>{priciness}</p>
         <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>

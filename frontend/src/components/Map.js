@@ -34,22 +34,23 @@ const Map = () => {
     website: ''
   }])
 
-  const [filter, setFilter] = useState('All')
-
+  const [categoryFilter, setCategoryFilter] = useState('All')
+  const [privacyFilter, setPrivacyFilter] = useState('1')
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
 
   function toggleModal() {
     setModal(!modal)
   }
-
   function handleClick(e) {
     setLocationId(e.target.id)
     toggleModal()
   }
-
   function handleCategory(e) {
-    setFilter(e.target.value)
+    setCategoryFilter(e.target.value)
+  }
+  function handlePrivacy(e) {
+    setPrivacyFilter(e.target.value)
   }
 
   useEffect(() => {
@@ -96,18 +97,31 @@ const Map = () => {
             onViewportChange={_onViewportChange}
             // mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
-            {locations.filter(location => {
-              return location.category === filter
-            }).map((location, i) => {
-              return <Marker 
-                key={i} 
-                latitude={location.latitude} 
-                longitude={location.longitude} 
-                offsetTop={-30} 
-                offsetLeft={-20}>
-                <div className="marker" id={location._id} onClick={handleClick}></div>
-              </Marker>
-            })}
+            {locations
+              .filter(location => {
+                if (categoryFilter === 'All') {
+                  return locations
+                } else if (location.category === categoryFilter) {
+                  return locations
+                }
+              })
+              .filter(location => {
+                if (privacyFilter == 1) {
+                  return locations
+                } else if (location.privacy == privacyFilter) {
+                  return locations
+                }
+              })
+              .map((location, i) => {
+                return <Marker 
+                  key={i} 
+                  latitude={location.latitude} 
+                  longitude={location.longitude} 
+                  offsetTop={-30} 
+                  offsetLeft={-20}>
+                  <div className="marker" id={location._id} onClick={handleClick}></div>
+                </Marker>
+              })}
           </ReactMap>
         </div>
         <div className="column">
@@ -120,6 +134,16 @@ const Map = () => {
               <option value="Shop">Shop</option>
               <option value="Other">Other</option>
               <option value="All">All</option>
+            </select>
+          </div>
+        </div>
+        <div className="column">
+          <div className="select">
+            <select name="category" onChange={handlePrivacy}>
+              <option value="Select" hidden defaultValue>Select</option>
+              <option value="1" >Display all locations</option>
+              <option value="2" >Display your circles locations</option>
+              <option value="3" >Display your locations only</option>
             </select>
           </div>
         </div>
