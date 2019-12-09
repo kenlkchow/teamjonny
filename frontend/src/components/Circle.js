@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const Auth = {
-  getToken() {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZGVlMmRkZDZjZmIwYWYwY2QzMTQ4ZWQiLCJpYXQiOjE1NzU4OTI2MTMsImV4cCI6MTU3NTk3OTAxM30.xtDz0-16dMvdAcnX3PqFE_MRPrG019LzjxTrb4HxcyE'
-  }
-}
+import Auth from '../lib/authMethods'
 
 const initialState = {
   sendRequest: '',

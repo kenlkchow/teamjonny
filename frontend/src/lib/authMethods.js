@@ -7,6 +7,14 @@ class Auth {
   static getToken() {
     return localStorage.getItem('token')
   }
+
+  static logout() {
+    localStorage.removeItem('token')
+  }
+
+  static isAuthorized() {
+    return this.getToken()
+  }
 }
 
 export default Auth
