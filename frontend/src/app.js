@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import PrivateRoute from './lib/privateRoutes'
 
 import 'bulma'
@@ -13,7 +13,7 @@ import Map from './components/Map'
 import Circle from './components/Circle'
 import NewLocation from './components/NewLocation'
 import EditLocation from './components/EditLocation'
-import Redirect from './components/Redirect'
+import RedirectHome from './components/RedirectHome'
 
 
 const App = () => (
@@ -25,8 +25,8 @@ const App = () => (
       <PrivateRoute exact path='/circle' component={Circle} />
       <PrivateRoute exact path='/new' component={NewLocation} />
       <PrivateRoute exact path='/edit/:id' component={EditLocation} />
-      <Route exact path='/redirect' component={Redirect} />
-
+      <Route exact path='/redirect' component={RedirectHome} />
+      <Redirect to="/map" />
     </Switch>
   </BrowserRouter>
 )
