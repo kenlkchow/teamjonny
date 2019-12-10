@@ -4,11 +4,23 @@ import axios from 'axios'
 import Auth from '../lib/authMethods'
 import moment from 'moment'
 
-const LocationModal = ({ locationId, toggleModal }) => {
+const LocationModal = ({ locationId, toggleModal, props }) => {
 
   const [priciness, setPriciness] = useState('')
   const [singleLocation, setSingleLocation] = useState({ user: { username: '' }
   })
+
+  function removeLocation() {
+    axios.delete(`/api/locations/${locationId}`, {
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
+    })
+      .then(props.history.push('/map'))
+      .catch(err => console.log(err))
+  }
+
+  function isOwner() {
+    return Auth.getUserId() === singleLocation.user.id
+  }
 
   useEffect(() => {
     axios.get(`/api/locations/${locationId}`, {
@@ -24,7 +36,7 @@ const LocationModal = ({ locationId, toggleModal }) => {
         }
         setSingleLocation(resp.data)
       })
-  }, [])
+  }, [])  
 
 
   return  <div className="modal is-active">
@@ -36,12 +48,13 @@ const LocationModal = ({ locationId, toggleModal }) => {
       <section className="modal-card-body">
         <p>{singleLocation.category}</p>
         {singleLocation.openLate ? <p>Open late</p> : null}
-        <p>{priciness}</p>
+        <p><strong>{priciness}</strong></p>
         <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>
       </section>
       <footer className="modal-card-foot">
-        <Link className="button is-success" to={`/edit/${locationId}`}>Edit</Link>
+        {isOwner() && <Link className="button is-success" to={`/edit/${locationId}`}>Edit</Link>}
         <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
+        {isOwner() && <button className="button is-danger" onClick={removeLocation}>Delete</button>}
       </footer>
     </div>
     <button className="modal-close is-large" aria-label="close" onClick={toggleModal}></button>
