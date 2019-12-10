@@ -52,9 +52,21 @@ const LocationModal = ({ locationId, toggleModal, props }) => {
         <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>
       </section>
       <footer className="modal-card-foot">
-        {isOwner() && <Link className="button is-success" to={`/edit/${locationId}`}>Edit</Link>}
-        <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
-        {isOwner() && <button className="button is-danger" onClick={removeLocation}>Delete</button>}
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              {isOwner() && <Link className="button is-success" to={`/edit/${locationId}`}>Edit</Link>}
+            </div>
+            <div className="level-item">
+              <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
+            </div>
+          </div>
+          <div className="level-right">
+            <div className="level-item">
+              {isOwner() && <button className="button is-danger" onClick={removeLocation}>Delete</button>}
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
     <button className="modal-close is-large" aria-label="close" onClick={toggleModal}></button>

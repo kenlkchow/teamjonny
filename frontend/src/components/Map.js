@@ -39,6 +39,7 @@ const Map = () => {
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
+  const [userPosition, setPosition] = useState(false)
 
   function toggleModal() {
     setModal(!modal)
@@ -52,6 +53,17 @@ const Map = () => {
   }
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
+  }
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+      console.log('geolocation not supported')
+    }
+  }
+  function showPosition(position) {
+    setPosition(true)
+    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude })
   }
 
   useEffect(() => {
@@ -143,6 +155,9 @@ const Map = () => {
         <div className="column">
           <div className="columns">
             <div className="column">
+              <button className="button is-success" onClick={getLocation}>Locate me</button>
+            </div>
+            <div className="column">
               <div className="select">
                 <select name="category" onChange={handleCategory}>
                   <option value="Select" hidden defaultValue>Select</option>
@@ -170,7 +185,6 @@ const Map = () => {
         </div>
       </div>
     </div>
-
     {modal ? <LocationModal 
       toggleModal={toggleModal}
       locationId={locationId}/> : null}

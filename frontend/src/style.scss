@@ -64,6 +64,14 @@ small.help.is-danger {
   cursor: pointer;
 }
 
+.currentPosition {
+  background-color: rgb(26, 229, 190);
+  border-radius: 50%;
+  border: 2px solid white;
+  height: 15px;
+  width: 15px;
+}
+
 small{
   margin-top: 10px;
   margin-left: 5px;
@@ -74,4 +82,8 @@ small{
   width: 20vw;
   margin: 0 auto;
   margin-bottom: 50px;
+}
+
+.level {
+  width: 100%;
 }
