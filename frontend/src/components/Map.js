@@ -12,7 +12,7 @@ import shopImage from '../images/locationicons/shop.png'
 import otherImage from '../images/locationicons/other.png'
 
 
-const Map = () => {
+const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
     width: '50vw',
@@ -48,6 +48,37 @@ const Map = () => {
   const [userCircle, setUserCircle] = useState([])
   const [userPosition, setPosition] = useState(false)
 
+  function getData() {
+    axios.get('/api/locations/available', {
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
+    })
+      .then(resp => {
+        const availableData = resp.data
+        const pulledPostcodes = availableData.map(postcode => {
+          return postcode.postcode
+        })
+
+        axios.post('https://api.postcodes.io/postcodes', {
+          'postcodes': pulledPostcodes
+        })
+          .then(resp => {
+            availableData.forEach((postcode, i) => {
+              if (resp.data.result[i].result === null) {
+                resp.data.result[i].result = {}
+                resp.data.result[i].result.latitude = 'remove me'
+                resp.data.result[i].result.longitude = 'remove me'
+              }
+              postcode.latitude = resp.data.result[i].result.latitude
+              postcode.longitude = resp.data.result[i].result.longitude
+            })
+            const addedLongLat = availableData
+            const filteredLongLat = addedLongLat.filter(element => {
+              return element.latitude !== 'remove me'
+            })
+            setLocations(filteredLongLat)
+          })
+      })
+  }
   function toggleModal() {
     setModal(!modal)
   }
@@ -86,35 +117,7 @@ const Map = () => {
       })
       .catch(err => console.log(err))
 
-    axios.get('/api/locations/available', {
-      headers: { Authorization: 'Bearer ' + Auth.getToken() }
-    })
-      .then(resp => {
-        const availableData = resp.data
-        const pulledPostcodes = availableData.map(postcode => {
-          return postcode.postcode
-        })
-
-        axios.post('https://api.postcodes.io/postcodes', {
-          'postcodes': pulledPostcodes
-        })
-          .then(resp => {
-            availableData.forEach((postcode, i) => {
-              if (resp.data.result[i].result === null) {
-                resp.data.result[i].result = {}
-                resp.data.result[i].result.latitude = 'remove me'
-                resp.data.result[i].result.longitude = 'remove me'
-              }
-              postcode.latitude = resp.data.result[i].result.latitude
-              postcode.longitude = resp.data.result[i].result.longitude
-            })
-            const addedLongLat = availableData
-            const filteredLongLat = addedLongLat.filter(element => {
-              return element.latitude !== 'remove me'
-            })
-            setLocations(filteredLongLat)
-          })
-      })
+    getData()
   }, [])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
@@ -203,7 +206,10 @@ const Map = () => {
       </div>
     </div>
     {modal ? <LocationModal 
+      setModal={setModal}
+      getData={getData}
       toggleModal={toggleModal}
+      props={props}
       locationId={locationId}/> : null}
   </section>
 }

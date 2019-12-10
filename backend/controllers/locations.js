@@ -46,6 +46,7 @@ function create(req, res, next) {
 }
 
 function remove(req, res) {
+  req.body.user = req.currentUser
   Location
     .findById(req.params.id)
     .then(location => {
