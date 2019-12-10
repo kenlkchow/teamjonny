@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Redirect = () => {
+const RedirectHome = () => {
   return (
     <section className="hero is-fullheight is-link">
       <div className="hero-body">
@@ -20,4 +20,4 @@ const Redirect = () => {
   )
 }
 
-export default Redirect
+export default RedirectHome
