@@ -13,7 +13,7 @@ import Circle from './components/Circle'
 import NewLocation from './components/NewLocation'
 import EditLocation from './components/EditLocation'
 import RedirectHome from './components/RedirectHome'
-
+import List from './components/List'
 
 const App = () => (
   <BrowserRouter>
@@ -23,6 +23,7 @@ const App = () => (
       <PrivateRoute exact path='/map' component={Map} />
       <PrivateRoute exact path='/circle' component={Circle} />
       <PrivateRoute exact path='/new' component={NewLocation} />
+      <PrivateRoute exact path='/list' component={List} />
       <PrivateRoute exact path='/edit/:id' component={EditLocation} />
       <Route exact path='/redirect' component={RedirectHome} />
       <Redirect to="/map" />

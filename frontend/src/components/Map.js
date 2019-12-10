@@ -4,6 +4,13 @@ import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
 
+import pubImage from '../images/locationicons/pub.png'
+import coffeeImage from '../images/locationicons/coffee.png'
+import restaurantImage from '../images/locationicons/restaurant.png'
+import brunchImage from '../images/locationicons/brunch.png'
+import shopImage from '../images/locationicons/shop.png'
+import otherImage from '../images/locationicons/other.png'
+
 
 const Map = () => {
     
@@ -147,7 +154,17 @@ const Map = () => {
                   longitude={location.longitude} 
                   offsetTop={-30} 
                   offsetLeft={-20}>
-                  <div className="marker" id={location._id} user={location.user.id} onClick={handleClick}></div>
+                  <div 
+                    className="marker" 
+                    id={location._id} 
+                    user={location.user.id} 
+                    onClick={handleClick}
+                    style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
+                    (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
+                    (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
+                    (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
+                    (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
+                    (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
                 </Marker>
               })}
           </ReactMap>
