@@ -60,7 +60,7 @@ const List = () => {
             <AccordionItem key={i}>
               <AccordionItemHeading>
                 <AccordionItemButton>
-                  <b>{location.name}</b> - {location.postcode}
+                  <strong>{location.name}</strong> - {location.postcode}
                 </ AccordionItemButton>
               </ AccordionItemHeading>
               <AccordionItemPanel>
@@ -76,7 +76,7 @@ const List = () => {
                 <p>
                   Created by: {location.user.username}
                 </p>
-                <Link className="button is-success" to={`/edit/${location._id}`}>Edit</Link>
+                <Link className="button is-success" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>
               </AccordionItemPanel>
             </ AccordionItem>
           )
