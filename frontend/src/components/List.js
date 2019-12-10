@@ -13,6 +13,9 @@ import {
 
 const List = () => {
 
+  const [priciness, setPriciness] = useState('')
+
+
   const [locations, setLocations] = useState([{
     category: '',
     createdAt: '',
@@ -38,6 +41,12 @@ const List = () => {
         setLocations(resp.data)
       })
   }, [])
+
+  locations.forEach(location => {
+    if (location.priciness === 1) return location.priciness = '£'
+    if (location.priciness === 2) return location.priciness = '££'
+    if (location.priciness === 3) return location.priciness = '£££'
+  })
 
   return <section className="section">
     <div className='container'>
