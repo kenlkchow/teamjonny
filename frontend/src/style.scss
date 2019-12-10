@@ -1,3 +1,12 @@
+*, .input, .button {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.title {
+  font-family: 'Poiret One', cursive;
+}
+
 #send-request {
   width: 100%;
 }
@@ -63,6 +72,8 @@ small.help.is-danger {
   border-radius: 50%;
   cursor: pointer;
 }
+
+
 
 small{
   margin-top: 10px;
