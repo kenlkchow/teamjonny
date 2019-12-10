@@ -101,7 +101,7 @@ mongoose.connect(
             openLate: false,
             privacy: 2,
             notes: '',
-            user: users[2]
+            user: users[0]
           },
           {
             name: 'Lantana',
@@ -112,7 +112,7 @@ mongoose.connect(
             openLate: false,
             privacy: 3,
             notes: '',
-            user: users[2]
+            user: users[0]
           },
           {
             name: 'Granger & Co',
@@ -123,7 +123,7 @@ mongoose.connect(
             openLate: false,
             privacy: 1,
             notes: '',
-            user: users[2]
+            user: users[0]
           }, 
           {
             name: 'Founder\'s Arms',
@@ -134,7 +134,7 @@ mongoose.connect(
             openLate: false,
             privacy: 2,
             notes: '',
-            user: users[2]
+            user: users[0]
           },
           {
             name: 'Market Place',
