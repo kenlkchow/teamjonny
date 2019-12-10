@@ -1,6 +1,7 @@
 class Auth {
   static setToken(token) {
-    localStorage.clear()
+    // localStorage.clear()
+    localStorage.removeItem('token')
     localStorage.setItem('token', token)
   }
 
