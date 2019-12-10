@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const LocationForm = ({ data, errors, handleSubmit, handleChange }) => (
+const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode, postcodeValidation }) => (
   <div className="container">
     <form className="form" onSubmit={handleSubmit}>
 
       <div className="field">
         <label className="label">
-          Name
+          Name (required)
         </label>
         <div className="control">
           <input
@@ -25,14 +25,15 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange }) => (
 
       <div className="field">
         <label htmlFor="" className="label">
-          Postcode
+          Postcode (required)
         </label>
         <div className="control">
           <input
             onChange={handleChange}
+            onBlur={handlePostcode}
             type="text"
             name="postcode"
-            className="input"
+            className={`input ${(postcodeValidation === 200) ? 'is-success' : (postcodeValidation === 404) ? 'is-danger' : ''}`}
             placeholder="E1 0AA"
             value={data.postcode}
           />
@@ -42,7 +43,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange }) => (
 
       <div className="field">
         <label htmlFor="" className="label">
-          Category
+          Category (required)
         </label>
         <div className="control">
           <div className="select">
@@ -116,7 +117,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange }) => (
 
       <div className="field">
         <label htmlFor="" className="label">
-          Visible for
+          Visible for (required)
         </label>
         <div className="control all-radio-buttons" onChange={handleChange}>
           <label className="radio">
@@ -152,7 +153,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange }) => (
       </div>
       {errors.notes && <small className="help is-danger">{errors.notes}</small>}
 
-      <button className="button is-link">
+      <button className='button is-link' disabled={(data.name && data.category && data.privacy && postcodeValidation === 200) ? '' : 'disabled'}>
       Submit
       </button>
       {errors.message && <small className="help is-danger">
