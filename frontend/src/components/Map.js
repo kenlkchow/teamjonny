@@ -141,27 +141,31 @@ const Map = () => {
           </ReactMap>
         </div>
         <div className="column">
-          <div className="select">
-            <select name="category" onChange={handleCategory}>
-              <option value="Select" hidden defaultValue>Select</option>
-              <option value="All">All</option>
-              <option value="Bistro/Brunch">Bistro/Brunch</option>
-              <option value="Coffee Shop">Coffee Shop</option>
-              <option value="Restaurant">Restaurant</option>
-              <option value="Shop">Shop</option>
-              <option value="Pub">Pub</option>
-              <option value="Other">Other</option>
-            </select>
+          <div className="columns">
+            <div className="column">
+              <div className="select">
+                <select name="category" onChange={handleCategory}>
+                  <option value="Select" hidden defaultValue>Select</option>
+                  <option value="All">All</option>
+                  <option value="Bistro/Brunch">Bistro/Brunch</option>
+                  <option value="Coffee Shop">Coffee Shop</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Shop">Shop</option>
+                  <option value="Pub">Pub</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="column">
-          <div className="select">
-            <select name="category" onChange={handlePrivacy}>
-              <option value="Select" hidden defaultValue>Select</option>
-              <option value="1">All locations</option>
-              <option value="2">Circles locations</option>
-              <option value="3">Your locations only</option>
-            </select>
+          <div className="column">
+            <div className="select">
+              <select name="category" onChange={handlePrivacy}>
+                <option value="Select" hidden defaultValue>Select</option>
+                <option value="1">All locations</option>
+                <option value="2">Circles locations</option>
+                <option value="3">Your locations only</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
