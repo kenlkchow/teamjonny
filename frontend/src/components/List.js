@@ -13,8 +13,6 @@ import {
 
 const List = () => {
 
-  const [priciness, setPriciness] = useState('')
-
 
   const [locations, setLocations] = useState([{
     category: '',
@@ -60,7 +58,7 @@ const List = () => {
             <AccordionItem key={i}>
               <AccordionItemHeading>
                 <AccordionItemButton>
-                  <strong>{location.name}</strong> - {location.postcode}
+                  <b>{location.name}</b> - {location.postcode}
                 </ AccordionItemButton>
               </ AccordionItemHeading>
               <AccordionItemPanel>
