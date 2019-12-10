@@ -40,7 +40,7 @@ const LocationModal = ({ locationId, toggleModal }) => {
         <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>
       </section>
       <footer className="modal-card-foot">
-        <Link className="button is-success">Edit</Link>
+        <Link className="button is-success" to={`/edit/${locationId}`}>Edit</Link>
         <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
       </footer>
     </div>

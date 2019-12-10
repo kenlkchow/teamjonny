@@ -11,6 +11,7 @@ import Home from './components/Home'
 import Map from './components/Map'
 import Circle from './components/Circle'
 import NewLocation from './components/NewLocation'
+import EditLocation from './components/EditLocation'
 
 const App = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ const App = () => (
       <Route exact path='/map' component={Map} />
       <Route exact path='/circle' component={Circle} />
       <Route exact path='/new' component={NewLocation} />
+      <Route exact path='/edit/:id' component={EditLocation} />
     </Switch>
   </BrowserRouter>
 )

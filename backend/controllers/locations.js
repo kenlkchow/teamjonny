@@ -58,6 +58,7 @@ function remove(req, res) {
 }
 
 function update(req, res) {
+  req.body.user = req.currentUser
   Location
     .findById(req.params.id)
     .then(location => {
@@ -67,6 +68,7 @@ function update(req, res) {
     })
     .then(location => location.save())
     .then(location => res.status(202).json(location))
+    .catch(err => console.log(err))
 }
 
 module.exports = {
