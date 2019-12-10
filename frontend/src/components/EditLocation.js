@@ -19,7 +19,7 @@ const initialData = {
 const EditLocation = (props) => {
   const [data, updateData] = useState(initialData)
   const [errors, setErrors] = useState(initialData)
-  const [postcodeValidation, setPostcodeValidation] = useState('')
+  const [postcodeValidation, setPostcodeValidation] = useState(200)
 
   useEffect(() => {
     const locationId = props.match.params.id
