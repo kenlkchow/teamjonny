@@ -16,10 +16,19 @@ const initialData = {
 }
 
 
-const NewLocation = (props) => {
+const EditLocation = (props) => {
   const [data, updateData] = useState(initialData)
   const [errors, setErrors] = useState(initialData)
   const [postcodeValidation, setPostcodeValidation] = useState('')
+
+  useEffect(() => {
+    const locationId = props.match.params.id
+    axios.get(`/api/locations/${locationId}`, {
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
+    })
+      .then(resp => updateData(resp.data))
+      .catch(err => setErrors({ ...errors, ...err.response.data.errors }))
+  }, [])
 
   function handleChange(e) {
     const newErrors = { ...errors, [e.target.name]: '' }
@@ -31,7 +40,7 @@ const NewLocation = (props) => {
       
     } else if (e.target.name === 'postcode') {
       setPostcodeValidation('')
-      updateData({ ...data, [e.target.name]: e.target.value.toUpperCase() })
+      updateData({ ...data, [e.target.name]: e.target.value })
     } else if (e.target.name === 'openLate') {
       let openLate
       (e.target.value === 'true') ?  openLate = true : openLate = false
@@ -55,7 +64,8 @@ const NewLocation = (props) => {
     if (data.openLate === undefined) {
       delete data.openLate
     }
-    axios.post('/api/locations', data, {
+    const locationId = props.match.params.id
+    axios.put(`/api/locations/${locationId}`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => props.history.push('/map'))
@@ -63,9 +73,9 @@ const NewLocation = (props) => {
   }
 
   return <section className="section">
-    {console.log(data.openLate)}
+    {console.log(data)}
     <div className="container">
-      <div className="title">Add new location</div>
+      <div className="title">Edit {data.name}</div>
       <LocationForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
@@ -78,4 +88,4 @@ const NewLocation = (props) => {
   </section>
 }
 
-export default NewLocation
+export default EditLocation

@@ -144,13 +144,13 @@ const Map = () => {
           <div className="select">
             <select name="category" onChange={handleCategory}>
               <option value="Select" hidden defaultValue>Select</option>
+              <option value="All">All</option>
               <option value="Bistro/Brunch">Bistro/Brunch</option>
               <option value="Coffee Shop">Coffee Shop</option>
               <option value="Restaurant">Restaurant</option>
               <option value="Shop">Shop</option>
               <option value="Pub">Pub</option>
               <option value="Other">Other</option>
-              <option value="All">All</option>
             </select>
           </div>
         </div>

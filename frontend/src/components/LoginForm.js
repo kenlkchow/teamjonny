@@ -7,12 +7,15 @@ const initialData = {
   password: ''
 }
 
+const initialErrors = ''
+
+
 
 
 const LoginForm = ({ props }) => {
 
   const [data, setData] = useState(initialData)
-  const [errors, setErrors] = useState()
+  const [errors, setErrors] = useState(initialErrors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,7 +26,7 @@ const LoginForm = ({ props }) => {
         // localStorage.setItem('token', resp.data.token)
         props.history.push('/map')
       })
-      .catch((errors) => setErrors(errors)
+      .catch((errors) => setErrors('Username or password incorrect')
       )
   }
 
