@@ -38,6 +38,7 @@ const Map = () => {
   const [privacyFilter, setPrivacyFilter] = useState('1')
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
+  const [userCircle, setUserCircle] = useState([])
 
   function toggleModal() {
     setModal(!modal)
@@ -54,6 +55,18 @@ const Map = () => {
   }
 
   useEffect(() => {
+    axios.get('/api/circle', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(resp => {
+        const userData = resp.data.approved.map(data => {
+          return data.id
+        })
+        setUserCircle(userData)
+       
+      })
+      .catch(err => console.log(err))
+
     axios.get('/api/locations/available', {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
@@ -95,7 +108,6 @@ const Map = () => {
             mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
             { ...viewport }
             onViewportChange={_onViewportChange}
-            // mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
             {locations
               .filter(location => {
@@ -106,9 +118,13 @@ const Map = () => {
                 }
               })
               .filter(location => {
-                if (privacyFilter == 1) {
+                if (privacyFilter == 3 && Auth.getUserId() === location.user.id) {
                   return locations
-                } else if (location.privacy == privacyFilter) {
+                } else if (privacyFilter == 2) {
+                  if (Auth.getUserId() === location.user.id || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))) {
+                    return locations
+                  }
+                } else if (privacyFilter == 1) {
                   return locations
                 }
               })
@@ -119,7 +135,7 @@ const Map = () => {
                   longitude={location.longitude} 
                   offsetTop={-30} 
                   offsetLeft={-20}>
-                  <div className="marker" id={location._id} onClick={handleClick}></div>
+                  <div className="marker" id={location._id} user={location.user.id} onClick={handleClick}></div>
                 </Marker>
               })}
           </ReactMap>
@@ -133,6 +149,7 @@ const Map = () => {
               <option value="Coffee Shop">Coffee Shop</option>
               <option value="Restaurant">Restaurant</option>
               <option value="Shop">Shop</option>
+              <option value="Pub">Pub</option>
               <option value="Other">Other</option>
             </select>
           </div>
@@ -141,9 +158,9 @@ const Map = () => {
           <div className="select">
             <select name="category" onChange={handlePrivacy}>
               <option value="Select" hidden defaultValue>Select</option>
-              <option value="1" >Display all locations</option>
-              <option value="2" >Display your circles locations</option>
-              <option value="3" >Display your locations only</option>
+              <option value="1">All locations</option>
+              <option value="2">Circles locations</option>
+              <option value="3">Your locations only</option>
             </select>
           </div>
         </div>
@@ -153,7 +170,6 @@ const Map = () => {
     {modal ? <LocationModal 
       toggleModal={toggleModal}
       locationId={locationId}/> : null}
-
   </section>
 }
 

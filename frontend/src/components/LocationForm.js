@@ -51,6 +51,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
               <option value="Select" hidden defaultValue>Select</option>
               <option value="Bistro/Brunch" selected={(data.category === 'Bistro/Brunch') ? 'selected' : ''}>Bistro/Brunch</option>
               <option value="Coffee Shop" selected={(data.category === 'Coffee Shop') ? 'selected' : ''}>Coffee Shop</option>
+              <option value="Coffee Shop" selected={(data.category === 'Pub') ? 'selected' : ''}>Pub</option>
               <option value="Restaurant" selected={(data.category === 'Restaurant') ? 'selected' : ''}>Restaurant</option>
               <option value="Shop" selected={(data.category === 'Shop') ? 'selected' : ''}>Shop</option>
               <option value="Other" selected={(data.category === 'Other') ? 'selected' : ''}>Other</option>
@@ -104,11 +105,11 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
         </label>
         <div className="control all-radio-buttons" onChange={handleChange}>
           <label className="radio">
-            <input type="radio" name="openLate" value="true" className="radio-button" defaultChecked={(data.openLate) ? 'checked' : ''} />
+            <input type="radio" name="openLate" value="true" className="radio-button" checked={(data.openLate) ? 'checked' : ''} />
             <p>Yes</p>
           </label>
           <label className="radio">
-            <input type="radio" name="openLate" value="false" className="radio-button" defaultChecked={(!data.openLate && data.openLate !== undefined) ? 'checked' : ''} />
+            <input type="radio" name="openLate" value="false" className="radio-button" checked={(!data.openLate && data.openLate !== undefined) ? 'checked' : ''} />
             <p>No</p>
           </label>
         </div>
