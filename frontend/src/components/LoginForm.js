@@ -26,7 +26,7 @@ const LoginForm = ({ props }) => {
         // localStorage.setItem('token', resp.data.token)
         props.history.push('/map')
       })
-      .catch((errors) => setErrors('Username or password incorrect')
+      .catch(() => setErrors('Username or password incorrect')
       )
   }
 
