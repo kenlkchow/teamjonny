@@ -13,8 +13,6 @@ import {
 
 const List = () => {
 
-  const [priciness, setPriciness] = useState('')
-
 
   const [locations, setLocations] = useState([{
     category: '',
@@ -76,7 +74,7 @@ const List = () => {
                 <p>
                   Created by: {location.user.username}
                 </p>
-                <Link className="button is-success" to={`/edit/${location._id}`}>Edit</Link>
+                <Link className="button is-success" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>
               </AccordionItemPanel>
             </ AccordionItem>
           )

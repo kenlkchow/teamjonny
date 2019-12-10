@@ -12,9 +12,15 @@ import shopImage from '../images/locationicons/shop.png'
 import otherImage from '../images/locationicons/other.png'
 
 
+<<<<<<< HEAD
 const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
+=======
+const Map = () => {
+
+  const [viewport, setViewPort] = useState({
+>>>>>>> development
     width: '50vw',
     height: '50vh',
     latitude: 51.51491,
@@ -35,7 +41,7 @@ const Map = (props) => {
     privacy: 0,
     updatedAt: '',
     user: {
-      username: '', 
+      username: '',
       id: ''
     },
     website: ''
@@ -46,7 +52,6 @@ const Map = (props) => {
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
-  const [userPosition, setPosition] = useState(false)
 
   function getData() {
     axios.get('/api/locations/available', {
@@ -92,17 +97,6 @@ const Map = (props) => {
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
   }
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      console.log('geolocation not supported')
-    }
-  }
-  function showPosition(position) {
-    setPosition(true)
-    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude })
-  }
 
   useEffect(() => {
     axios.get('/api/circle', {
@@ -113,7 +107,7 @@ const Map = (props) => {
           return data.id
         })
         setUserCircle(userData)
-       
+
       })
       .catch(err => console.log(err))
 
@@ -126,57 +120,56 @@ const Map = (props) => {
     <div className="container has-text-centered">
       <div className="columns">
         <div className="column">
-          <ReactMap
-            mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
-            { ...viewport }
-            onViewportChange={_onViewportChange}
-          >
-            {locations
-              .filter(location => {
-                if (categoryFilter === 'All') {
-                  return locations
-                } else if (location.category === categoryFilter) {
-                  return locations
-                }
-              })
-              .filter(location => {
-                if (privacyFilter == 3 && Auth.getUserId() === location.user.id) {
-                  return locations
-                } else if (privacyFilter == 2) {
-                  if (Auth.getUserId() === location.user.id || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))) {
+          <div id="mapbox">
+            <ReactMap
+              mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
+              {...viewport}
+              onViewportChange={_onViewportChange}
+            >
+              {locations
+                .filter(location => {
+                  if (categoryFilter === 'All') {
+                    return locations
+                  } else if (location.category === categoryFilter) {
                     return locations
                   }
-                } else if (privacyFilter == 1) {
-                  return locations
-                }
-              })
-              .map((location, i) => {
-                return <Marker 
-                  key={i} 
-                  latitude={location.latitude} 
-                  longitude={location.longitude} 
-                  offsetTop={-30} 
-                  offsetLeft={-20}>
-                  <div 
-                    className="marker" 
-                    id={location._id} 
-                    user={location.user.id} 
-                    onClick={handleClick}
-                    style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
-                    (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
-                    (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
-                    (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
-                    (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
-                    (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
-                </Marker>
-              })}
-          </ReactMap>
+                })
+                .filter(location => {
+                  if (privacyFilter == 3 && Auth.getUserId() === location.user.id) {
+                    return locations
+                  } else if (privacyFilter == 2) {
+                    if (Auth.getUserId() === location.user.id || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))) {
+                      return locations
+                    }
+                  } else if (privacyFilter == 1) {
+                    return locations
+                  }
+                })
+                .map((location, i) => {
+                  return <Marker
+                    key={i}
+                    latitude={location.latitude}
+                    longitude={location.longitude}
+                    offsetTop={-30}
+                    offsetLeft={-20}>
+                    <div
+                      className="marker"
+                      id={location._id}
+                      user={location.user.id}
+                      onClick={handleClick}
+                      style={(location.category === 'Pub') ? { backgroundImage: `url(${pubImage})` } :
+                        (location.category === 'Restaurant') ? { backgroundImage: `url(${restaurantImage})` } :
+                          (location.category === 'Coffee Shop') ? { backgroundImage: `url(${coffeeImage})` } :
+                            (location.category === 'Bistro/Brunch') ? { backgroundImage: `url(${brunchImage})` } :
+                              (location.category === 'Shop') ? { backgroundImage: `url(${shopImage})` } :
+                                (location.category === 'Other') ? { backgroundImage: `url(${otherImage})` } : {}}></div>
+                  </Marker>
+                })}
+            </ReactMap>
+          </div>
         </div>
         <div className="column">
           <div className="columns">
-            <div className="column">
-              <button className="button is-success" onClick={getLocation}>Locate me</button>
-            </div>
             <div className="column">
               <div className="select">
                 <select name="category" onChange={handleCategory}>
