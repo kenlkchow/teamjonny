@@ -1,25 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-
+import PrivateRoute from './lib/privateRoutes'
 
 import 'bulma'
 import './style.scss'
+
 
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Map from './components/Map'
 import Circle from './components/Circle'
 import NewLocation from './components/NewLocation'
+import Redirect from './components/Redirect'
+
 
 const App = () => (
   <BrowserRouter>
     <Navbar />
     <Switch>
       <Route exact path='/' component={Home} />
-      <Route exact path='/map' component={Map} />
-      <Route exact path='/circle' component={Circle} />
-      <Route exact path='/new' component={NewLocation} />
+      <PrivateRoute exact path='/map' component={Map} />
+      <PrivateRoute exact path='/circle' component={Circle} />
+      <PrivateRoute exact path='/new' component={NewLocation} />
+      <Route exact path='/redirect' component={Redirect} />
     </Switch>
   </BrowserRouter>
 )
