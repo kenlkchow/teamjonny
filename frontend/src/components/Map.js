@@ -12,15 +12,9 @@ import shopImage from '../images/locationicons/shop.png'
 import otherImage from '../images/locationicons/other.png'
 
 
-<<<<<<< HEAD
 const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
-=======
-const Map = () => {
-
-  const [viewport, setViewPort] = useState({
->>>>>>> development
     width: '50vw',
     height: '50vh',
     latitude: 51.51491,
