@@ -104,11 +104,11 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
         </label>
         <div className="control all-radio-buttons" onChange={handleChange}>
           <label className="radio">
-            <input type="radio" name="openLate" value="true" className="radio-button" defaultChecked={(data.openLate) ? 'checked' : ''} />
+            <input type="radio" name="openLate" value="true" className="radio-button" checked={(data.openLate) ? 'checked' : ''} />
             <p>Yes</p>
           </label>
           <label className="radio">
-            <input type="radio" name="openLate" value="false" className="radio-button" defaultChecked={(!data.openLate && data.openLate !== undefined) ? 'checked' : ''} />
+            <input type="radio" name="openLate" value="false" className="radio-button" checked={(!data.openLate && data.openLate !== undefined) ? 'checked' : ''} />
             <p>No</p>
           </label>
         </div>
