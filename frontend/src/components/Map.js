@@ -15,8 +15,8 @@ import otherImage from '../images/locationicons/other.png'
 const Map = () => {
     
   const [viewport, setViewPort ] = useState({
-    width: '50vw',
-    height: '50vh',
+    width: '100%',
+    height: '70vh',
     latitude: 51.51491,
     longitude: -0.07280,
     zoom: 16
@@ -119,77 +119,31 @@ const Map = () => {
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 
-  return <section className="section hero is-fullheight has-background-link">
-    <div className="container has-text-centered">
-      <div className="columns">
-        <div className="column">
-          <ReactMap
-            mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
-            { ...viewport }
-            onViewportChange={_onViewportChange}
-          >
-            {locations
-              .filter(location => {
-                if (categoryFilter === 'All') {
-                  return locations
-                } else if (location.category === categoryFilter) {
-                  return locations
-                }
-              })
-              .filter(location => {
-                if (privacyFilter == 3 && Auth.getUserId() === location.user.id) {
-                  return locations
-                } else if (privacyFilter == 2) {
-                  if (Auth.getUserId() === location.user.id || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))) {
-                    return locations
-                  }
-                } else if (privacyFilter == 1) {
-                  return locations
-                }
-              })
-              .map((location, i) => {
-                return <Marker 
-                  key={i} 
-                  latitude={location.latitude} 
-                  longitude={location.longitude} 
-                  offsetTop={-30} 
-                  offsetLeft={-20}>
-                  <div 
-                    className="marker" 
-                    id={location._id} 
-                    user={location.user.id} 
-                    onClick={handleClick}
-                    style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
-                    (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
-                    (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
-                    (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
-                    (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
-                    (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
-                </Marker>
-              })}
-          </ReactMap>
+  return <section className="section">
+    <div className="container" id="map-container">
+      
+      <div className="level is-mobile">
+        <div className="level-left">
+          <div className="level-item">
+            <button className="button is-success" onClick={getLocation}>Locate me</button>
+          </div>
         </div>
-        <div className="column">
-          <div className="columns">
-            <div className="column">
-              <button className="button is-success" onClick={getLocation}>Locate me</button>
-            </div>
-            <div className="column">
-              <div className="select">
-                <select name="category" onChange={handleCategory}>
-                  <option value="Select" hidden defaultValue>Select</option>
-                  <option value="All">All</option>
-                  <option value="Bistro/Brunch">Bistro/Brunch</option>
-                  <option value="Coffee Shop">Coffee Shop</option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="Shop">Shop</option>
-                  <option value="Pub">Pub</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+        <div className="level-right">
+          <div className="level-item">
+            <div className="select">
+              <select name="category" onChange={handleCategory}>
+                <option value="Select" hidden defaultValue>Select</option>
+                <option value="All">All</option>
+                <option value="Bistro/Brunch">Bistro/Brunch</option>
+                <option value="Coffee Shop">Coffee Shop</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Shop">Shop</option>
+                <option value="Pub">Pub</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
-          <div className="column">
+          <div className="level-item">
             <div className="select">
               <select name="category" onChange={handlePrivacy}>
                 <option value="Select" hidden defaultValue>Select</option>
@@ -201,10 +155,59 @@ const Map = () => {
           </div>
         </div>
       </div>
-    </div>
+
+
+      <ReactMap
+        mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
+        { ...viewport }
+        onViewportChange={_onViewportChange}
+      >
+        {locations
+          .filter(location => {
+            if (categoryFilter === 'All') {
+              return locations
+            } else if (location.category === categoryFilter) {
+              return locations
+            }
+          })
+          .filter(location => {
+            if (privacyFilter == 3 && Auth.getUserId() === location.user.id) {
+              return locations
+            } else if (privacyFilter == 2) {
+              if (Auth.getUserId() === location.user.id || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))) {
+                return locations
+              }
+            } else if (privacyFilter == 1) {
+              return locations
+            }
+          })
+          .map((location, i) => {
+            return <Marker 
+              key={i} 
+              latitude={location.latitude} 
+              longitude={location.longitude} 
+              offsetTop={-30} 
+              offsetLeft={-20}>
+              <div 
+                className="marker" 
+                id={location._id} 
+                user={location.user.id} 
+                onClick={handleClick}
+                style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
+                (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
+                (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
+                (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
+                (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
+                (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
+            </Marker>
+          })}
+      </ReactMap>
+
+   
     {modal ? <LocationModal 
       toggleModal={toggleModal}
       locationId={locationId}/> : null}
+    </div>
   </section>
 }
 
