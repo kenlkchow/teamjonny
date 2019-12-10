@@ -4,12 +4,12 @@ import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
 
-import pubImage from '../images/locationicons/pub.png'
-import coffeeImage from '../images/locationicons/coffee.png'
-import restaurantImage from '../images/locationicons/restaurant.png'
-import brunchImage from '../images/locationicons/brunch.png'
-import shopImage from '../images/locationicons/shop.png'
-import otherImage from '../images/locationicons/other.png'
+import pubImage from '../images/locationicons/pub-colour.png'
+import coffeeImage from '../images/locationicons/coffee-colour.png'
+import restaurantImage from '../images/locationicons/restaurant-colour.png'
+import brunchImage from '../images/locationicons/brunch-colour.png'
+import shopImage from '../images/locationicons/shop-colour.png'
+import otherImage from '../images/locationicons/other-colour.png'
 
 
 const Map = (props) => {
