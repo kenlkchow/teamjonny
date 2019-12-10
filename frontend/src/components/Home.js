@@ -3,19 +3,27 @@ import React from 'react'
 import { useModalRegister, RegisterModal } from './RegisterModal'
 import { useModalLogin, LoginModal } from './LoginModal'
 
+import Logo from '../images/logo.png'
+
 const Home = (props) => {
   const { toggleRegister, isRegisterShowing } = useModalRegister()
   const { toggleLogin, isLoginShowing } = useModalLogin()
   return (
-    <section className="hero is-fullheight is-link">
+    <section className="hero is-fullheight">
       <div className="hero-body">
         <div className="container has-text-centered">
-          <h1 className="title">
-            <a className="title" onClick={toggleRegister}>Register</a>
+          <figure className="image is-128x128 has-text-centered" >
+            <img src={Logo} alt=""/>
+          </figure>
+          <h1 className="title">PLACEHOLDER</h1>
+        <div id="home-container">
+          <h1 className="subtitle">
+            <a className="subtitle is-size-4" onClick={toggleRegister}>Register</a>
           </h1>
-          <h1 className="title">
-            <a className="title" onClick={toggleLogin}>Login</a>
+          <h1 className="subtitle">
+            <a className="subtitle is-size-4" onClick={toggleLogin}>Login</a>
           </h1>
+        </div>
         </div>
       </div>
       <RegisterModal

@@ -25,7 +25,7 @@ const useModalRegister = () => {
 
 const RegisterModal = ({ isRegisterShowing, hideRegister, hideLogin }) => isRegisterShowing ?
   <div className="modal is-active">
-    <div className="modal-background"></div>
+    <div className="modal-background" onClick={hideRegister}></div>
     <div className="modal-content">
       <RegisterForm 
         hideRegister={hideRegister}

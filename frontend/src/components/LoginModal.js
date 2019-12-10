@@ -25,7 +25,7 @@ const useModalLogin = () => {
 
 const LoginModal = ({ isLoginShowing, hideLogin, props }) => isLoginShowing ?
   <div className="modal is-active">
-    <div className="modal-background"></div>
+    <div className="modal-background" onClick={hideLogin}></div>
     <div className="modal-content">
       < LoginForm props={props} />
     </div>

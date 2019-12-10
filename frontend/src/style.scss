@@ -1,6 +1,7 @@
 // Set your brand colors
 $blue: rgb(6, 53, 201);
 $light-blue: rgb(26, 229, 190);
+$light-gray: rgb(242, 242, 242);
 
 
 *, .input, .button {
@@ -8,8 +9,57 @@ $light-blue: rgb(26, 229, 190);
   font-weight: 300;
 }
 
-.title {
+body, div.navbar, .hero {
+  background-color: $light-gray;
+}
+
+html, body {
+  height: 100%;
+}
+
+.title, .subtitle {
   font-family: 'Poiret One', cursive;
+}
+
+.hero-body {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+    }
+
+    figure {
+      margin: 30px;
+    }
+  }
+}
+
+.logo {
+  font-family: 'Poiret One', cursive;
+}
+
+img#logo {
+  margin-right: 10px;
+}
+
+#home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  h1 {
+    margin: 20px;
+  }
+}
+
+#map-container {
+  padding-top: 0;
+  padding-bottom: 5vh;
+  height: 100%;
 }
 
 #send-request {

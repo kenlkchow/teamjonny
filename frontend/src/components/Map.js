@@ -15,8 +15,8 @@ import otherImage from '../images/locationicons/other.png'
 const Map = () => {
     
   const [viewport, setViewPort ] = useState({
-    width: '100%',
-    height: '70vh',
+    width: '90vw',
+    height: '80vh',
     latitude: 51.51491,
     longitude: -0.07280,
     zoom: 16
@@ -119,18 +119,18 @@ const Map = () => {
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 
-  return <section className="section">
-    <div className="container" id="map-container">
+  return <section className="section" id="map-container">
+    <div className="container" >
       
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-success" onClick={getLocation}>Locate me</button>
+            <button className="button is-success is-small" onClick={getLocation}>Locate me</button>
           </div>
         </div>
         <div className="level-right">
           <div className="level-item">
-            <div className="select">
+            <div className="select is-small">
               <select name="category" onChange={handleCategory}>
                 <option value="Select" hidden defaultValue>Select</option>
                 <option value="All">All</option>
@@ -144,7 +144,7 @@ const Map = () => {
             </div>
           </div>
           <div className="level-item">
-            <div className="select">
+            <div className="select is-small">
               <select name="category" onChange={handlePrivacy}>
                 <option value="Select" hidden defaultValue>Select</option>
                 <option value="1">All locations</option>
