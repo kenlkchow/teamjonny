@@ -12,7 +12,7 @@ import shopImage from '../images/locationicons/shop.png'
 import otherImage from '../images/locationicons/other.png'
 
 
-const Map = () => {
+const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
     width: '90vw',
@@ -35,7 +35,7 @@ const Map = () => {
     privacy: 0,
     updatedAt: '',
     user: {
-      username: '', 
+      username: '',
       id: ''
     },
     website: ''
@@ -46,46 +46,8 @@ const Map = () => {
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
-  const [userPosition, setPosition] = useState(false)
 
-  function toggleModal() {
-    setModal(!modal)
-  }
-  function handleClick(e) {
-    setLocationId(e.target.id)
-    toggleModal()
-  }
-  function handleCategory(e) {
-    setCategoryFilter(e.target.value)
-  }
-  function handlePrivacy(e) {
-    setPrivacyFilter(e.target.value)
-  }
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      console.log('geolocation not supported')
-    }
-  }
-  function showPosition(position) {
-    setPosition(true)
-    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude })
-  }
-
-  useEffect(() => {
-    axios.get('/api/circle', {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(resp => {
-        const userData = resp.data.approved.map(data => {
-          return data.id
-        })
-        setUserCircle(userData)
-       
-      })
-      .catch(err => console.log(err))
-
+  function getData() {
     axios.get('/api/locations/available', {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
@@ -115,6 +77,39 @@ const Map = () => {
             setLocations(filteredLongLat)
           })
       })
+  }
+  function toggleModal() {
+    setModal(!modal)
+  }
+  function handleClick(e) {
+    setLocationId(e.target.id)
+    toggleModal()
+  }
+  function handleCategory(e) {
+    setCategoryFilter(e.target.value)
+  }
+  function handlePrivacy(e) {
+    setPrivacyFilter(e.target.value)
+  }
+
+  function getLocation() {
+    return
+  }
+
+  useEffect(() => {
+    axios.get('/api/circle', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(resp => {
+        const userData = resp.data.approved.map(data => {
+          return data.id
+        })
+        setUserCircle(userData)
+
+      })
+      .catch(err => console.log(err))
+
+    getData()
   }, [])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
@@ -205,7 +200,10 @@ const Map = () => {
 
    
     {modal ? <LocationModal 
+      setModal={setModal}
+      getData={getData}
       toggleModal={toggleModal}
+      props={props}
       locationId={locationId}/> : null}
     </div>
   </section>

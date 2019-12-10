@@ -4,7 +4,7 @@ import axios from 'axios'
 import Auth from '../lib/authMethods'
 import moment from 'moment'
 
-const LocationModal = ({ locationId, toggleModal, props }) => {
+const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) => {
 
   const [priciness, setPriciness] = useState('')
   const [singleLocation, setSingleLocation] = useState({ user: { username: '' }
@@ -14,7 +14,12 @@ const LocationModal = ({ locationId, toggleModal, props }) => {
     axios.delete(`/api/locations/${locationId}`, {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
-      .then(props.history.push('/map'))
+      .then(() => {
+        getData()
+        props.history.push('/map')
+        setModal(false)
+      })
+
       .catch(err => console.log(err))
   }
 
