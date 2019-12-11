@@ -58,7 +58,7 @@ const NewLocation = (props) => {
     axios.post('/api/locations', data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(() => props.history.push('/map'))
+      .then((resp) => props.history.push('/map', resp.data))
       .catch(err => setErrors({ ...errors, ...err.response.data.errors }))
   }
 

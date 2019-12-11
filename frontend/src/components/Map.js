@@ -13,7 +13,6 @@ import brunchImage from '../images/locationicons/brunch-colour.png'
 import shopImage from '../images/locationicons/shop-colour.png'
 import otherImage from '../images/locationicons/other-colour.png'
 
-
 const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
@@ -106,10 +105,13 @@ const Map = (props) => {
     setUserMarkerShowing(true)
     setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
-    notify()
   }
   function notify() {
-    toast('Wow so easy!')
+    toast(`${props.location.state.name} has been added to your locations`)
+    axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+      .then(resp => {
+        setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+      })
   }
   
   useEffect(() => {
@@ -126,6 +128,11 @@ const Map = (props) => {
       .catch(err => console.log(err))
 
     getData()
+    if (props.location.state === undefined) {
+      return
+    } else {
+      notify()
+    }
   }, [])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
