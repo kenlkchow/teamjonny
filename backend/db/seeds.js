@@ -60,39 +60,6 @@ mongoose.connect(
         console.log(`${users.length} users created`)
         return Location.create([
           {
-            name: 'test',
-            postcode: 'test',
-            category: 'test',
-            website: 'test',
-            priciness: 3,
-            openLate: true,
-            privacy: 1,
-            notes: '',
-            user: users[0]
-          },
-          {
-            name: 'test2',
-            postcode: 'test2',
-            category: 'test2',
-            website: 'test2',
-            priciness: 2,
-            openLate: true,
-            privacy: 3,
-            notes: 'qdkmldwmlqkm',
-            user: users[0]
-          },
-          {
-            name: 'test3',
-            postcode: 'test3',
-            category: 'test3',
-            website: 'test3',
-            priciness: 1,
-            openLate: true,
-            privacy: 2,
-            notes: '',
-            user: users[0]
-          },
-          {
             name: 'Pear Tree Cafe',
             postcode: 'SE8 5ET',
             category: 'Bistro/Brunch',

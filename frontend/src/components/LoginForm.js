@@ -41,7 +41,7 @@ const LoginForm = ({ props }) => {
   return <section className="section">
     <div className="container">
       <div className="title">Login </div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form form-home" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
             Username

@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode, postcodeValidation }) => (
   <div className="container">
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form form-location" onSubmit={handleSubmit}>
 
       <div className="field">
         <label className="label">

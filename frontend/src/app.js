@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import PrivateRoute from './lib/privateRoutes'
 
-import './style.scss'
 import 'bulma'
+import './style.scss'
 
 import Navbar from './components/Navbar'
 import Home from './components/Home'

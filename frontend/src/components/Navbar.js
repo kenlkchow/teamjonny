@@ -19,14 +19,13 @@ const Navbar = (props) => {
   }, [props.location.pathname])
 
   if (!Auth.isAuthorized()) return <></>
-  return <div className="navbar">
+  return <div className="navbar is-transparent">
     <div className="container">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/map">
           <img src={Logo} height="28" id="logo" />
-          <div className="logo">Placeholder</div>
+          <div className="logo">PLACEHOLDER</div>
         </Link>
-        {Auth.isAuthorized() && <div className="navbar-item is-size-7">🔵 logged in</div>}
         <a
           role="button"
           className={`navbar-burger burger ${open ? 'is-active' : ''}`}
