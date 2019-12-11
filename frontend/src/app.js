@@ -25,7 +25,7 @@ const App = () => (
       <PrivateRoute exact path='/new' component={NewLocation} />
       <PrivateRoute exact path='/list' component={List} />
       <PrivateRoute exact path='/edit/:id' component={EditLocation} />
-      <Route exact path='/redirect' component={RedirectHome} />
+      <Route exact path='/mistakeswereMADE' component={RedirectHome} />
       <Redirect to="/map" />
     </Switch>
   </BrowserRouter>
