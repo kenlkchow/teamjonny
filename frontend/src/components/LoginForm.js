@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Auth from '../lib/authMethods'
 
+import Logo from '../images/logo.png'
+
+
 const initialData = {
   username: '',
   password: ''
@@ -40,7 +43,18 @@ const LoginForm = ({ props }) => {
 
   return <section className="section">
     <div className="container">
-      <div className="title">Login </div>
+      <div className="columns home-columns-login">
+        <div className="column home-modal-title-login">
+          <div className="title has-text-white">
+            Login
+          </div>
+        </div>
+        <div className="column">
+          <figure className="image is-64x64">
+            <img src={Logo}></img>
+          </figure>
+        </div>
+      </div>
       <form className="form form-home" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">

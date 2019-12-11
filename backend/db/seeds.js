@@ -54,7 +54,17 @@ mongoose.connect(
             approved: [],
             requested: []
           }
-        }])
+        },
+        {
+          username: 'nick',
+          password: 'nick',
+          passwordConfirmation: 'nick',
+          circle: {
+            approved: [],
+            requested: []
+          }
+        }
+        ])
       })
       .then(users => {
         console.log(`${users.length} users created`)
@@ -91,7 +101,7 @@ mongoose.connect(
             privacy: 1,
             notes: '',
             user: users[0]
-          }, 
+          },
           {
             name: 'Founder\'s Arms',
             postcode: 'SE1 9JH',
@@ -135,7 +145,7 @@ mongoose.connect(
             privacy: 2,
             notes: '',
             user: users[2]
-          }, 
+          },
           {
             name: 'Forge & Co',
             postcode: 'E1 6HU',
@@ -278,6 +288,50 @@ mongoose.connect(
             privacy: 1,
             notes: 'Nice outdoor bit',
             user: users[0]
+          },
+          {
+            name: 'Roof East',
+            postcode: 'E15 1BB',
+            category: 'Pub',
+            website: 'https://www.strongroombar.com',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Rooftop bar',
+            user: users[1]
+          },
+          {
+            name: 'Ken\'s apartment',
+            postcode: 'E20 1HR',
+            category: 'Pub',
+            website: 'lantanaheights.com',
+            priciness: 3,
+            openLate: true,
+            privacy: 3,
+            notes: 'Luxury',
+            user: users[1]
+          },
+          {
+            name: 'Caravan Coffee',
+            postcode: 'N7 9DP',
+            category: 'Coffee Shop',
+            website: 'https://www.caravancoffeeroasters.co.uk/',
+            priciness: 1,
+            openLate: false,
+            privacy: 1,
+            notes: 'Nice Coffee',
+            user: users[1]
+          },
+          {
+            name: 'Formans Restaurant',
+            postcode: 'E3 2NT',
+            category: 'Restaurant',
+            website: 'formans.co.uk',
+            priciness: 3,
+            openLate: true,
+            privacy: 2,
+            notes: 'Great food',
+            user: users[1]
           }
         ]
         )

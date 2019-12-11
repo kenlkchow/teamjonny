@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import LoginForm  from './LoginForm'
+import LoginForm from './LoginForm'
+
+import Logo from '../images/logo.png'
 
 const useModalLogin = () => {
   const [isLoginShowing, setIsLoginShowing] = useState(false)

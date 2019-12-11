@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import Logo from '../images/logo.png'
+
 const initialData = {
   username: '',
   password: '',
@@ -41,7 +43,18 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
 
   return <section className="section">
     <div className="container">
-      <div className="title">Register</div>
+      <div className="columns home-columns-register">
+        <div className="column home-modal-title-register">
+          <div className="title has-text-white">
+            Register
+          </div>
+        </div>
+        <div className="column">
+          <figure className="image is-64x64">
+            <img src={Logo}></img>
+          </figure>
+        </div>
+      </div>
       <form className="form form-home" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
