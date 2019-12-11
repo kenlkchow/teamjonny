@@ -3,6 +3,8 @@ import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import pubImage from '../images/locationicons/pub-colour.png'
 import coffeeImage from '../images/locationicons/coffee-colour.png'
@@ -93,7 +95,6 @@ const Map = (props) => {
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
   }
-
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
@@ -105,8 +106,12 @@ const Map = (props) => {
     setUserMarkerShowing(true)
     setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
+    notify()
   }
-
+  function notify() {
+    toast('Wow so easy!')
+  }
+  
   useEffect(() => {
     axios.get('/api/circle', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -222,6 +227,7 @@ const Map = (props) => {
         props={props}
         locationId={locationId}/> : null}
     </div>
+    <ToastContainer />
   </section>
 }
 
