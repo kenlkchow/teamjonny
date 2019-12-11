@@ -1,22 +1,61 @@
+//******** BULMA ********//
+
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
 // Set your brand colors
 $blue: rgb(6, 53, 201);
 $light-blue: rgb(26, 229, 190);
 $light-gray: rgb(242, 242, 242);
+$orange: rgb(255, 156, 0);
+$yellow: rgb(255, 240, 0);
+$purple: rgb(108, 0, 255);
+$pink: rgb(255, 0, 126);
+$green: rgb(102, 255, 0);
 
+// Update Bulma's global variables
+$family-sans-serif: 'Open Sans', sans-serif;
+$primary: $light-blue;
+$success: $green;
+$link: $blue;
+$danger: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $light-gray;
+$input-shadow: none;
+
+// Import only what you need from Bulma
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/elements/button.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/elements/title.sass";
+@import "../../node_modules/bulma/sass/form/_all.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/components/modal.sass";
+@import "../../node_modules/bulma/sass/layout/hero.sass";
+@import "../../node_modules/bulma/sass/layout/section.sass";
+
+
+//******** CUSTOM ********//
 
 *, .input, .button {
-  font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
 
-body, div.navbar, .hero {
+div.navbar, .hero {
   background-color: $light-gray;
 }
 
 html, body {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
+// HOMEPAGE
 .title, .subtitle {
   font-family: 'Poiret One', cursive;
 }
@@ -56,12 +95,7 @@ img#logo {
   }
 }
 
-#map-container {
-  padding-top: 0;
-  padding-bottom: 5vh;
-  height: 100%;
-}
-
+// CIRCLE PAGE
 #send-request {
   width: 100%;
 }
@@ -74,40 +108,30 @@ img#logo {
   margin: 5px 0;
 }
 
-.field {
-  display: flex;
-  flex-direction: row;
-  min-width: 100%;
-
-  .label, .input {
-    margin: 10px;
+form.form-home {
+  b {
+    font-weight: bold;
   }
-
-  .label {
-    width: 15vw;
+  
+  small {
+    margin-top: 10px;
+    margin-left: 5px;
   }
+}
 
-  .control {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .input, select, .select {
-      width: 100%;
-    }
-  }
-
+// LOCATION FORMS
+form.form-location {
   .all-radio-buttons {
     display: flex;
     flex-direction: row;
-  
-  
+
+
     .radio {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-  
+
       .radio-button {
         margin: 5px;
       }
@@ -115,21 +139,12 @@ img#logo {
   }
 }
 
-
-small.help.is-danger {
-    margin-bottom: 10px;
-  }
-
-//ken's styling
-b{
-  font-weight: bold;
+// MAP PAGE
+#map-container {
+  padding-top: 0;
+  padding-bottom: 5vh;
+  height: 100%;
 }
-
-small{
-  margin-top: 10px;
-  margin-left: 5px;
-}
-//ken's styling
   
 .marker {
   background-image: url("http://www.myiconfinder.com/uploads/iconsets/369f997cef4f440c5394ed2ae6f8eecd.png");
@@ -148,6 +163,8 @@ small{
   width: 15px;
 }
 
+// REDIRECTION PAGE
+
 #redirectlogo{
   height: 20vw;
   width: 20vw;
@@ -155,10 +172,24 @@ small{
   margin-bottom: 50px;
 }
 
+// LOCATION MODAL
+
 .level {
   width: 100%;
 }
 
+.modal-subtitle {
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 5px;
+}
+
+.modal-card-head, .modal-card-body, .modal-card-foot {
+  background-color: $light-gray;
+  border: none;
+}
+
+
+// LIST OF LOCATIONS
 .accordion {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;

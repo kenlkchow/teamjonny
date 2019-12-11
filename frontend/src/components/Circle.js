@@ -90,52 +90,44 @@ const Circle = () => {
   if (!circle) return <h1>Loading...</h1>
 
   return <section className="section">
-    {console.log('username', username)}
     <div className="container">
 
       <h1 className="title">Your Circle</h1>
 
-      <section className="section">
-        <div className="container">
-          
-            
-          <form className="form" onSubmit={handleRequest}>
+      <form className="form" onSubmit={handleRequest}>
 
-            <div className="columns is-mobile">
+        <div className="columns is-mobile">
 
-              <div className="column is-10-desktop is-8-tablet is-8-mobile">
-                <div className="field">
-                  <div className="control">
-                    <input
-                      onChange={handleChange}
-                      type="text"
-                      name="username"
-                      className="input"
-                      placeholder="Type username"
-                      value={username.username}
-                    />
-                  </div>
-                </div>
+          <div className="column is-10-desktop is-8-tablet is-8-mobile">
+            <div className="field">
+              <div className="control">
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  name="username"
+                  className="input"
+                  placeholder="Enter username to send request"
+                  value={username.username}
+                />
               </div>
-
-              <div className="column column is-2-desktop is-4-tablet is-4-mobile has-text-right">
-                <button className="button is-link" id="send-request">
-                  Send request
-                </button>
-                {errors.sendRequest && <small className="help is-danger">
-                  {errors.sendRequest}
-                </small>}
-                {message.sendRequest && <small className="help is-success">
-                  {message.sendRequest}
-                </small>}
-              </div>
-            
             </div>
-          </form>
+          </div>
 
-          
+          <div className="column column is-2-desktop is-4-tablet is-4-mobile has-text-right">
+            <button className="button is-link" id="send-request">
+              Send
+            </button>
+            {errors.sendRequest && <small className="help is-danger">
+              {errors.sendRequest}
+            </small>}
+            {message.sendRequest && <small className="help is-success">
+              {message.sendRequest}
+            </small>}
+          </div>
+        
         </div>
-      </section>
+      </form>
+
 
       <div className="has-text-centered">
         {errors.sendApprove && <small className="help is-danger">
@@ -154,13 +146,13 @@ const Circle = () => {
 
       <section className="section">
         <div className="container">
-          <h2 className="subtitle">New requests</h2>
+          <h2 className="subtitle is-size-4 has-text-weight-bold">New requests</h2>
           {circle.requested && circle.requested.map((user, i) => {
             return <div key={i}>
               <div className="level is-mobile circle-level">
                 <div className="level-left">
                   <div className="level-item">
-                    {user.username}
+                    <div className="is-size-6">{user.username}</div>
                   </div>
                 </div>
                 <div className="level-right">
@@ -173,7 +165,7 @@ const Circle = () => {
               </div>
             </div>
           })}
-          {(!circle.requested || circle.requested.length === 0) && <div className="is-size-7 has-text-grey">No requests</div>}
+          {(!circle.requested || circle.requested.length === 0) && <div className="is-size-6 has-text-grey">No requests</div>}
 
 
         </div>
@@ -182,13 +174,13 @@ const Circle = () => {
 
       <section className="section">
         <div className="container">
-          <h2 className="subtitle">Current members</h2>
+          <h2 className="subtitle is-size-4 has-text-weight-bold">Current members</h2>
           {circle.approved && circle.approved.map((user, i) => {
             return <div key={i}>
               <div className="level is-mobile circle-level">
                 <div className="level-left">
                   <div className="level-item">
-                    {user.username}
+                    <div className="is-size-6">{user.username}</div>
                   </div>
                 </div>
                 <div className="level-right">
@@ -201,7 +193,7 @@ const Circle = () => {
               </div>
             </div>
           })}
-          {(!circle.approved || circle.approved.length === 0) && <div className="is-size-7 has-text-grey">No members added</div>}
+          {(!circle.approved || circle.approved.length === 0) && <div className="is-size-6 has-text-grey">No members added</div>}
         </div>
       </section>
 

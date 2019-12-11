@@ -15,7 +15,7 @@ import otherImage from '../images/locationicons/other-colour.png'
 const Map = (props) => {
     
   const [viewport, setViewPort ] = useState({
-    width: '90vw',
+    width: '100%',
     height: '80vh',
     latitude: 51.51491,
     longitude: -0.07280,
@@ -120,7 +120,7 @@ const Map = (props) => {
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-success is-small" onClick={getLocation}>Locate me</button>
+            <button className="button is-primary is-small" onClick={getLocation}>Locate me</button>
           </div>
         </div>
         <div className="level-right">
@@ -189,22 +189,22 @@ const Map = (props) => {
                 user={location.user.id} 
                 onClick={handleClick}
                 style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
-                  (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
-                    (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
-                      (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
-                        (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
-                          (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
+                (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
+                (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
+                (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
+                (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
+                (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
             </Marker>
           })}
       </ReactMap>
 
    
-      {modal ? <LocationModal 
-        setModal={setModal}
-        getData={getData}
-        toggleModal={toggleModal}
-        props={props}
-        locationId={locationId}/> : null}
+    {modal ? <LocationModal 
+      setModal={setModal}
+      getData={getData}
+      toggleModal={toggleModal}
+      props={props}
+      locationId={locationId}/> : null}
     </div>
   </section>
 }
