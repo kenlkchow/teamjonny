@@ -189,22 +189,22 @@ const Map = (props) => {
                 user={location.user.id} 
                 onClick={handleClick}
                 style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
-                (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
-                (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
-                (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
-                (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
-                (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
+                  (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
+                    (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
+                      (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
+                        (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
+                          (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
             </Marker>
           })}
       </ReactMap>
 
    
-    {modal ? <LocationModal 
-      setModal={setModal}
-      getData={getData}
-      toggleModal={toggleModal}
-      props={props}
-      locationId={locationId}/> : null}
+      {modal ? <LocationModal 
+        setModal={setModal}
+        getData={getData}
+        toggleModal={toggleModal}
+        props={props}
+        locationId={locationId}/> : null}
     </div>
   </section>
 }
