@@ -160,6 +160,10 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
       {errors.message && <small className="help is-danger">
         {errors.message}
       </small>}
+
+      <Link className='button is-primary cancel-button' to="/map">
+        Cancel
+      </Link>
       
     </form>
   </div>
