@@ -23,7 +23,7 @@ const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) =>
     })
       .then(() => {
         getData()
-        props.history.push('/map')
+        props.history.push('/map', { from: 'delete' })
         setModal(false)
       })
 

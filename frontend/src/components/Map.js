@@ -3,6 +3,8 @@ import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import pubImage from '../images/locationicons/pub-colour.png'
 import coffeeImage from '../images/locationicons/coffee-colour.png'
@@ -10,7 +12,6 @@ import restaurantImage from '../images/locationicons/restaurant-colour.png'
 import brunchImage from '../images/locationicons/brunch-colour.png'
 import shopImage from '../images/locationicons/shop-colour.png'
 import otherImage from '../images/locationicons/other-colour.png'
-
 
 const Map = (props) => {
     
@@ -93,7 +94,6 @@ const Map = (props) => {
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
   }
-
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
@@ -106,7 +106,24 @@ const Map = (props) => {
     setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
   }
-
+  function notify() {
+    if (props.location.state.from === 'new') {
+      toast(`${props.location.state.name} has been added to your locations`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'edit') {
+      toast(`${props.location.state.name} has been edited`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'delete') {
+      toast('Location has been deleted')
+    } 
+  }
+  
   useEffect(() => {
     axios.get('/api/circle', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -116,12 +133,17 @@ const Map = (props) => {
           return data.id
         })
         setUserCircle(userData)
-
       })
       .catch(err => console.log(err))
 
     getData()
-  }, [])
+
+    if (props.location.state === undefined) {
+      return
+    } else {
+      notify()
+    }
+  }, [props.location.state])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 
@@ -222,6 +244,7 @@ const Map = (props) => {
       props={props}
       locationId={locationId}/> : null}
     </div>
+    <ToastContainer />
   </section>
 }
 
