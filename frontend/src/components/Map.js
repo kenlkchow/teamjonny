@@ -107,11 +107,22 @@ const Map = (props) => {
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
   }
   function notify() {
-    toast(`${props.location.state.name} has been added to your locations`)
-    axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
-      .then(resp => {
-        setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
-      })
+    if (props.location.state.from === 'new') {
+      toast(`${props.location.state.name} has been added to your locations`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'edit') {
+      toast(`${props.location.state.name} has been edited`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'delete') {
+      toast('Location has been deleted')
+    }
+
   }
   
   useEffect(() => {
@@ -123,17 +134,19 @@ const Map = (props) => {
           return data.id
         })
         setUserCircle(userData)
-
       })
       .catch(err => console.log(err))
 
     getData()
+  }, [])
+
+  useEffect(() => {
     if (props.location.state === undefined) {
       return
     } else {
       notify()
     }
-  }, [])
+  }, [props.location.state.from])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 

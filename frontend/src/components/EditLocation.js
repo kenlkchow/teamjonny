@@ -68,7 +68,7 @@ const EditLocation = (props) => {
     axios.put(`/api/locations/${locationId}`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(() => props.history.push('/map'))
+      .then((resp) => props.history.push('/map', { ...resp.data, from: 'edit' }))
       .catch(err => setErrors({ ...errors, ...err.response.data.errors }))
   }
 
