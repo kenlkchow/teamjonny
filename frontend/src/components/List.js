@@ -34,6 +34,12 @@ const List = () => {
     website: ''
   }])
 
+  const [randomKey, setRandomKey] = useState(0.5)
+
+  function randomizeKey() {
+    setRandomKey(Math.random())
+  }
+
   function handleCategory(e) {
     setCategory(e.target.value)
   }
@@ -42,7 +48,17 @@ const List = () => {
     setPrivacy(e.target.value)
   }
 
-  useEffect(() => {
+  function removeLocation(e) {
+    axios.delete(`/api/locations/${e.target.id}`, {
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
+    })
+      .then(() => getData())
+      .catch(err => console.log(err))
+
+    randomizeKey()
+  }
+
+  function getData() {
     axios.get('/api/locations/available', {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
@@ -50,6 +66,10 @@ const List = () => {
         setLocations(resp.data)
       })
       .catch(err => console.log(err))
+  }
+
+
+  useEffect(() => {
 
     axios.get('/api/circle', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -61,6 +81,8 @@ const List = () => {
         setUserCircle(userData)
       })
       .catch(err => console.log(err))
+
+    getData()
   }, [])
 
   locations.forEach(location => {
@@ -109,7 +131,7 @@ const List = () => {
       <Accordion
         allowMultipleExpanded={true}
         allowZeroExpanded={true}
-
+        key={randomKey}
       >
         {locations
           .filter(location => {
@@ -129,7 +151,7 @@ const List = () => {
                     <b>{location.name}</b> - {location.postcode}
                   </ AccordionItemButton>
                 </ AccordionItemHeading>
-                <AccordionItemPanel>
+                <AccordionItemPanel >
                   <p>
                     category: {location.category}
                   </p>
@@ -143,7 +165,12 @@ const List = () => {
                   <p>
                     Created by: {location.user.username}
                   </p>
-                  <Link className="button is-success" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>
+                  <div className="container">
+                    <div className="level is-mobile">
+                      {(Auth.getUserId() === location.user.id) && <Link className="button is-success list-button" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>}
+                      {(Auth.getUserId() === location.user.id) && <button className="button is-danger list-button" id={location._id} onClick={removeLocation}>Delete</button>}
+                    </div>
+                  </div>
                 </AccordionItemPanel>
               </ AccordionItem>
             )
