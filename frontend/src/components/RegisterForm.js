@@ -85,7 +85,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
             {errors.passwordConfirmation && <small className="help is-danger">Password and Password Confirmation do not match. Dummy!</small>}
           </div>
         </div>
-        <button className="button is-info">
+        <button className="button is-link">
           Complete registration
         </button>
       </form>
