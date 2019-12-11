@@ -183,10 +183,8 @@ const List = () => {
                     <div className="level is-mobile">
                       <div className="level-left">
                         <div className="level-item">
-                          <p>
-                            <Link to={location.website} >
-                              {location.website}
-                            </Link >
+                          <p> 
+                            <a href={`${location.website}`} target='_blank' rel='noopener noreferrer'>{location.website}</a>
                           </p>
                         </div>
                       </div>
