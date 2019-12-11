@@ -115,9 +115,21 @@ img#logo {
   }
 }
 
+
 small.help.is-danger {
     margin-bottom: 10px;
   }
+
+//ken's styling
+b{
+  font-weight: bold;
+}
+
+small{
+  margin-top: 10px;
+  margin-left: 5px;
+}
+//ken's styling
   
 .marker {
   background-image: url("http://www.myiconfinder.com/uploads/iconsets/369f997cef4f440c5394ed2ae6f8eecd.png");
@@ -134,11 +146,6 @@ small.help.is-danger {
   border: 2px solid white;
   height: 15px;
   width: 15px;
-}
-
-small{
-  margin-top: 10px;
-  margin-left: 5px;
 }
 
 #redirectlogo{
@@ -214,6 +221,3 @@ small{
 }
 
 
-b{
-  font-weight: bold;
-}
