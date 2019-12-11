@@ -121,8 +121,7 @@ const Map = (props) => {
         })
     } else if (props.location.state.from === 'delete') {
       toast('Location has been deleted')
-    }
-
+    } 
   }
   
   useEffect(() => {
@@ -138,15 +137,13 @@ const Map = (props) => {
       .catch(err => console.log(err))
 
     getData()
-  }, [])
 
-  useEffect(() => {
     if (props.location.state === undefined) {
       return
     } else {
       notify()
     }
-  }, [props.location.state.from])
+  }, [props.location.state])
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 
