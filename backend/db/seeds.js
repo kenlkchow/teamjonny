@@ -256,6 +256,61 @@ mongoose.connect(
             privacy: 1,
             notes: '',
             user: users[2]
+          },
+          {
+            name: 'The Merton Apprentice',
+            postcode: 'SW19 2RD',
+            category: 'Pub',
+            website: 'https://www.mertonapprentice.com',
+            priciness: 1,
+            openLate: false,
+            privacy: 2,
+            notes: 'Solid pub, cheap pints',
+            user: users[0]
+          },
+          {
+            name: 'The Castle',
+            postcode: 'SW17 0RG',
+            category: 'Pub',
+            website: 'https://www.castletooting.com',
+            priciness: 2,
+            openLate: true,
+            privacy: 2,
+            notes: 'Bit spenny but outdoor bit is nice',
+            user: users[0]
+          },
+          {
+            name: 'Wheatsheaf',
+            postcode: 'SW17 7PG',
+            category: 'Pub',
+            website: 'https://www.thewheatsheafsw17.com',
+            priciness: 1,
+            openLate: true,
+            privacy: 2,
+            notes: 'AKA The Wheaty',
+            user: users[0]
+          },
+          {
+            name: 'The Half Moon',
+            postcode: 'E1 4AA',
+            category: 'Pub',
+            website: 'https://www.jdwetherspoon.com/pubs/all-pubs/england/london/the-half-moon-mile-end',
+            priciness: 2,
+            openLate: true,
+            privacy: 3,
+            notes: 'Best beer garden in London',
+            user: users[0]
+          },
+          {
+            name: 'Strongrooms',
+            postcode: 'EC2A 3PJ',
+            category: 'Other',
+            website: 'https://www.strongroombar.com',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Nice outdoor bit',
+            user: users[0]
           }
         ]
         )
