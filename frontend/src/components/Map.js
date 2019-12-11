@@ -19,7 +19,7 @@ const Map = (props) => {
     height: '80vh',
     latitude: 51.51491,
     longitude: -0.07280,
-    zoom: 16
+    zoom: 13
   })
 
   const [locations, setLocations] = useState([{
@@ -131,7 +131,7 @@ const Map = (props) => {
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-primary is-small" onClick={getLocation}>Locate me</button>
+            <button className="button is-link is-small" onClick={getLocation}>Locate me</button>
           </div>
         </div>
         <div className="level-right">

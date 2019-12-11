@@ -60,6 +60,21 @@ html, body {
   font-family: 'Poiret One', cursive;
 }
 
+#logo-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .bracket {
+    margin: 0 10px;
+  }
+
+  .bracket-nav{
+    margin: 0 5px;
+  }
+}
+
 .hero-body {
   .container {
     display: flex;
@@ -189,6 +204,9 @@ form.form-location {
   border: none;
 }
 
+.location-info {
+  margin: 5px 0;
+}
 
 // LIST OF LOCATIONS
 .accordion {

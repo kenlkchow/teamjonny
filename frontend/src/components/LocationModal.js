@@ -69,26 +69,28 @@ const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) =>
         
       </header>
       <section className="modal-card-body">
+        {priciness ? <div className="location-info"><strong>{priciness}</strong></div> : <></>}
 
-        <p>{singleLocation.category}</p>
-        {singleLocation.openLate ? <p>Open late</p> : null}
-        <p><strong>{priciness}</strong></p>
-        <p className="modal-card-subtitle">Notes: <br></br>{singleLocation.notes}</p>
+        <div className="location-info"><a href={singleLocation.website} target='_blank' rel='noopener noreferrer'>{singleLocation.website}</a></div>
+        <div className="location-info">{singleLocation.postcode} <a className="is-size-7" href={`https://www.google.com/maps/place/${singleLocation.postcode}`} target='_blank' rel='noopener noreferrer'>(Google Maps)</a></div>
+        {singleLocation.openLate ? <div>Open late</div> : <></>}
+
+        <div className="location-info">Notes: <br></br>{singleLocation.notes}</div>
 
       </section>
       <footer className="modal-card-foot">
         <div className="level">
           <div className="level-left">
             <div className="level-item">
-              {isOwner() && <Link className="button is-primary" to={`/edit/${locationId}`}>Edit</Link>}
+              {isOwner() && <Link className="button is-link is-small" to={`/edit/${locationId}`}>Edit</Link>}
             </div>
             <div className="level-item">
-              <p>Location added by <strong>{singleLocation.user.username}</strong> {moment(singleLocation.updatedAt).fromNow()}</p>
+              <div className="is-size-7">Location added by <strong>{singleLocation.user.username}</strong> ({moment(singleLocation.updatedAt).fromNow()})</div>
             </div>
           </div>
           <div className="level-right">
             <div className="level-item">
-              {isOwner() && <button className="button is-danger" onClick={removeLocation}>Delete</button>}
+              {isOwner() && <button className="button is-danger is-small" onClick={removeLocation}>Delete</button>}
             </div>
           </div>
         </div>

@@ -24,7 +24,11 @@ const Navbar = (props) => {
       <div className="navbar-brand">
         <Link className="navbar-item" to="/map">
           <img src={Logo} height="28" id="logo" />
-          <div className="logo">PLACEHOLDER</div>
+          <div className="title" id="logo-title">
+            <div className="bracket-nav is-size-4">[</div>
+            <div className="title-name is-size-6 has-text-weight-bold">PLACEHOLDER</div>
+            <div className="bracket-nav is-size-4">]</div>
+          </div>
         </Link>
         <a
           role="button"
