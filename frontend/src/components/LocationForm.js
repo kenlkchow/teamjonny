@@ -16,7 +16,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
             type="text"
             name="name"
             className="input"
-            placeholder="Name"
+            placeholder="General Assembly"
             value={data.name}
           />
         </div>
@@ -34,7 +34,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
             type="text"
             name="postcode"
             className={`input ${(postcodeValidation === 200) ? 'is-success' : (postcodeValidation === 404) ? 'is-danger' : ''}`}
-            placeholder="E1 0AA"
+            placeholder="E1 7PT"
             value={data.postcode}
           />
         </div>
@@ -71,7 +71,7 @@ const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode
             type="text"
             name="website"
             className="input"
-            placeholder="www.thisgreatplace.com"
+            placeholder="www.generalassemb.ly"
             value={data.website}
           />
         </div>
