@@ -46,6 +46,7 @@ const Map = (props) => {
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
+  const [userPosition, setPosition] = useState(false)
 
   function getData() {
     axios.get('/api/locations/available', {
@@ -93,7 +94,15 @@ const Map = (props) => {
   }
 
   function getLocation() {
-    return
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+      console.log('geolocation not supported')
+    }
+  }
+  function showPosition(position) {
+    setPosition(true)
+    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude })
   }
 
   useEffect(() => {
