@@ -277,6 +277,10 @@ b{
   font-weight: bold;
 }
 
+.redirect-link{
+  margin-top: 50px;
+}
+
 @keyframes fadein {
   0% {
       opacity: 0;
@@ -305,3 +309,10 @@ b{
     width: 300px;
   }
 }
+
+.accordion-category-image{
+  height: 32px;
+  width: 32px;
+  float:right;
+}
+

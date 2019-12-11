@@ -10,6 +10,12 @@ import {
   AccordionItemPanel
 } from 'react-accessible-accordion'
 
+import pubImage from '../images/locationicons/pub-colour.png'
+import coffeeImage from '../images/locationicons/coffee-colour.png'
+import restaurantImage from '../images/locationicons/restaurant-colour.png'
+import brunchImage from '../images/locationicons/brunch-colour.png'
+import shopImage from '../images/locationicons/shop-colour.png'
+import otherImage from '../images/locationicons/other-colour.png'
 
 const List = () => {
 
@@ -149,28 +155,54 @@ const List = () => {
                 <AccordionItemHeading>
                   <AccordionItemButton>
                     <b>{location.name}</b> - {location.postcode}
+                    <img className="accordion-category-image" src={(location.category === 'Pub') ? pubImage :
+                      (location.category === 'Restaurant') ? restaurantImage :
+                        (location.category === 'Coffee Shop') ? coffeeImage :
+                          (location.category === 'Bistro/Brunch') ? brunchImage :
+                            (location.category === 'Shop') ? shopImage :
+                              (location.category === 'Other') ? otherImage : null} />
                   </ AccordionItemButton>
                 </ AccordionItemHeading>
                 <AccordionItemPanel >
-                  <p>
-                    category: {location.category}
-                  </p>
-                  <p>
-                    website: {location.website}
-                  </p>
-                  <p>
-                    priciness: {location.priciness}
-                  </p>
-                  <p>privacy: {location.privacy}  </p>
-                  <p>
-                    Created by: {location.user.username}
-                  </p>
-                  <div className="container">
-                    <div className="level is-mobile">
-                      {(Auth.getUserId() === location.user.id) && <Link className="button is-success list-button" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>}
-                      {(Auth.getUserId() === location.user.id) && <button className="button is-danger list-button" id={location._id} onClick={removeLocation}>Delete</button>}
+                  <div className="level is-mobile">
+                    <div className="level-left">
+                      <div className="level-item">
+                        <a className="is-size-9" href={`https://www.google.com/maps/place/${location.postcode}`} target='_blank' rel='noopener noreferrer'>Google Maps</a>
+                      </div>
                     </div>
                   </div>
+                  <div>
+                    <p>
+                      <strong>{location.priciness}</strong>
+                    </p>
+                    <p>
+                      {location.category}
+                    </p>
+                  </div>
+                  <div className="container">
+                    <div className="level is-mobile">
+                      <div className="level-left">
+                        <div className="level-item">
+                          <p>
+                            <Link to={location.website} >
+                              {location.website}
+                            </Link >
+                          </p>
+                        </div>
+                      </div>
+                      <div className="level-right">
+                        <div className="level-item">
+                          created by: {location.user.username} ({location.privacy})
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {(Auth.getUserId() === location.user.id) && <div className="container">
+                    <div className="level is-mobile">
+                      {(Auth.getUserId() === location.user.id) && <Link className="button is-link is-small" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>}
+                      {(Auth.getUserId() === location.user.id) && <button className="button is-danger is-small" id={location._id} onClick={removeLocation}>Delete</button>}
+                    </div>
+                  </div>}
                 </AccordionItemPanel>
               </ AccordionItem>
             )
@@ -182,4 +214,25 @@ const List = () => {
 
 }
 
-export default List   
+export default List
+
+
+  // < div className = "level is-mobile" >
+  //   <div className="level-left">
+  //     <div className="level-item">
+  //       <b>{location.name}</b> - {location.postcode}
+  //     </div>
+  //   </div>
+  //   <div className="level-right">
+  //     <div className="level-item">
+  //       <figure className="image is-32x32">
+  //         <img src={(location.category === 'Pub') ? pubImage :
+  //           (location.category === 'Restaurant') ? restaurantImage :
+  //             (location.category === 'Coffee Shop') ? coffeeImage :
+  //               (location.category === 'Bistro/Brunch') ? brunchImage :
+  //                 (location.category === 'Shop') ? shopImage :
+  //                   (location.category === 'Other') ? otherImage : ''} />
+  //       </figure>
+  //     </div>
+  //   </div>
+  //   </div >
