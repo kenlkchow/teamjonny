@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Auth from '../lib/authMethods'
-
-const initialState = {
-  sendRequest: '',
-  sendApprove: '',
-  sendDelete: ''
-}
 
 const Circle = () => {
 
   const [circle, setCircle] = useState({})
-  const [errors, setErrors] = useState(initialState)
+  const [errors, setErrors] = useState({})
   const [username, setUsername] = useState({ username: '' })
-  const [message, setMessage] = useState(initialState)
 
   function fetchCircleData() {
     axios.get('/api/circle', {
@@ -37,19 +32,17 @@ const Circle = () => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(resp => {
-        setMessage({ ...initialState, sendRequest: resp.data.message })
-        setUsername({ username: '' })
-        setErrors({ ...errors, sendRequest: '' })
+        setUsername({ username: '' })  
+        toast(resp.data.message)  
       })
       .catch(err => {
-        setMessage({ ...initialState })
-        setErrors({ ...errors, sendRequest: err.response.data.message })
+        toast(err.response.data.message)
       })
+
   }
 
   function handleChange (e) {
     setUsername({ username: e.target.value })
-    setErrors({ ...errors, sendRequest: '' })
   }
 
   function handleApprove(e) {
@@ -58,14 +51,12 @@ const Circle = () => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(resp => {
-        setMessage({ ...initialState, sendApprove: resp.data.message })
         setUsername({ username: '' })
-        setErrors({ ...errors, sendApprove: '' })
         fetchCircleData()
+        toast(resp.data.message)   
       })
       .catch(err => {
-        setErrors({ ...errors, sendApprove: err.response.data.message })
-        setMessage({ ...initialState })
+        toast(err.response.data.message)
       })
   }
 
@@ -76,22 +67,19 @@ const Circle = () => {
       data: { username: e.target.id }
     })
       .then(resp => {
-        setMessage({ ...initialState, sendDelete: resp.data.message })
         setUsername({ username: '' })
-        setErrors({ ...errors, sendDelete: '' })
         fetchCircleData()
+        toast(resp.data.message)  
       })
       .catch(err => {
-        setErrors({ ...errors, sendDelete: err.response.data.message })
-        setMessage({ ...initialState })
+        toast(err.response.data.message)  
       })
   }
-
+  
   if (!circle) return <h1>Loading...</h1>
 
   return <section className="section">
     <div className="container">
-
       <h1 className="title">Your Circle</h1>
 
       <form className="form" onSubmit={handleRequest}>
@@ -117,32 +105,10 @@ const Circle = () => {
             <button className="button is-link" id="send-request">
               Send
             </button>
-            {errors.sendRequest && <small className="help is-danger">
-              {errors.sendRequest}
-            </small>}
-            {message.sendRequest && <small className="help is-success">
-              {message.sendRequest}
-            </small>}
           </div>
         
         </div>
       </form>
-
-
-      <div className="has-text-centered">
-        {errors.sendApprove && <small className="help is-danger">
-          {errors.sendApprove}
-        </small>}
-        {message.sendApprove && <small className="help is-success">
-          {message.sendApprove}
-        </small>}
-        {errors.sendDelete && <small className="help is-danger">
-          {errors.sendDelete}
-        </small>}
-        {message.sendDelete && <small className="help is-success">
-          {message.sendDelete}
-        </small>}
-      </div>
 
       <section className="section">
         <div className="container">
@@ -198,6 +164,7 @@ const Circle = () => {
       </section>
 
     </div>
+    <ToastContainer />
   </section>
 }
 
