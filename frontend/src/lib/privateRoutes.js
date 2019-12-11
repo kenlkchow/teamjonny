@@ -14,7 +14,7 @@ function PrivateRoute({ component: Component, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: '/redirect'
+              pathname: '/mistakeswereMADE'
             }}
           />
         )

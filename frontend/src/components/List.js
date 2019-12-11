@@ -48,6 +48,35 @@ const List = () => {
 
   return <section className="section">
     <div className='container'>
+      <div className="level is-mobile">
+        <div className="level-right">
+          <div className="level-item">
+            <div className="select is-small">
+              <select name="category">
+                <option value="Select" hidden defaultValue>Select</option>
+                <option value="All">All</option>
+                <option value="Bistro/Brunch">Bistro/Brunch</option>
+                <option value="Coffee Shop">Coffee Shop</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Shop">Shop</option>
+                <option value="Pub">Pub</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div className="level-item">
+            <div className="select is-small">
+              <select name="category" >
+                <option value="Select" hidden defaultValue>Select</option>
+                <option value="1">All locations</option>
+                <option value="2">Circles locations</option>
+                <option value="3">Your locations only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Accordion
         allowMultipleExpanded={true}
         allowZeroExpanded={true}
