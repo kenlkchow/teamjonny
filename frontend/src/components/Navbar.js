@@ -24,7 +24,7 @@ const Navbar = (props) => {
       <div className="navbar-brand">
         <Link className="navbar-item" to="/map">
           <img src={Logo} height="28" id="logo" />
-          <div className="logo">Placeholder</div>
+          <div className="logo">PLACEHOLDER</div>
         </Link>
         {Auth.isAuthorized() && <div className="navbar-item is-size-7">🔵 logged in</div>}
         <a
