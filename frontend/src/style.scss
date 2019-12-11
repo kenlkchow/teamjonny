@@ -60,6 +60,21 @@ html, body {
   font-family: 'Poiret One', cursive;
 }
 
+#logo-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .bracket {
+    margin: 0 10px;
+  }
+
+  .bracket-nav{
+    margin: 0 5px;
+  }
+}
+
 .hero-body {
   .container {
     display: flex;
@@ -152,7 +167,7 @@ form.form-location {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: pointer;  
 }
 
 .currentPosition {
@@ -189,6 +204,9 @@ form.form-location {
   border: none;
 }
 
+.location-info {
+  margin: 5px 0;
+}
 
 // LIST OF LOCATIONS
 .accordion {
@@ -242,6 +260,11 @@ form.form-location {
   margin-top: 1.3em;
 }
 
+button.list-button{
+  margin-bottom: 0;  
+  margin-top: 1.3em;
+}
+
 b{
   font-weight: bold;
 }
@@ -273,5 +296,4 @@ b{
   #map-container {
     width: 300px;
   }
-
 }

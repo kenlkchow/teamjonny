@@ -13,6 +13,9 @@ import {
 
 const List = () => {
 
+  const [category, setCategory] = useState('All')
+  const [privacy, setPrivacy] = useState('1')
+  const [userCircle, setUserCircle] = useState([])
 
   const [locations, setLocations] = useState([{
     category: '',
@@ -31,13 +34,55 @@ const List = () => {
     website: ''
   }])
 
-  useEffect(() => {
+  const [randomKey, setRandomKey] = useState(0.5)
+
+  function randomizeKey() {
+    setRandomKey(Math.random())
+  }
+
+  function handleCategory(e) {
+    setCategory(e.target.value)
+  }
+
+  function handlePrivacy(e) {
+    setPrivacy(e.target.value)
+  }
+
+  function removeLocation(e) {
+    axios.delete(`/api/locations/${e.target.id}`, {
+      headers: { Authorization: 'Bearer ' + Auth.getToken() }
+    })
+      .then(() => getData())
+      .catch(err => console.log(err))
+
+    randomizeKey()
+  }
+
+  function getData() {
     axios.get('/api/locations/available', {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
     })
       .then(resp => {
         setLocations(resp.data)
       })
+      .catch(err => console.log(err))
+  }
+
+
+  useEffect(() => {
+
+    axios.get('/api/circle', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(resp => {
+        const userData = resp.data.approved.map(data => {
+          return data.id
+        })
+        setUserCircle(userData)
+      })
+      .catch(err => console.log(err))
+
+    getData()
   }, [])
 
   locations.forEach(location => {
@@ -46,13 +91,19 @@ const List = () => {
     if (location.priciness === 3) return location.priciness = '£££'
   })
 
+  locations.forEach(location => {
+    if (location.privacy === 1) return location.privacy = 'public'
+    if (location.privacy === 2) return location.privacy = 'circle'
+    if (location.privacy === 3) return location.privacy = 'private'
+  })
+
   return <section className="section">
     <div className='container'>
       <div className="level is-mobile">
         <div className="level-right">
           <div className="level-item">
             <div className="select is-small">
-              <select name="category">
+              <select name="category" onChange={handleCategory}>
                 <option value="Select" hidden defaultValue>Select</option>
                 <option value="All">All</option>
                 <option value="Bistro/Brunch">Bistro/Brunch</option>
@@ -66,7 +117,7 @@ const List = () => {
           </div>
           <div className="level-item">
             <div className="select is-small">
-              <select name="category" >
+              <select name="category" onChange={handlePrivacy}>
                 <option value="Select" hidden defaultValue>Select</option>
                 <option value="1">All locations</option>
                 <option value="2">Circles locations</option>
@@ -80,34 +131,50 @@ const List = () => {
       <Accordion
         allowMultipleExpanded={true}
         allowZeroExpanded={true}
-
+        key={randomKey}
       >
-        {locations.map((location, i) => {
-          return (
-            <AccordionItem key={i}>
-              <AccordionItemHeading>
-                <AccordionItemButton>
-                  <b>{location.name}</b> - {location.postcode}
-                </ AccordionItemButton>
-              </ AccordionItemHeading>
-              <AccordionItemPanel>
-                <p>
-                  category: {location.category}
-                </p>
-                <p>
-                  website: {location.website}
-                </p>
-                <p>
-                  priciness: {location.priciness}
-                </p>
-                <p>
-                  Created by: {location.user.username}
-                </p>
-                <Link className="button is-success" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>
-              </AccordionItemPanel>
-            </ AccordionItem>
-          )
-        })}
+        {locations
+          .filter(location => {
+            if (category === 'All') return locations
+            else return location.category === category
+          })
+          .filter(location => {
+            if (privacy == 3) return Auth.getUserId() === location.user.id
+            else if (privacy == 2) return (Auth.getUserId() === location.user.id) || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))
+            else if (privacy == 1) return locations
+          })
+          .map((location, i) => {
+            return (
+              <AccordionItem key={i}>
+                <AccordionItemHeading>
+                  <AccordionItemButton>
+                    <b>{location.name}</b> - {location.postcode}
+                  </ AccordionItemButton>
+                </ AccordionItemHeading>
+                <AccordionItemPanel >
+                  <p>
+                    category: {location.category}
+                  </p>
+                  <p>
+                    website: {location.website}
+                  </p>
+                  <p>
+                    priciness: {location.priciness}
+                  </p>
+                  <p>privacy: {location.privacy}  </p>
+                  <p>
+                    Created by: {location.user.username}
+                  </p>
+                  <div className="container">
+                    <div className="level is-mobile">
+                      {(Auth.getUserId() === location.user.id) && <Link className="button is-success list-button" id="list-Edit-Button" to={`/edit/${location._id}`}>Edit</Link>}
+                      {(Auth.getUserId() === location.user.id) && <button className="button is-danger list-button" id={location._id} onClick={removeLocation}>Delete</button>}
+                    </div>
+                  </div>
+                </AccordionItemPanel>
+              </ AccordionItem>
+            )
+          })}
       </Accordion>
     </div>
     {console.log(locations)}

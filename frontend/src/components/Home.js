@@ -15,15 +15,19 @@ const Home = (props) => {
           <figure className="image is-128x128 has-text-centered" >
             <img src={Logo} alt=""/>
           </figure>
-          <h1 className="title">PLACEHOLDER</h1>
-        <div id="home-container">
-          <h1 className="subtitle">
-            <a className="subtitle is-size-4" onClick={toggleRegister}>Register</a>
+          <h1 className="title" id="logo-title">
+            <div className="bracket is-size-1">[</div>
+            <div className="title-name has-text-weight-bold">PLACEHOLDER</div>
+            <div className="bracket is-size-1">]</div>
           </h1>
-          <h1 className="subtitle">
-            <a className="subtitle is-size-4" onClick={toggleLogin}>Login</a>
-          </h1>
-        </div>
+          <div id="home-container">
+            <h1 className="subtitle">
+              <a className="subtitle is-size-4" onClick={toggleRegister}>Register</a>
+            </h1>
+            <h1 className="subtitle">
+              <a className="subtitle is-size-4" onClick={toggleLogin}>Login</a>
+            </h1>
+          </div>
         </div>
       </div>
       <RegisterModal
