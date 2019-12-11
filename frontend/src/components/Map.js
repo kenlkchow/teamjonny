@@ -46,6 +46,8 @@ const Map = (props) => {
   const [modal, setModal] = useState(false)
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
+  const [userMarkerShowing, setUserMarkerShowing] = useState(false)
+  const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 })
 
   function getData() {
     axios.get('/api/locations/available', {
@@ -93,7 +95,16 @@ const Map = (props) => {
   }
 
   function getLocation() {
-    return
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+      console.log('geolocation not supported')
+    }
+  }
+  function showPosition(position) {
+    setUserMarkerShowing(true)
+    setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
   }
 
   useEffect(() => {
@@ -196,6 +207,11 @@ const Map = (props) => {
                 (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
             </Marker>
           })}
+        {userMarkerShowing ? <Marker 
+          latitude={userPosition.latitude}
+          longitude={userPosition.longitude}>
+          <div className="currentPosition"></div>
+        </Marker> : <div></div>}
       </ReactMap>
 
    

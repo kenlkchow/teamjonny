@@ -161,6 +161,7 @@ form.form-location {
   border: 2px solid white;
   height: 15px;
   width: 15px;
+  animation: pulse 2s linear infinite;
 }
 
 // REDIRECTION PAGE
@@ -235,20 +236,42 @@ form.form-location {
     animation: fadein 0.35s ease-in;
 }
 
-@keyframes fadein {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 #list-Edit-Button{
   height: 10%;
   padding-left: 1.2em;
   margin-top: 1.3em;
 }
 
+b{
+  font-weight: bold;
+}
 
+@keyframes fadein {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  #map-container {
+    width: 300px;
+  }
+
+}
