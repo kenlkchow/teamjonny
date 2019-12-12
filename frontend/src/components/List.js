@@ -201,6 +201,7 @@ const List = () => {
                     <p>
                       {location.category}
                     </p>
+                    {(location.notes !== '') && <p>Notes: {location.notes}</p>}
                   </div>
                   <div className="container">
                     <div className="level is-mobile">
