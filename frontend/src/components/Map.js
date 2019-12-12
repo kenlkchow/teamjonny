@@ -3,7 +3,7 @@ import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
@@ -52,6 +52,7 @@ const Map = (props) => {
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
   const [userMarkerShowing, setUserMarkerShowing] = useState(false)
+  const [addMyLocationShowing, setAddMyLocationShowing] = useState(false)
   const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 })
 
   function getData() {
@@ -103,6 +104,7 @@ const Map = (props) => {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
+      setAddMyLocationShowing(true)
     } else {
       console.log('geolocation not supported')
     }
@@ -159,7 +161,7 @@ const Map = (props) => {
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-link is-small" onClick={getLocation}>Locate me</button>
+            <button className="button is-link is-small" onClick={getLocation}><strong>Locate me</strong></button>
           </div>
         </div>
         <div className="level-right">
@@ -250,7 +252,6 @@ const Map = (props) => {
         props={props}
         locationId={locationId} /> : null}
     </div>
-    <ToastContainer />
   </section>
 }
 
