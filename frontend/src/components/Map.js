@@ -5,6 +5,10 @@ import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
+
+
 
 import pubImage from '../images/locationicons/pub-colour.png'
 import coffeeImage from '../images/locationicons/coffee-colour.png'
@@ -14,8 +18,8 @@ import shopImage from '../images/locationicons/shop-colour.png'
 import otherImage from '../images/locationicons/other-colour.png'
 
 const Map = (props) => {
-    
-  const [viewport, setViewPort ] = useState({
+
+  const [viewport, setViewPort] = useState({
     width: '100%',
     height: '80vh',
     latitude: 51.51491,
@@ -94,6 +98,8 @@ const Map = (props) => {
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
   }
+
+
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
@@ -121,9 +127,9 @@ const Map = (props) => {
         })
     } else if (props.location.state.from === 'delete') {
       toast('Location has been deleted')
-    } 
+    }
   }
-  
+
   useEffect(() => {
     axios.get('/api/circle', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -149,7 +155,7 @@ const Map = (props) => {
 
   return <section className="section" id="map-container">
     <div className="container" >
-      
+
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
@@ -187,7 +193,7 @@ const Map = (props) => {
 
       <ReactMap
         mapboxApiAccessToken="pk.eyJ1IjoiamdhciIsImEiOiJjazNicmRob2MwOTM0M2R1aW9iMjJpdHBxIn0.b-gHKxL-hNP7YOODnakv7Q"
-        { ...viewport }
+        {...viewport}
         onViewportChange={_onViewportChange}
       >
         {locations
@@ -210,39 +216,39 @@ const Map = (props) => {
             }
           })
           .map((location, i) => {
-            return <Marker 
-              key={i} 
-              latitude={location.latitude} 
-              longitude={location.longitude} 
-              offsetTop={-30} 
+            return <Marker
+              key={i}
+              latitude={location.latitude}
+              longitude={location.longitude}
+              offsetTop={-30}
               offsetLeft={-20}>
-              <div 
-                className="marker" 
-                id={location._id} 
-                user={location.user.id} 
+              <div
+                className="marker"
+                id={location._id}
+                user={location.user.id}
                 onClick={handleClick}
-                style={(location.category === 'Pub') ? {backgroundImage: `url(${pubImage})`} : 
-                (location.category === 'Restaurant') ? {backgroundImage: `url(${restaurantImage})`} :
-                (location.category === 'Coffee Shop') ? {backgroundImage: `url(${coffeeImage})`} :
-                (location.category === 'Bistro/Brunch') ? {backgroundImage: `url(${brunchImage})`} : 
-                (location.category === 'Shop') ? {backgroundImage: `url(${shopImage})`} :
-                (location.category === 'Other') ? {backgroundImage: `url(${otherImage})`} : {}}></div>
+                style={(location.category === 'Pub') ? { backgroundImage: `url(${pubImage})` } :
+                  (location.category === 'Restaurant') ? { backgroundImage: `url(${restaurantImage})` } :
+                    (location.category === 'Coffee Shop') ? { backgroundImage: `url(${coffeeImage})` } :
+                      (location.category === 'Bistro/Brunch') ? { backgroundImage: `url(${brunchImage})` } :
+                        (location.category === 'Shop') ? { backgroundImage: `url(${shopImage})` } :
+                          (location.category === 'Other') ? { backgroundImage: `url(${otherImage})` } : {}}></div>
             </Marker>
           })}
-        {userMarkerShowing ? <Marker 
+        {userMarkerShowing ? <Marker
           latitude={userPosition.latitude}
           longitude={userPosition.longitude}>
           <div className="currentPosition"></div>
         </Marker> : <div></div>}
       </ReactMap>
 
-   
-    {modal ? <LocationModal 
-      setModal={setModal}
-      getData={getData}
-      toggleModal={toggleModal}
-      props={props}
-      locationId={locationId}/> : null}
+
+      {modal ? <LocationModal
+        setModal={setModal}
+        getData={getData}
+        toggleModal={toggleModal}
+        props={props}
+        locationId={locationId} /> : null}
     </div>
     <ToastContainer />
   </section>
