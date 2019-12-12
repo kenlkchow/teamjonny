@@ -296,7 +296,7 @@ b{
     transform: scale(1);
   }
   50% {
-    transform: scale(1.3);
+    transform: scale(1.4);
   }
   100% {
     transform: scale(1);
@@ -306,7 +306,7 @@ b{
 @media only screen and (max-width: 768px) {
 
   #map-container {
-    width: 300px;
+    width: 100%;
   }
 }
 

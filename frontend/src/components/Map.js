@@ -48,6 +48,7 @@ const Map = (props) => {
   const [locationId, setLocationId] = useState('')
   const [userCircle, setUserCircle] = useState([])
   const [userMarkerShowing, setUserMarkerShowing] = useState(false)
+  const [addMyLocationShowing, setAddMyLocationShowing] = useState(false)
   const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 })
 
   function getData() {
@@ -97,6 +98,7 @@ const Map = (props) => {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
+      setAddMyLocationShowing(true)
     } else {
       console.log('geolocation not supported')
     }
@@ -153,7 +155,7 @@ const Map = (props) => {
       <div className="level is-mobile">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-link is-small" onClick={getLocation}>Locate me</button>
+            <button className="button is-link is-small" onClick={getLocation}><strong>Locate me</strong></button>
           </div>
         </div>
         <div className="level-right">

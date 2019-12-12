@@ -332,6 +332,50 @@ mongoose.connect(
             privacy: 2,
             notes: 'Great food',
             user: users[1]
+          },
+          {
+            name: 'The Bear',
+            postcode: 'SL6 1QJ',
+            category: 'Pub',
+            website: 'https://www.jdwetherspoon.com/pubs/all-pubs/england/berkshire/the-bear-maidenhead',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: 'Great place to go before watching the Magpies play at York Road',
+            user: users[0]
+          },
+          {
+            name: 'The Maidens Head',
+            postcode: 'SL6 1QE',
+            category: 'Pub',
+            website: 'https://www.themaidenshead.co.uk/',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Good pub to watch the grand national or before going on a cheeky trip to Smokey Joes.',
+            user: users[0]
+          },
+          {
+            name: 'O\'Neill\'s',
+            postcode: 'RG1 1DB',
+            category: 'Pub',
+            website: 'https://www.oneills.co.uk/national-search/south-east/reading',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: 'Sticky floors, low ceiling, good for World Cups.',
+            user: users[0]
+          },
+          {
+            name: 'Monk\'s Retreat',
+            postcode: 'RG1 1HE',
+            category: 'Pub',
+            website: 'https://www.greatukpubs.co.uk/monksretreatreading',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: 'Now has screens to show the football',
+            user: users[0]
           }
         ]
         )
