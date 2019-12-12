@@ -60,20 +60,25 @@ html, body {
   font-family: 'Poiret One', cursive;
 }
 
-#logo-title {
+#logo-title, .home-form-title {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
 
   .bracket {
     margin: 0 10px;
   }
 
-  .bracket-nav{
+  .bracket-nav, .bracket-form {
     margin: 0 5px;
   }
+
 }
+
+#logo-title {
+  justify-content: center;
+}
+
 
 .hero-body {
   .container {
