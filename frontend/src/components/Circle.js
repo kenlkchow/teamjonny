@@ -85,7 +85,6 @@ const Circle = () => {
       <form className="form" onSubmit={handleRequest}>
 
         <div className="columns is-mobile">
-
           <div className="column is-10-desktop is-8-tablet is-8-mobile">
             <div className="field">
               <div className="control">
@@ -164,7 +163,7 @@ const Circle = () => {
       </section>
 
     </div>
-    <ToastContainer />
+    
   </section>
 }
 
