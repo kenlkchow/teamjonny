@@ -391,7 +391,7 @@ mongoose.connect(
           {
             name: 'Canada Water Cafe',
             postcode: 'SE16 7DX',
-            category: 'Brunch',
+            category: 'Bistro/Brunch',
             website: 'https://canadawatercafe.com',
             priciness: 2,
             openLate: false,
@@ -460,7 +460,7 @@ mongoose.connect(
             category: 'Shop',
             website: 'https://www.foyles.co.uk/',
             priciness: 2,
-            openLate: true,
+            openLate: false,
             privacy: 1,
             notes: '',
             user: users[2]
@@ -471,7 +471,7 @@ mongoose.connect(
             category: 'Restaurant',
             website: 'http://www.santorerestaurant.london/',
             priciness: 2,
-            openLate: true,
+            openLate: false,
             privacy: 1,
             notes: '',
             user: users[2]
@@ -640,6 +640,39 @@ mongoose.connect(
             privacy: 1,
             notes: 'Traditional City drinking spot with wood-panelling, Kent cask ale and English pub food.',
             user: users[0]
+          },
+          {
+            name: 'Phoenix',
+            postcode: 'SW3 4EE',
+            category: 'Pub',
+            website: 'http://www.thephoenixchelsea.co.uk',
+            priciness: 2,
+            openLate: false,
+            privacy: 3,
+            notes: 'Not that pub, the other pub.',
+            user: users[2]
+          },
+          {
+            name: 'El Pastor',
+            postcode: 'SE1 9AA',
+            category: 'Pub',
+            website: 'https://www.tacoselpastor.co.uk/',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Mile End Climbing Wall',
+            postcode: 'E3 5BE',
+            category: 'Other',
+            website: 'https://www.mileendwall.org.uk/',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: '',
+            user: users[2]
           }
         ]
         )

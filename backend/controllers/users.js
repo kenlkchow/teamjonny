@@ -31,6 +31,7 @@ function addToCircle(req, res) {
     .findOne({ username: req.body.username })
     .then(user => {
       if (!user) return res.status(404).json({ message: 'No such user found' })
+      if (user.equals(req.currentUser._id)) return res.status(400).json({ message: 'Can\'t add yourself...' })
       if (user.circle.requested.includes(req.currentUser._id)) return res.status(400).json({ message: 'Request already pending' })
       if (user.circle.approved.includes(req.currentUser._id)) return res.status(400).json({ message: 'Already connected' })
       user.circle.requested.push(req.currentUser._id)
