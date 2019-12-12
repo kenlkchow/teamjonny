@@ -673,6 +673,39 @@ mongoose.connect(
             privacy: 1,
             notes: '',
             user: users[2]
+          },
+          {
+            name: 'Gaylord Tandoori',
+            postcode: 'RG10 9ER',
+            category: 'Restaurant',
+            website: 'gaylordtandoori.co.uk',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Their food is bomb.',
+            user: users[1]
+          },
+          {
+            name: 'McQueen',
+            postcode: 'EC2A 4AA',
+            category: 'Bar',
+            website: 'http://mcqueen-shoreditch.co.uk/',
+            priciness: 2,
+            openLate: true,
+            privacy: 2,
+            notes: 'Speedy bar',
+            user: users[1]
+          },
+          {
+            name: 'JinJuu',
+            postcode: 'W1B 5PS',
+            category: 'Bar',
+            website: 'https://jinjuu.com/london-soho/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Great for overpriced soju',
+            user: users[1]
           }
         ]
         )
