@@ -13,6 +13,15 @@ import otherImage from '../images/locationicons/other-colour.png'
 
 const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) => {
 
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === 'Escape') {
+        setModal(false)
+      }
+    }
+    window.addEventListener('keydown', listener)
+  }, [])
+
   const [priciness, setPriciness] = useState('')
   const [singleLocation, setSingleLocation] = useState({ user: { username: '' }
   })
