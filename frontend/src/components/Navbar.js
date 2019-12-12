@@ -19,7 +19,7 @@ const Navbar = (props) => {
   }, [props.location.pathname])
 
   if (!Auth.isAuthorized()) return <></>
-  return <div className="navbar is-transparent">
+  return <div className="navbar">
     <div className="container">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/map">

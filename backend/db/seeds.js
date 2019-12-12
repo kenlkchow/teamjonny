@@ -376,6 +376,105 @@ mongoose.connect(
             privacy: 1,
             notes: 'Now has screens to show the football',
             user: users[0]
+          },
+          {
+            name: 'The Astronomer',
+            postcode: 'E1 7JF',
+            category: 'Pub',
+            website: 'https://theastronomerpub.co.uk',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Canada Water Cafe',
+            postcode: 'SE16 7DX',
+            category: 'Brunch',
+            website: 'https://canadawatercafe.com',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Delamina East',
+            postcode: 'E1 6BJ',
+            category: 'Restaurant',
+            website: 'https://delaminaeast.co.uk',
+            priciness: 2,
+            openLate: false,
+            privacy: 2,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Salt Quay',
+            postcode: 'SE16 5QU',
+            category: 'Pub',
+            website: 'https://www.greeneking-pubs.co.uk/pubs/greater-london/salt-quay',
+            priciness: 2,
+            openLate: false,
+            privacy: 2,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Mayflower',
+            postcode: 'SE16 4NF',
+            category: 'Pub',
+            website: 'https://www.mayflowerpub.co.uk/',
+            priciness: 3,
+            openLate: false,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Eat Tokyo',
+            postcode: 'W1D 4TL',
+            category: 'Restaurant',
+            website: 'https://www.eattokyo.co.uk/soho',
+            priciness: 3,
+            openLate: false,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'La Bodega Negra',
+            postcode: 'W1D 5JF',
+            category: 'Restaurant',
+            website: 'https://www.labodeganegra.com/',
+            priciness: 3,
+            openLate: true,
+            privacy: 2,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Foyles',
+            postcode: 'WC2H 0DT',
+            category: 'Shop',
+            website: 'https://www.foyles.co.uk/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: '',
+            user: users[2]
+          },
+          {
+            name: 'Santore',
+            postcode: 'EC1R 4QL',
+            category: 'Restaurant',
+            website: 'http://www.santorerestaurant.london/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: '',
+            user: users[2]
           }
         ]
         )
