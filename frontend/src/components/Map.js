@@ -54,6 +54,7 @@ const Map = (props) => {
   const [userMarkerShowing, setUserMarkerShowing] = useState(false)
   const [addMyLocationShowing, setAddMyLocationShowing] = useState(false)
   const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 })
+  const [loading, setLoading] = useState(false)
 
   function getData() {
     axios.get('/api/locations/available', {
@@ -99,10 +100,9 @@ const Map = (props) => {
   function handlePrivacy(e) {
     setPrivacyFilter(e.target.value)
   }
-
-
   function getLocation() {
     if (navigator.geolocation) {
+      setLoading(true)
       navigator.geolocation.getCurrentPosition(showPosition)
     } else {
       console.log('geolocation not supported')
@@ -114,7 +114,8 @@ const Map = (props) => {
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
     setTimeout(() => {
       setAddMyLocationShowing(true)
-    }, 2000)
+    }, 3000)
+    setLoading(false)
   }
   function addMyLocation() {
     axios.get(`https://api.postcodes.io/postcodes?lon=${userPosition.longitude}&lat=${userPosition.latitude}`)
@@ -170,7 +171,7 @@ const Map = (props) => {
       <div className="level">
         <div className="level-left">
           <div className="level-item">
-            <button className="button is-link is-small" onClick={getLocation}><strong>Locate me</strong></button>
+            <button className={!loading ? 'button is-link is-small' : 'button is-link is-small is-loading'} onClick={getLocation}><strong>Locate me</strong></button>
           </div>
           {addMyLocationShowing ? <div className="level-item"><button className="button is-primary is-small add-location-button" onClick={addMyLocation}><strong>Add my location</strong></button></div> : null}
         </div>
