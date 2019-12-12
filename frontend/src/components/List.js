@@ -10,6 +10,8 @@ import {
   AccordionItemPanel
 } from 'react-accessible-accordion'
 
+import { toast } from 'react-toastify'
+
 import pubImage from '../images/locationicons/pub-colour.png'
 import coffeeImage from '../images/locationicons/coffee-colour.png'
 import restaurantImage from '../images/locationicons/restaurant-colour.png'
@@ -61,6 +63,7 @@ const List = () => {
       .then(() => getData())
       .catch(err => console.log(err))
 
+    toast('Location has been deleted')
     randomizeKey()
   }
 
