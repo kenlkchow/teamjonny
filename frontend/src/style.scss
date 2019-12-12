@@ -187,6 +187,68 @@ form.form-location {
   animation: pulse 2s linear infinite;
 }
 
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  #map-container {
+    width: 100%;
+  }
+}
+
+.accordion-category-image{
+  height: 32px;
+  width: 32px;
+  float:right;
+}
+
+
+.home-columns-register{
+  width: 45%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.home-modal-title-register{
+  padding-right: 0px;
+}
+
+.home-columns-login{
+  width: 37%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.home-modal-title-login{
+  padding-right: 0px;
+}
+
+// TOASTIFY
+.Toastify__toast-body {
+  padding-left: 10px;
+  color: black;
+}
+
+.Toastify__toast.toast {
+  border-radius: 2px;
+}
+
+.Toastify__progress-bar.toast-progress {
+  background: linear-gradient(to right, $blue, $light-blue, $light-gray)
+}
+
+
 // REDIRECTION PAGE
 
 #redirectlogo{
@@ -196,8 +258,11 @@ form.form-location {
   margin-bottom: 50px;
 }
 
-// LOCATION MODAL
+.redirect-link{
+  margin-top: 50px;
+}
 
+// LOCATION MODAL
 .level {
   width: 100%;
 }
@@ -277,10 +342,6 @@ b{
   font-weight: bold;
 }
 
-.redirect-link{
-  margin-top: 50px;
-}
-
 @keyframes fadein {
   0% {
       opacity: 0;
@@ -289,50 +350,4 @@ b{
   100% {
       opacity: 1;
   }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.4);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@media only screen and (max-width: 768px) {
-
-  #map-container {
-    width: 100%;
-  }
-}
-
-.accordion-category-image{
-  height: 32px;
-  width: 32px;
-  float:right;
-}
-
-
-.home-columns-register{
-  width: 45%;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-.home-modal-title-register{
-  padding-right: 0px;
-}
-
-.home-columns-login{
-  width: 37%;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-.home-modal-title-login{
-  padding-right: 0px;
 }

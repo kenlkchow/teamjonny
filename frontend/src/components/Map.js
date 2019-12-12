@@ -3,7 +3,7 @@ import ReactMap, { Marker } from 'react-map-gl'
 import axios from 'axios'
 import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import pubImage from '../images/locationicons/pub-colour.png'
@@ -246,7 +246,6 @@ const Map = (props) => {
       props={props}
       locationId={locationId}/> : null}
     </div>
-    <ToastContainer />
   </section>
 }
 
