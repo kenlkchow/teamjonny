@@ -167,6 +167,9 @@ form.form-location {
   padding-top: 0;
   padding-bottom: 5vh;
   height: 100%;
+  button {
+    animation: fadein 0.35s ease-in;
+  }
 }
   
 .marker {
@@ -307,6 +310,26 @@ b{
 
   #map-container {
     width: 100%;
+    .level {
+      .level-left {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .level-item {
+          margin: 10px 0px 0px 0px;
+        }
+      }
+      .level-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .level-item {
+          margin: 0px 0px 0px 0px;
+        }
+      }
+    }
   }
 }
 

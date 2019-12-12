@@ -98,7 +98,6 @@ const Map = (props) => {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition)
-      setAddMyLocationShowing(true)
     } else {
       console.log('geolocation not supported')
     }
@@ -107,6 +106,16 @@ const Map = (props) => {
     setUserMarkerShowing(true)
     setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
     setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
+    setTimeout(() => {
+      setAddMyLocationShowing(true)
+    }, 2000)
+  }
+  function addMyLocation() {
+    axios.get(`https://api.postcodes.io/postcodes?lon=${userPosition.longitude}&lat=${userPosition.latitude}`)
+      .then(resp => {
+        const postcode = resp.data.result[0].postcode
+        props.history.push('/new', postcode)
+      })
   }
   function notify() {
     if (props.location.state.from === 'new') {
@@ -147,16 +156,18 @@ const Map = (props) => {
     }
   }, [props.location.state])
 
+
   const _onViewportChange = viewport => setViewPort({ ...viewport })
 
   return <section className="section" id="map-container">
-    <div className="container" >
+    <div className="container">
       
-      <div className="level is-mobile">
+      <div className="level">
         <div className="level-left">
           <div className="level-item">
             <button className="button is-link is-small" onClick={getLocation}><strong>Locate me</strong></button>
           </div>
+          {addMyLocationShowing ? <div className="level-item"><button className="button is-primary is-small add-location-button" onClick={addMyLocation}><strong>Add my location</strong></button></div> : null}
         </div>
         <div className="level-right">
           <div className="level-item">

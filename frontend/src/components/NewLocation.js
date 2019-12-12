@@ -62,8 +62,16 @@ const NewLocation = (props) => {
       .catch(err => setErrors({ ...errors, ...err.response.data.errors }))
   }
 
+  useEffect(() => {
+    if (props.location.state === undefined) {
+      return
+    } else {
+      updateData({ ...initialData, postcode: props.location.state })
+      setPostcodeValidation(200)
+    }
+  }, [])
+
   return <section className="section">
-    {console.log(data.openLate)}
     <div className="container">
       <div className="title">Add new location</div>
       <LocationForm
