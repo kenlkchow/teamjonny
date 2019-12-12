@@ -24,6 +24,7 @@ const List = () => {
   const [category, setCategory] = useState('All')
   const [privacy, setPrivacy] = useState('1')
   const [userCircle, setUserCircle] = useState([])
+  const [searchBar, setSearchBar] = useState('')
 
   const [locations, setLocations] = useState([{
     category: '',
@@ -43,6 +44,11 @@ const List = () => {
   }])
 
   const [randomKey, setRandomKey] = useState(0.5)
+
+  function handleSearchChange(e) {
+    setSearchBar(e.target.value)
+
+  }
 
   function randomizeKey() {
     setRandomKey(Math.random())
@@ -109,6 +115,11 @@ const List = () => {
   return <section className="section">
     <div className='container'>
       <div className="level is-mobile">
+        <div className="level-left">
+          <div className="level-item">
+            <input className="input is-small" type="text" placeholder="Search locations" onChange={handleSearchChange}></input>
+          </div>
+        </div>
         <div className="level-right">
           <div className="level-item">
             <div className="select is-small">
@@ -143,7 +154,7 @@ const List = () => {
         key={randomKey}
       >
         {locations
-          .sort(function(a, b) {
+          .sort(function (a, b) {
             if (a.name < b.name) return -1
             if (a.name > b.name) return 1
             return 0
@@ -156,6 +167,10 @@ const List = () => {
             if (privacy == 3) return Auth.getUserId() === location.user.id
             else if (privacy == 2) return (Auth.getUserId() === location.user.id) || ((location.privacy == 2 || location.privacy == 1) && userCircle.includes(location.user.id))
             else if (privacy == 1) return locations
+          })
+          .filter(location => {
+            if (searchBar !== '') return location.name.toLowerCase().includes(searchBar)
+            return locations
           })
           .map((location, i) => {
             return (
@@ -186,12 +201,13 @@ const List = () => {
                     <p>
                       {location.category}
                     </p>
+                    {(location.notes !== '') && <p>Notes: {location.notes}</p>}
                   </div>
                   <div className="container">
                     <div className="level is-mobile">
                       <div className="level-left">
                         <div className="level-item">
-                          <p> 
+                          <p>
                             <a href={`${location.website}`} target='_blank' rel='noopener noreferrer'>{location.website}</a>
                           </p>
                         </div>

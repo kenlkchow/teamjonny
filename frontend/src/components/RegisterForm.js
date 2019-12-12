@@ -69,7 +69,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
           </label>
           <div className="control">
             <input
-              type="text"
+              type="password"
               name="password"
               className="input"
               onChange={handleChange}
@@ -83,7 +83,7 @@ const RegisterForm = ({ hideRegister, hideLogin }) => {
           </label>
           <div className="control">
             <input
-              type="text"
+              type="password"
               name="passwordConfirmation"
               className="input"
               onChange={handleChange}
