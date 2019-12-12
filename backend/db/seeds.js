@@ -376,6 +376,171 @@ mongoose.connect(
             privacy: 1,
             notes: 'Now has screens to show the football',
             user: users[0]
+          },
+          {
+            name: 'Brickwood',
+            postcode: 'SW4 7AB',
+            category: 'Coffee Shop',
+            website: 'http://www.brickwoodlondon.com/clapham/',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Nice Australian Themed Cafe',
+            user: users[0]
+          },
+          {
+            name: 'Ozone Coffee',
+            postcode: 'EC2A 4AQ',
+            category: 'Coffee Shop',
+            website: 'ozonecoffee.co.uk',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Good cuppa joe right here',
+            user: users[0]
+          },
+          {
+            name: 'Shoreditch Grind',
+            postcode: 'EC1V 9NR',
+            category: 'Coffee Shop',
+            website: 'https://grind.co.uk/pages/shoreditch-grind',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Good place to meet tech recruiters',
+            user: users[0]
+          },
+          {
+            name: 'Pret A Manger',
+            postcode: 'EC1Y 1HQ',
+            category: 'Coffee Shop',
+            website: 'https://grind.co.uk/pages/shoreditch-grind',
+            priciness: 2,
+            openLate: false,
+            privacy: 1,
+            notes: 'Standard',
+            user: users[0]
+          },
+          {
+            name: 'Duck and Waffle',
+            postcode: 'EC2N 4AY',
+            category: 'Restaurant',
+            website: 'https://duckandwaffle.com/',
+            priciness: 3,
+            openLate: true,
+            privacy: 1,
+            notes: '24 hours babyyyyyyyy',
+            user: users[0]
+          },
+          {
+            name: 'The Athenian',
+            postcode: 'E1 6GY',
+            category: 'Restaurant',
+            website: 'https://www.athand.co.uk/restaurant/the-athenian---shoreditch',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Best sauce of all time',
+            user: users[0]
+          },
+          {
+            name: 'Taste of Tennessee',
+            postcode: 'N1 6HB',
+            category: 'Restaurant',
+            website: '',
+            priciness: 1,
+            openLate: false,
+            privacy: 1,
+            notes: 'Okay listen boom. You go up counter and arx bossman for 4 chicken wings and a strip meal. Strawberry Mirinda. Fine establishment and one of London\'s best kept secrets.',
+            user: users[0]
+          },
+          {
+            name: 'Redan',
+            postcode: 'RG40 1XG',
+            category: 'Other',
+            website: 'https://www.theredan.bar/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Woko\'s biggest night out. The strawberry daiquiri is delightful.',
+            user: users[0]
+          },
+          {
+            name: 'Sports Direct',
+            postcode: 'E1 7RA',
+            category: 'Shop',
+            website: '',
+            priciness: 1,
+            openLate: false,
+            privacy: 1,
+            notes: 'Sport\'s direct dot com, UK\'s number 1.',
+            user: users[0]
+          },
+          {
+            name: 'Petit Pois Bistro',
+            postcode: 'N1 6NU',
+            category: 'Bistro/Brunch',
+            website: 'https://www.petitpoisbistro.com/alldaymenu/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Located above its basement sibling Happiness Forgets (one of London\'s best bars), this sweet French bistro overlooks Hoxton Square. ',
+            user: users[0]
+          },
+          {
+            name: 'Boro Bistro',
+            postcode: 'SE1 9QQ',
+            category: 'Bistro/Brunch',
+            website: 'http://borobistro.co.uk/',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'Chic restaurant, wine bar and terrace with Gallic ambiance, serving French fare with Asian touches.',
+            user: users[0]
+          },
+          {
+            name: 'Smokey Joe\'s',
+            postcode: 'SL6 1LB',
+            category: 'Other',
+            website: 'https://www.smokey-joes.co.uk/',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: 'VK\'s at Smokey\'s',
+            user: users[0]
+          },
+          {
+            name: 'The Hoop and Grapes',
+            postcode: 'EC3N 1AL',
+            category: 'Pub',
+            website: 'https://www.nicholsonspubs.co.uk',
+            priciness: 2,
+            openLate: true,
+            privacy: 1,
+            notes: 'There\'s not a right angle in sight at this timber-framed pub, which escaped the Great Fire of 1666.',
+            user: users[0]
+          },
+          {
+            name: 'Duke Of Somerset',
+            postcode: 'E1 8AH',
+            category: 'Pub',
+            website: '',
+            priciness: 1,
+            openLate: true,
+            privacy: 1,
+            notes: 'Traditional, airy pub with large menu of British pub grub, plus live sport on TV and outdoor screen.',
+            user: users[0]
+          },
+          {
+            name: 'White Swan',
+            postcode: 'E1 8DE',
+            category: 'Pub',
+            website: '',
+            priciness: 1,
+            openLate: false,
+            privacy: 1,
+            notes: 'Traditional City drinking spot with wood-panelling, Kent cask ale and English pub food.',
+            user: users[0]
           }
         ]
         )
