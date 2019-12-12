@@ -60,20 +60,25 @@ html, body {
   font-family: 'Poiret One', cursive;
 }
 
-#logo-title {
+#logo-title, .home-form-title {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
 
   .bracket {
     margin: 0 10px;
   }
 
-  .bracket-nav{
+  .bracket-nav, .bracket-form {
     margin: 0 5px;
   }
+
 }
+
+#logo-title {
+  justify-content: center;
+}
+
 
 .hero-body {
   .container {
@@ -167,6 +172,9 @@ form.form-location {
   padding-top: 0;
   padding-bottom: 5vh;
   height: 100%;
+  button {
+    animation: fadein 0.35s ease-in;
+  }
 }
   
 .marker {
@@ -350,4 +358,70 @@ b{
   100% {
       opacity: 1;
   }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  #map-container {
+    width: 100%;
+    .level {
+      .level-left {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .level-item {
+          margin: 10px 0px 0px 0px;
+        }
+      }
+      .level-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .level-item {
+          margin: 0px 0px 0px 0px;
+        }
+      }
+    }
+  }
+}
+
+.accordion-category-image{
+  height: 32px;
+  width: 32px;
+  float:right;
+}
+
+
+.home-columns-register{
+  width: 45%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.home-modal-title-register{
+  padding-right: 0px;
+}
+
+.home-columns-login{
+  width: 37%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.home-modal-title-login{
+  padding-right: 0px;
 }

@@ -22,7 +22,7 @@ const App = () => (
     <Navbar />
     <ToastContainer 
       transition={Flip}
-      autoClose={8000}
+      autoClose={5000}
       toastClassName="toast"
       progressClassName="toast-progress"
     />
