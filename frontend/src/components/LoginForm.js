@@ -43,18 +43,12 @@ const LoginForm = ({ props }) => {
 
   return <section className="section">
     <div className="container">
-      <div className="columns home-columns-login">
-        <div className="column home-modal-title-login">
-          <div className="title has-text-white">
-            Login
-          </div>
-        </div>
-        <div className="column">
-          <figure className="image is-64x64">
-            <img src={Logo}></img>
-          </figure>
-        </div>
-      </div>
+
+      <h1 className="title home-form-title">
+        <div className="bracket-form is-size-1 has-text-white">[</div>
+        <div className="title-name has-text-white has-text-weight-bold">Login</div>
+        <div className="bracket-form has-text-white is-size-1">]</div>
+      </h1>
       <form className="form form-home" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label has-text-white">
