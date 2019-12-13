@@ -58,7 +58,7 @@ const LoginForm = ({ props }) => {
               className="input"
               onChange={handleChange}
             />
-            {errors && <small className="help is-danger">{errors}</small>}
+            {errors && <small className="help is-primary">{errors}</small>}
           </div>
         </div>
         <div className="field">
@@ -72,7 +72,7 @@ const LoginForm = ({ props }) => {
               className="input"
               onChange={handleChange}
             />
-            {errors && <small className="help is-danger">{errors}</small>}
+            {errors && <small className="help is-primary">{errors}</small>}
           </div>
         </div>
         <button className="button is-link">
