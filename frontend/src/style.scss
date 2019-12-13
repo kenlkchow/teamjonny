@@ -57,7 +57,7 @@ html, body {
 
 // HOMEPAGE
 .title, .subtitle {
-  font-family: 'Poiret One', cursive;
+  font-family: 'Poiret One', sans-serif;
 }
 
 #logo-title, .home-form-title {
@@ -98,7 +98,7 @@ html, body {
 }
 
 .logo {
-  font-family: 'Poiret One', cursive;
+  font-family: 'Poiret One', sans-serif;
 }
 
 img#logo {
@@ -173,9 +173,10 @@ form.form-location {
   padding-bottom: 5vh;
   max-height: 90vh;
   overflow: hidden;
-  button {
+  button, a {
     animation: fadein 0.35s ease-in;
   }
+
 }
   
 .marker {
@@ -213,6 +214,17 @@ form.form-location {
 
   #map-container {
     width: 100%;
+
+    .container {
+      div:nth-child(2) {
+        overflow: hidden;
+      }
+    }
+
+    .mapboxgl-map {
+      position: relative;
+      bottom: 5vh;
+    }
   }
 }
 
