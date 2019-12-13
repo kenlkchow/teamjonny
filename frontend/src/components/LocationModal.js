@@ -95,7 +95,7 @@ const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) =>
             </div>
           </div>
           <div className="level-right">
-          <div className="level-item">
+            <div className="level-item">
               {isOwner() && <Link className="button is-link is-small" to={`/edit/${locationId}`}>Edit</Link>}
             </div>
             <div className="level-item">
