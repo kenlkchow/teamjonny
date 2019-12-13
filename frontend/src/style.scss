@@ -394,7 +394,15 @@ b{
   }
 }
 
+.postcode-mobile{
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
+
+  .postcode-mobile{
+    display: inline;
+  }
 
   #map-container, #list-container {
     width: 100%;
@@ -451,6 +459,11 @@ b{
   height: 32px;
   width: 32px;
   float:right;
+}
+
+.accordion_button{
+  vertical-align: middle;
+  
 }
 
 
