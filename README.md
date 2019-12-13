@@ -43,6 +43,8 @@ You can launch the game on GitHub pages [here](url), or find the GitHub repo [he
 
 ## Artwork and credit
 
+Logo made by [Icongeek26](https://www.flaticon.com/authors/icongeek26) from [www.flaticon.com](https://www.flaticon.com/), all others made by Kathrin Eichinger in same style.
+
 Pub icon made by [Freepik](https://www.freepik.com/) from [www.flaticon.com](https://www.flaticon.com/), all others made by Kathrin Eichinger in same style.
 
 ... and name provided by Michael Adair
