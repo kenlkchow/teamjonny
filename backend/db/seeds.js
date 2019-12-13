@@ -688,7 +688,7 @@ mongoose.connect(
           {
             name: 'McQueen',
             postcode: 'EC2A 4AA',
-            category: 'Bar',
+            category: 'Other',
             website: 'http://mcqueen-shoreditch.co.uk/',
             priciness: 2,
             openLate: true,
@@ -699,7 +699,7 @@ mongoose.connect(
           {
             name: 'JinJuu',
             postcode: 'W1B 5PS',
-            category: 'Bar',
+            category: 'Other',
             website: 'https://jinjuu.com/london-soho/',
             priciness: 2,
             openLate: true,
