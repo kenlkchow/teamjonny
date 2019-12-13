@@ -91,13 +91,13 @@ const LocationModal = ({ locationId, toggleModal, props, getData, setModal }) =>
         <div className="level">
           <div className="level-left">
             <div className="level-item">
-              {isOwner() && <Link className="button is-link is-small" to={`/edit/${locationId}`}>Edit</Link>}
-            </div>
-            <div className="level-item">
               <div className="is-size-7">Location added by <strong>{singleLocation.user.username}</strong> ({moment(singleLocation.updatedAt).fromNow()})</div>
             </div>
           </div>
           <div className="level-right">
+          <div className="level-item">
+              {isOwner() && <Link className="button is-link is-small" to={`/edit/${locationId}`}>Edit</Link>}
+            </div>
             <div className="level-item">
               {isOwner() && <button className="button is-danger is-small" onClick={removeLocation}>Delete</button>}
             </div>
