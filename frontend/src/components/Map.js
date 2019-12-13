@@ -7,8 +7,6 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'axios-progress-bar/dist/nprogress.css'
 
-
-
 import pubImage from '../images/locationicons/pub-colour.png'
 import coffeeImage from '../images/locationicons/coffee-colour.png'
 import restaurantImage from '../images/locationicons/restaurant-colour.png'

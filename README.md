@@ -37,6 +37,22 @@ You can launch the game on GitHub pages [here](url), or find the GitHub repo [he
 
 ## Screenshots
 
+![Homepage](./frontend/src/images/screenshots/home.png)
+
+![Register](./frontend/src/images/screenshots/home-register.png)
+
+![Login](./frontend/src/images/screenshots/home-login.png)
+
+![Map](./frontend/src/images/screenshots/map.png)
+
+![Single location info](./frontend/src/images/screenshots/locationmodal.png)
+
+![List of all locations](./frontend/src/images/screenshots/list.png)
+
+![Adding a new location](./frontend/src/images/screenshots/addnewlocation.png)
+
+![Circle summary](./frontend/src/images/screenshots/circle.png)
+
 ## Future features
 
 ## Bugs / lessons learned
