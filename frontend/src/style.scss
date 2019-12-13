@@ -176,6 +176,7 @@ form.form-location {
   button {
     animation: fadein 0.35s ease-in;
   }
+
 }
   
 .marker {
@@ -213,6 +214,17 @@ form.form-location {
 
   #map-container {
     width: 100%;
+
+    .container {
+      div:nth-child(2) {
+        overflow: hidden;
+      }
+    }
+
+    .mapboxgl-map {
+      position: relative;
+      bottom: 5vh;
+    }
   }
 }
 
