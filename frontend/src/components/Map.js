@@ -14,35 +14,39 @@ import brunchImage from '../images/locationicons/brunch-colour.png'
 import shopImage from '../images/locationicons/shop-colour.png'
 import otherImage from '../images/locationicons/other-colour.png'
 
+
+const initalViewport = {
+  width: '100%',
+  height: '80vh',
+  latitude: 51.51491,
+  longitude: -0.07280,
+  zoom: 13
+}
+
+const initalLocations = [{
+  category: '',
+  createdAt: '',
+  latitude: 0,
+  longitude: 0,
+  name: '',
+  notes: '',
+  openLate: false,
+  postcode: '',
+  priciness: 0,
+  privacy: 0,
+  updatedAt: '',
+  user: {
+    username: '',
+    id: ''
+  },
+  website: ''
+}]
+
 const Map = (props) => {
 
-  const [viewport, setViewPort] = useState({
-    width: '100%',
-    height: '80vh',
-    latitude: 51.51491,
-    longitude: -0.07280,
-    zoom: 13
-  })
-
-  const [locations, setLocations] = useState([{
-    category: '',
-    createdAt: '',
-    latitude: 0,
-    longitude: 0,
-    name: '',
-    notes: '',
-    openLate: false,
-    postcode: '',
-    priciness: 0,
-    privacy: 0,
-    updatedAt: '',
-    user: {
-      username: '',
-      id: ''
-    },
-    website: ''
-  }])
-
+  // STATE VARIABLES
+  const [viewport, setViewPort] = useState(initalViewport)
+  const [locations, setLocations] = useState(initalLocations)
   const [categoryFilter, setCategoryFilter] = useState('All')
   const [privacyFilter, setPrivacyFilter] = useState('1')
   const [modal, setModal] = useState(false)
@@ -53,6 +57,8 @@ const Map = (props) => {
   const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 })
   const [loading, setLoading] = useState(false)
 
+
+  // POPULATE MAP DATA
   function getData() {
     axios.get('/api/locations/available', {
       headers: { Authorization: 'Bearer ' + Auth.getToken() }
@@ -84,60 +90,6 @@ const Map = (props) => {
           })
       })
   }
-  function toggleModal() {
-    setModal(!modal)
-  }
-  function handleClick(e) {
-    setLocationId(e.target.id)
-    toggleModal()
-  }
-  function handleCategory(e) {
-    setCategoryFilter(e.target.value)
-  }
-  function handlePrivacy(e) {
-    setPrivacyFilter(e.target.value)
-  }
-  function getLocation() {
-    if (navigator.geolocation) {
-      setLoading(true)
-      navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      console.log('geolocation not supported')
-    }
-  }
-  function showPosition(position) {
-    setUserMarkerShowing(true)
-    setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
-    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
-    setTimeout(() => {
-      setAddMyLocationShowing(true)
-    }, 3000)
-    setLoading(false)
-  }
-  function addMyLocation() {
-    axios.get(`https://api.postcodes.io/postcodes?lon=${userPosition.longitude}&lat=${userPosition.latitude}`)
-      .then(resp => {
-        const postcode = resp.data.result[0].postcode
-        props.history.push('/new', postcode)
-      })
-  }
-  function notify() {
-    if (props.location.state.from === 'new') {
-      toast(`${props.location.state.name} has been added to your locations`)
-      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
-        .then(resp => {
-          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
-        })
-    } else if (props.location.state.from === 'edit') {
-      toast(`${props.location.state.name} has been edited`)
-      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
-        .then(resp => {
-          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
-        })
-    } else if (props.location.state.from === 'delete') {
-      toast('Location has been deleted')
-    }
-  }
 
   useEffect(() => {
     axios.get('/api/circle', {
@@ -159,6 +111,72 @@ const Map = (props) => {
       notify()
     }
   }, [props.location.state])
+
+  // LOCATION MODALS
+  function toggleModal() {
+    setModal(!modal)
+  }
+  
+  function handleClick(e) {
+    setLocationId(e.target.id)
+    toggleModal()
+  }
+
+  // FILTERING
+  function handleCategory(e) {
+    setCategoryFilter(e.target.value)
+  }
+
+  function handlePrivacy(e) {
+    setPrivacyFilter(e.target.value)
+  }
+
+  // LOCATE ME BUTTON
+  function getLocation() {
+    if (navigator.geolocation) {
+      setLoading(true)
+      navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+      console.log('geolocation not supported')
+    }
+  }
+
+  function showPosition(position) {
+    setUserMarkerShowing(true)
+    setUserPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+    setViewPort({ ...viewport, latitude: position.coords.latitude, longitude: position.coords.longitude, zoom: 16, transitionDuration: 2000 })
+    setTimeout(() => {
+      setAddMyLocationShowing(true)
+    }, 3000)
+    setLoading(false)
+  }
+
+  function addMyLocation() {
+    axios.get(`https://api.postcodes.io/postcodes?lon=${userPosition.longitude}&lat=${userPosition.latitude}`)
+      .then(resp => {
+        const postcode = resp.data.result[0].postcode
+        props.history.push('/new', postcode)
+      })
+  }
+
+  // TOASTIFY
+  function notify() {
+    if (props.location.state.from === 'new') {
+      toast(`${props.location.state.name} has been added to your locations`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'edit') {
+      toast(`${props.location.state.name} has been edited`)
+      axios.get(`https://api.postcodes.io/postcodes/${props.location.state.postcode}`)
+        .then(resp => {
+          setViewPort({ ...viewport, latitude: resp.data.result.latitude, longitude: resp.data.result.longitude, zoom: 16, transitionDuration: 2000 })
+        })
+    } else if (props.location.state.from === 'delete') {
+      toast('Location has been deleted')
+    }
+  }
 
 
   const _onViewportChange = viewport => setViewPort({ ...viewport })

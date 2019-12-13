@@ -177,7 +177,7 @@ const List = () => {
               <AccordionItem key={i}>
                 <AccordionItemHeading>
                   <AccordionItemButton>
-                    <b>{location.name}</b> - {location.postcode}
+                    <b>{location.name}</b> - <br className="postcode-mobile"></br>{location.postcode}
                     <img className="accordion-category-image" src={(location.category === 'Pub') ? pubImage :
                       (location.category === 'Restaurant') ? restaurantImage :
                         (location.category === 'Coffee Shop') ? coffeeImage :
