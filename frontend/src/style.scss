@@ -173,7 +173,7 @@ form.form-location {
   padding-bottom: 5vh;
   max-height: 90vh;
   overflow: hidden;
-  button, a {
+  button {
     animation: fadein 0.35s ease-in;
   }
 }
@@ -286,8 +286,17 @@ form.form-location {
   border: none;
 }
 
+.modal-card-foot {
+  button, a {
+    animation: fadein 0.35s ease-in;
+  }
+}
+
 .location-info {
   margin: 5px 0;
+  a {
+    overflow-wrap: break-word;
+  }
 }
 
 // LIST OF LOCATIONS
