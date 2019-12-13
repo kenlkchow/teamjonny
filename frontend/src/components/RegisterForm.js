@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-import Logo from '../images/logo.png'
-
 const initialData = {
   username: '',
   password: '',
