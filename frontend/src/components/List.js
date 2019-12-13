@@ -112,11 +112,11 @@ const List = () => {
     if (location.privacy === 3) return location.privacy = 'private'
   })
 
-  return <section className="section">
-    <div className='container'>
-      <div className="level is-mobile">
+  return <section className="section" id="list-container">
+    <div className="container">
+      <div className="level">
         <div className="level-left">
-          <div className="level-item">
+          <div className="level-item list-search">
             <input className="input is-small" type="text" placeholder="Search locations" onChange={handleSearchChange}></input>
           </div>
         </div>
@@ -169,7 +169,7 @@ const List = () => {
             else if (privacy == 1) return locations
           })
           .filter(location => {
-            if (searchBar !== '') return location.name.toLowerCase().includes(searchBar)
+            if (searchBar !== '') return location.name.toLowerCase().includes(searchBar.toLowerCase())
             return locations
           })
           .map((location, i) => {
@@ -201,13 +201,13 @@ const List = () => {
                     <p>
                       {location.category}
                     </p>
-                    {(location.notes !== '') && <p>Notes: {location.notes}</p>}
+                    {(location.notes !== '') && <p id="list-notes">Notes: {location.notes}</p>}
                   </div>
                   <div className="container">
-                    <div className="level is-mobile">
+                    <div className="level list-footer">
                       <div className="level-left">
                         <div className="level-item">
-                          <p>
+                          <p className="list-website">
                             <a href={`${location.website}`} target='_blank' rel='noopener noreferrer'>{location.website}</a>
                           </p>
                         </div>

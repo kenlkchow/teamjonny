@@ -387,7 +387,7 @@ b{
 
 @media only screen and (max-width: 768px) {
 
-  #map-container {
+  #map-container, #list-container {
     width: 100%;
     .level {
       .level-left {
@@ -409,6 +409,32 @@ b{
         }
       }
     }
+  }
+
+  #list-container{
+    padding-top: 0px;
+    .level{
+      margin-bottom: 10px;
+    }
+    .level-right{
+      margin-top: 5px;
+    }
+    #list-footer{
+      display: flex;
+      align-content: left;
+      flex-direction: column;
+     margin-block-start: 1em;
+     margin-block-end: 1em;
+     margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      .level-left, .level-right{
+        text-align: left;
+        width: 90%;
+      }  
+    }
+  }
+  .list-website{
+    word-wrap: break-word
   }
 }
 
@@ -438,3 +464,7 @@ b{
 .home-modal-title-login{
   padding-right: 0px;
 }
+
+// #list-notes {
+//   width: 50%;
+// }
