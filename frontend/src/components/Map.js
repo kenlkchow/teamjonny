@@ -5,7 +5,6 @@ import { LocationModal } from './LocationModal'
 import Auth from '../lib/authMethods'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
 
 import pubImage from '../images/locationicons/pub-colour.png'

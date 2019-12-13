@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 const LocationForm = ({ data, errors, handleSubmit, handleChange, handlePostcode, postcodeValidation }) => (
   <div className="container">
