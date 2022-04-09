@@ -39,7 +39,7 @@
     "file-loader": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^6.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.7.12",
     "mongoose-unique-validator": "^2.0.3",
     "react": "^16.12.0",
